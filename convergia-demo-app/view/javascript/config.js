@@ -19,3 +19,5 @@ var wssConfig = ["wsClientProvider",function (wsClientProvider) {
 //https provider
 var httpsConfig = ["httpClientProvider",function (httpClientProvider) {
 }]
+
+var mapDefaultCenter="-26.9491,-71.7117";

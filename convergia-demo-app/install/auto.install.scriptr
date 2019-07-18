@@ -10,7 +10,6 @@ var pubsub = require("pubsub");
 var stores = require("store");
 var schema = require("schema");
 var devices = require("device");
-var subdomain = require("subdomain");
 var configuration = require("configuration");
 
 /** SETUP ADVANCED APP REQUIRED CHANNELS IF NOT EXIST **/
@@ -27,23 +26,15 @@ channels.forEach(function(channel) {
    responseObject["channelCreation_"+channel] = JSON.stringify(step1);
 });
 
-/** SETUP ADVANCED APP REQUIRED DOMAIN IF NO DOMAIN IS SET **/
-
-var _subdomain = request.account.accountKey;
-
-
-var step2 =  subdomain.create(_subdomain);
-responseObject["subdomainCreation_"+_subdomain] = JSON.stringify(step2);
-
 /** SETUP ADVANCED APP REQUIRED DOMAIN IF NO DOMAIN IS SET  **/
-var step3 =stores.save("convergia", {
+var step2 =stores.save("convergia", {
     "saveDocumentACL" : "nobody",
     "deleteDocumentACL" : "nobody",
     "queryACL" : "nobody",
     "getAttachmentACL" : "nobody"
 });    
 
-responseObject["storeCreation_convergia"] = JSON.stringify(step3);
+responseObject["storeCreation_convergia"] = JSON.stringify(step2);
 
 /** SETUP ADVANCED APP REQUIRED SCHEMAS IF NOT SET  **/
 
@@ -54,12 +45,12 @@ var convergia_alert_schema="<schema><aclGroups><aclGroup name='convergia'><read>
 
 var convergia_latest_event_schema="<schema><aclGroups><aclGroup name='convergia'><read>authenticated</read><write>authenticated</write><fields><field>id</field><field>id_wasp</field><field>id_secret</field><field>location</field><field>TC</field><field>BAT</field><field>PLV1</field><field>PLV2</field><field>PLV3</field><field>SOIL2</field><field>ANE</field><field>STR</field><field>PRES</field><field>HUM</field><field>updated_filed</field></fields></aclGroup><defaultAcl><read>authenticated</read><write>authenticated</write><delete>group:convergia</delete></defaultAcl><schemaAcl><read>nobody</read><write>nobody</write><delete>nobody</delete></schemaAcl></aclGroups><fields><field name='id' type='string'></field><field name='id_wasp' type='string'></field><field name='id_secret' type='string'></field><field name='location' type='geospatial'></field><field name='TC' type='numeric'></field><field name='BAT' type='numeric'></field><field name='PLV1' type='numeric'></field><field name='PLV2' type='numeric'></field><field name='PLV3' type='numeric'></field><field name='SOIL2' type='numeric'></field><field name='ANE' type='numeric'></field><field name='STR' type='string'></field><field name='PRES' type='numeric'></field><field name='HUM' type='numeric'></field><field name='updated_filed' type='string'></field></fields></schema>";
 
-var step4 = schema.create("convergia_event",convergia_event_schema);
-responseObject["schemaCreation_convergia_event"] = JSON.stringify(step4);
-var step5 = schema.create("convergia_alert",convergia_alert_schema);
-responseObject["schemaCreation_convergia_alert"] = JSON.stringify(step5);
-var step6 = schema.create("convergia_latest_event",convergia_latest_event_schema);
-responseObject["schemaCreation_convergia_latest_event"] = JSON.stringify(step6);
+var step3 = schema.create("convergia_event",convergia_event_schema);
+responseObject["schemaCreation_convergia_event"] = JSON.stringify(step3);
+var step4 = schema.create("convergia_alert",convergia_alert_schema);
+responseObject["schemaCreation_convergia_alert"] = JSON.stringify(step4);
+var step5 = schema.create("convergia_latest_event",convergia_latest_event_schema);
+responseObject["schemaCreation_convergia_latest_event"] = JSON.stringify(step5);
 
 /** SETUP ADVANCED APP DEMO DEVICE  **/
 
@@ -69,13 +60,13 @@ var params = {
     "name" : "demo",
     
 };
-var step7= devices.save(params);
-responseObject["deviceCreation_demo"] = JSON.stringify(step7);
-var step8=devices.generateToken("demo");
-responseObject["deviceTokenCreation_demo"] = JSON.stringify(step8);
+var step6= devices.save(params);
+responseObject["deviceCreation_demo"] = JSON.stringify(step6);
+var step7=devices.generateToken("demo");
+responseObject["deviceTokenCreation_demo"] = JSON.stringify(step7);
 
 /** SETUP UN AUTHORIZED PAGE **/
-var step9=configuration.setUnauthorizedErrorFile("asset-tracking/view/html/unauthorize.html");
-responseObject["unauthorizedPageCreation"] = JSON.stringify(step9);
+var step8=configuration.setUnauthorizedErrorFile("asset-tracking/view/html/unauthorize.html");
+responseObject["unauthorizedPageCreation"] = JSON.stringify(step8);
 
 return responseObject;

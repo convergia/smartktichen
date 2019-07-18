@@ -9,7 +9,6 @@ var pubsub = require("pubsub");
 var stores = require("store");
 var schema = require("schema");
 var devices = require("device");
-var subdomain = require("subdomain");
 var configuration = require("configuration");
 
 /** REMOVE ADVANCED APP CREATED CHANNELS **/
@@ -25,37 +24,26 @@ channels.forEach(function(channel) {
    responseObject["channelDeletion_"+channel] = JSON.stringify(step1)
 });
 
-
-/** REMOVE ADVANCED APP CREATED SUBDOMAIN **/
-var _subdomain = request.account.accountKey;
-
-
-
-var step2 = subdomain.delete(_subdomain);
-responseObject["subdomainDeletion_"+_subdomain] = JSON.stringify(step2)
-
 /** REMOVE ADVANCED APP CREATED STORE  **/
-var step3 =stores.delete("convergia");    
+var step2 =stores.delete("convergia");    
 
-responseObject["storeDeletion_convergia"] = JSON.stringify(step3)
+responseObject["storeDeletion_convergia"] = JSON.stringify(step2)
 
 /** REMOVE ADVANCED APP CREATED SCHEMAS  **/
 
-
-
-var step4 = schema.delete("convergia_event");
-responseObject["schemaDeletion_convergia_event"] = JSON.stringify(step4);
-var step5 = schema.delete("convergia_alert");
-responseObject["schemaDeletion_convergia_alert"] = JSON.stringify(step5);
-var step6 = schema.delete("convergia_latest_event");
-responseObject["schemaDeletion_convergia_latest_event"] = JSON.stringify(step6);
+var step3 = schema.delete("convergia_event");
+responseObject["schemaDeletion_convergia_event"] = JSON.stringify(step3);
+var step4 = schema.delete("convergia_alert");
+responseObject["schemaDeletion_convergia_alert"] = JSON.stringify(step4);
+var step5 = schema.delete("convergia_latest_event");
+responseObject["schemaDeletion_convergia_latest_event"] = JSON.stringify(step5);
 /** REMOVE ADVANCED APP DEMO DEVICE  **/
 
-var step7= devices.delete("demo");
-responseObject["deviceCreation_demo"] = JSON.stringify(step7);
+var step6= devices.delete("demo");
+responseObject["deviceCreation_demo"] = JSON.stringify(step6);
 
 /** REMOVE THE UNAUTHORIZED PAGE **/
-var step9=configuration.setUnauthorizedErrorFile("");
-responseObject["unauthorizedPageDeAttched"] = JSON.stringify(step9);
+var step7=configuration.setUnauthorizedErrorFile("");
+responseObject["unauthorizedPageDeAttched"] = JSON.stringify(step7);
 
 return responseObject;

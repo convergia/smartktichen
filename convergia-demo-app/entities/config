@@ -9,7 +9,7 @@ var email = {
     "FROM": "Convergia Demo App",
     "BODY": "Convergia Demo App Warning."
 }
-var anonymousToken="UjlENDA1QUFCRA==";
+var anonymousToken="<anonymous-token>";
 
 var locations={
   "0345":{

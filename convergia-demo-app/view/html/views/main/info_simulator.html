@@ -1,20 +1,20 @@
 <div ng-non-bindable="">
     <!-- begin vehicle summary -->
     <section class="col-xs-12 bg-white-light pdt10 pdb10 index-summary">
-        <div class="col-xs-12 col-sm-6 text-center pdl0 pdr0">
+        <div class="col-xs-12 col-sm-12 text-center ">
             <div class="icon bg-grey" ng-bind-html="summaryIcons.device">
             </div>
             <div class="nb bold"><span>{{marker.details.id.value}}</span></div>
             <small>Device Id</small>
         </div>
-        <div class="col-xs-12 col-sm-6 text-center">
+        <div class="col-xs-12 col-sm-4 text-center">
             <div class="icon bg-black" ng-bind-html="summaryIcons.time">
             </div>
             <div class="nb bold">{{(marker.details.timestamp  | date:'MM/dd/yyyy hh:mm:ss') || "N/A"}}</div>
             <small>Time</small>
         </div>
 
-        <div class="clearfix mb10"></div>
+       
 
         <div class="col-xs-12 col-sm-4 text-center">
             <div class="icon bg-green" ng-bind-html="summaryIcons.TC">

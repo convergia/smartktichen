@@ -20,7 +20,8 @@ myApp.controller('mapCtrl', function($scope, $timeout, wsClient, httpClient, hea
     var vm = this;
     vm.scope = $scope;
     vm.deviceKey = null;
-    
+    vm.defaultCenter=mapDefaultCenter;
+    console.log("DC="+vm.defaultCenter)
     
     vm.sources = mapConstants.sources;
     vm.icons = mapConstants.infoWindows.icons;
@@ -48,7 +49,7 @@ myApp.controller('dashboardCtrl', function($scope, $timeout, wsClient, httpClien
         pushing: false,
         minRows: 1, // the minimum height of the grid, in rows
         maxRows: 100,
-        columns: 3, // the width of the grid, in columns
+        columns: 4, // the width of the grid, in columns
         colWidth: 'auto', // can be an integer or 'auto'.  'auto' uses the pixel width of the element divided by 'columns'
         rowHeight: 'match', // can be an integer or 'match'.  Match uses the colWidth, giving you square widgets.
         margins: [10, 10], // the pixel distance between each widget

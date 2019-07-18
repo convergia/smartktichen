@@ -15,7 +15,7 @@ log.setLevel("INFO");
 
 
         //Build the url of the ingest api
-        const api = "https://api-convergia.scriptrapps.io/convergia-demo-app/api/ingest?auth_token="+config.anonymousToken;
+        const api = "https://<subdomain>.scriptrapps.io/convergia-demo-app/api/ingest?auth_token="+config.anonymousToken;
 				log.info("Generated Ingest API : " + JSON.stringify(api));
         var devices = [{ id: '2345', lat: "40.7411", long: "-73.9816" }, { id: '1345', lat: "40.74", long: "-73.9899" }, { id: '0345' }];
         var values = ["TC",

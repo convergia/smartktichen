@@ -128,7 +128,16 @@ header, .logo, .side-bar {
 .btn-default:hover, .btn-default:focus, .btn-default:active{background-color: #2a6496;}
 .btn-danger {background: #f35857;}
 .btn-primary {background: #e64f2a;}
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:active:hover {background: #ef5c38;}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:active:hover {    
+    background-color: #632080!important;
+    border-color: #632080!important;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+color: #fff;
+background-color: #632080!important;
+border-color: #632080!important;
+}
+
 .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active {background: #a94442;}
 .btn {font-size: 13px;border: none;box-shadow: none;text-shadow: none;}
 .tooltip-inner {font-weight: normal; font-family: 'texgyreherosregular'; font-size: 12px;}

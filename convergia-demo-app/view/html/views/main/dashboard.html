@@ -25,52 +25,6 @@
              <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 0 , row: 0 }'>
                  <div class="box">
                      <div class="box-content">
-                         <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Temperature" class="box-label">Temperature</div>
-                         <div  style="height: calc(100% - 30px)" > 
-                             <scriptr-gauge
-                                            boxLabel='Temperature'
-                                            value-font-color='#999'
-                                            gauge-value='vm.selectedDevice.TC.value'
-                                            min='-10'
-                                            max='50'
-                                            hide-min-max='false'
-                                            hide-value='false'
-                                            show-inner-shadow='false'
-                                            custom-sectors='{"percents":"false","ranges":[{}]}'
-                                            shadow-size='5'
-                                            shadow-opacity='0.2'
-                                            start-animation-type='bounce'
-                                            refresh-animation-type='bounce'
-                                            value-font-family='Verdana'
-                                            value-min-font-size='8'
-                                            label-min-font-size='8'
-                                            min-label-min-font-size='8'
-                                            max-label-min-font-size='8'
-                                            gauge-width-scale='1'
-                                            shadow-vertical-offset='3'
-                                            level-colors='["#1877dd","#fce94f","#fcaf3e","#ef2929"]'
-                                            relative-gauge-size='true'
-                                            no-gradient='false'
-                                            start-animation-time='700'
-                                            refresh-animation-time='700'
-                                            donut='false'
-                                            donut-start-angle='90'
-                                            reverse='false'
-                                            decimals='0'
-                                            format-number='false'
-                                            human-friendly='false'
-                                            human-friendly-decimal='0'
-                                            pointer='true'
-                                            counter='false'
-                                            on-format-data='vm.temperatureFormatData'
-                                            ></scriptr-gauge> 
-                         </div>
-                     </div>
-                 </div>
-             </li>
-             <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 1 , row: 0 }'>
-                 <div class="box">
-                     <div class="box-content">
                          <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Battery" class="box-label">Battery</div>
                          <div  style="height: calc(100% - 30px)" > 
                              <scriptr-gauge
@@ -116,7 +70,147 @@
                      </div>
                  </div>
              </li>
-             <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 2 , row: 0 }'>
+             <li class="myItem" gridster-item='{sizeX: 3, sizeY: 1, col: 1 , row: 0 }'>
+                 <div class="box">
+                     <div class="box-content">
+                         <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Battery" class="box-label">Battery</div>
+                         <div  style="height: calc(100% - 30px)" > 
+                             <scriptr-chart
+                                            type='line'
+                                            boxLabel='Battery'
+                                            xkey='creationDate'
+                                            ykeys='["BAT"]'
+                                            labels='["Battery"]'
+                                            colors='["#2196F3"]'
+                                            transport='wss'
+                                            msg-tag='{{vm.msgTag}}'
+                                            api="convergia-demo-app/api/historicalevents"
+                                            api-params="vm.params"
+                                            grid-text-family='Verdana'
+                                            line-width='3'
+                                            point-size='5'
+                                            point-stroke-colors='["rgb(46, 47, 44)"]'
+                                            ymax='auto'
+                                            ymin='auto 0'
+                                            smooth='false'
+                                            hide-hover='auto'
+                                            parse-time='true'
+                                            xlabels='auto'
+                                            xlabel-angle='0'
+                                            goal-stroke-width='1'
+                                            goal-line-colors='["#666633","#999966","#cc6666","#663333"]'
+                                            event-stroke-width='1'
+                                            event-line-colors='["#005a04","#ccffbb","#3a5f0b","#005502"]'
+                                            axes='true'
+                                            grid='true'
+                                            grid-text-color='#1f211d'
+                                            grid-text-size='12'
+                                            grid-text-weight='normal'
+                                            point-fill-colors='["#4550b1"]'
+                                            goals='[null]'
+                                            events='[null]'
+                                            parse-time="true"
+                                            on-format-data='vm.historicalFormatData'
+                                            ></scriptr-chart>
+                         </div>
+                     </div>
+                 </div>
+             </li>
+             
+             <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 0 , row: 1 }'>
+                 <div class="box">
+                     <div class="box-content">
+                         <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Temperature" class="box-label">Temperature</div>
+                         <div  style="height: calc(100% - 30px)" > 
+                             <scriptr-gauge
+                                            boxLabel='Temperature'
+                                            value-font-color='#999'
+                                            gauge-value='vm.selectedDevice.TC.value'
+                                            min='-10'
+                                            max='50'
+                                            hide-min-max='false'
+                                            hide-value='false'
+                                            show-inner-shadow='false'
+                                            custom-sectors='{"percents":"false","ranges":[{}]}'
+                                            shadow-size='5'
+                                            shadow-opacity='0.2'
+                                            start-animation-type='bounce'
+                                            refresh-animation-type='bounce'
+                                            value-font-family='Verdana'
+                                            value-min-font-size='8'
+                                            label-min-font-size='8'
+                                            min-label-min-font-size='8'
+                                            max-label-min-font-size='8'
+                                            gauge-width-scale='1'
+                                            shadow-vertical-offset='3'
+                                            level-colors='["#1877dd","#fce94f","#fcaf3e","#ef2929"]'
+                                            relative-gauge-size='true'
+                                            no-gradient='false'
+                                            start-animation-time='700'
+                                            refresh-animation-time='700'
+                                            donut='false'
+                                            donut-start-angle='90'
+                                            reverse='false'
+                                            decimals='0'
+                                            format-number='false'
+                                            human-friendly='false'
+                                            human-friendly-decimal='0'
+                                            pointer='true'
+                                            counter='false'
+                                            on-format-data='vm.temperatureFormatData'
+                                            ></scriptr-gauge> 
+                         </div>
+                     </div>
+                 </div>
+             </li>
+             <li class="myItem" gridster-item='{sizeX: 3, sizeY: 1, col: 1 , row: 1 }'>
+                 <div class="box">
+                     <div class="box-content">
+                         <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Temperature" class="box-label">Temperature</div>
+                         <div  style="height: calc(100% - 30px)" > 
+                             <scriptr-chart
+                                            type='line'
+                                            boxLabel='Temperature'
+                                            xkey='creationDate'
+                                            ykeys='["TC"]'
+                                            labels='["Temperature"]'
+                                            colors='["#F44336"]'
+                                            transport='wss'
+                                            msg-tag='{{vm.msgTag}}'
+                                            api="convergia-demo-app/api/historicalevents"
+                                            api-params="vm.params"
+                                            grid-text-family='Verdana'
+                                            line-width='3'
+                                            point-size='5'
+                                            point-stroke-colors='["rgb(46, 47, 44)"]'
+                                            ymax='auto'
+                                            ymin='auto 0'
+                                            smooth='false'
+                                            hide-hover='auto'
+                                            parse-time='true'
+                                            xlabels='auto'
+                                            xlabel-angle='0'
+                                            goal-stroke-width='1'
+                                            goal-line-colors='["#666633","#999966","#cc6666","#663333"]'
+                                            event-stroke-width='1'
+                                            event-line-colors='["#005a04","#ccffbb","#3a5f0b","#005502"]'
+                                            axes='true'
+                                            grid='true'
+                                            grid-text-color='#1f211d'
+                                            grid-text-size='12'
+                                            grid-text-weight='normal'
+                                            point-fill-colors='["#4550b1"]'
+                                            goals='[null]'
+                                            events='[null]'
+                                            parse-time="true"
+                                            on-format-data='vm.historicalFormatData'
+                                            ></scriptr-chart>
+                         </div>
+                     </div>
+                 </div>
+             </li>
+             
+             <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 0 , row: 2 }'>
                  <div class="box">
                      <div class="box-content">
                          <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Humidity" class="box-label">Humidity</div>
@@ -164,10 +258,55 @@
                      </div>
                  </div>
              </li>
-             
+             <li class="myItem" gridster-item='{sizeX: 3, sizeY: 1, col: 1 , row: 2 }'>
+                <div class="box">
+                    <div class="box-content">
+                        <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Humidity" class="box-label">Humidity</div>
+                        <div  style="height: calc(100% - 30px)" > 
+                            <scriptr-chart
+                                           type='line'
+                                           boxLabel='Humidity'
+                                           xkey='creationDate'
+                                           ykeys='[ "HUM"]'
+                                           labels='[ "Humidity"]'
+                                           colors='["#4CAF50"]'
+                                           transport='wss'
+                                           msg-tag='{{vm.msgTag}}'
+                                           api="convergia-demo-app/api/historicalevents"
+                                           api-params="vm.params"
+                                           grid-text-family='Verdana'
+                                           line-width='3'
+                                           point-size='5'
+                                           point-stroke-colors='["rgb(46, 47, 44)"]'
+                                           ymax='auto'
+                                           ymin='auto 0'
+                                           smooth='false'
+                                           hide-hover='auto'
+                                           parse-time='true'
+                                           xlabels='auto'
+                                           xlabel-angle='0'
+                                           goal-stroke-width='1'
+                                           goal-line-colors='["#666633","#999966","#cc6666","#663333"]'
+                                           event-stroke-width='1'
+                                           event-line-colors='["#005a04","#ccffbb","#3a5f0b","#005502"]'
+                                           axes='true'
+                                           grid='true'
+                                           grid-text-color='#1f211d'
+                                           grid-text-size='12'
+                                           grid-text-weight='normal'
+                                           point-fill-colors='["#4550b1"]'
+                                           goals='[null]'
+                                           events='[null]'
+                                           parse-time="true"
+                                           on-format-data='vm.historicalFormatData'
+                                           ></scriptr-chart>
+                        </div>
+                    </div>
+                </div>
+            </li>
             
              
-             <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 0 , row:1 }'>
+             <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 0 , row:3 }'>
                  <div class="box">
                      <div class="box-content">
                          <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Soil moisture" class="box-label">Soil moisture</div>
@@ -215,7 +354,55 @@
                      </div>
                  </div>
              </li>
-             <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 1 , row: 1 }'>
+
+             <li class="myItem" gridster-item='{sizeX: 3, sizeY: 1, col: 1 , row: 3 }'>
+                <div class="box">
+                    <div class="box-content">
+                        <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Soil moisture" class="box-label">Soil moisture</div>
+                        <div  style="height: calc(100% - 30px)" > 
+                            <scriptr-chart
+                                           type='line'
+                                           boxLabel='Soil moisture'
+                                           xkey='creationDate'
+                                           ykeys='[ "SOIL2"]'
+                                           labels='[ "Soil moisture"]'
+                                           colors='["#4CAF50"]'
+                                           transport='wss'
+                                           msg-tag='{{vm.msgTag}}'
+                                           api="convergia-demo-app/api/historicalevents"
+                                           api-params="vm.params"
+                                           grid-text-family='Verdana'
+                                           line-width='3'
+                                           point-size='5'
+                                           point-stroke-colors='["rgb(46, 47, 44)"]'
+                                           ymax='auto'
+                                           ymin='auto 0'
+                                           smooth='false'
+                                           hide-hover='auto'
+                                           parse-time='true'
+                                           xlabels='auto'
+                                           xlabel-angle='0'
+                                           goal-stroke-width='1'
+                                           goal-line-colors='["#666633","#999966","#cc6666","#663333"]'
+                                           event-stroke-width='1'
+                                           event-line-colors='["#005a04","#ccffbb","#3a5f0b","#005502"]'
+                                           axes='true'
+                                           grid='true'
+                                           grid-text-color='#1f211d'
+                                           grid-text-size='12'
+                                           grid-text-weight='normal'
+                                           point-fill-colors='["#4550b1"]'
+                                           goals='[null]'
+                                           events='[null]'
+                                           parse-time="true"
+                                           on-format-data='vm.historicalFormatData'
+                                           ></scriptr-chart>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+             <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 0 , row: 4 }'>
                     <div class="box">
                         <div class="box-content">
                           <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Anemometer" class="box-label">Anemometer</div>
@@ -231,252 +418,75 @@
                         </div>
                     </div>
                 </li>
-             <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 2 , row: 1 }'>
+
+                <li class="myItem" gridster-item='{sizeX: 3, sizeY: 1, col: 1 , row: 4 }'>
+                    <div class="box">
+                        <div class="box-content">
+                            <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Anemometer" class="box-label">Anemometer</div>
+                            <div  style="height: calc(100% - 30px)" > 
+                                <scriptr-chart
+                                               type='line'
+                                               boxLabel='Anemometer'
+                                               xkey='creationDate'
+                                               ykeys='[ "ANE"]'
+                                               labels='[ "Anemometer"]'
+                                               colors='["#4CAF50"]'
+                                               transport='wss'
+                                               msg-tag='{{vm.msgTag}}'
+                                               api="convergia-demo-app/api/historicalevents"
+                                               api-params="vm.params"
+                                               grid-text-family='Verdana'
+                                               line-width='3'
+                                               point-size='5'
+                                               point-stroke-colors='["rgb(46, 47, 44)"]'
+                                               ymax='auto'
+                                               ymin='auto 0'
+                                               smooth='false'
+                                               hide-hover='auto'
+                                               parse-time='true'
+                                               xlabels='auto'
+                                               xlabel-angle='0'
+                                               goal-stroke-width='1'
+                                               goal-line-colors='["#666633","#999966","#cc6666","#663333"]'
+                                               event-stroke-width='1'
+                                               event-line-colors='["#005a04","#ccffbb","#3a5f0b","#005502"]'
+                                               axes='true'
+                                               grid='true'
+                                               grid-text-color='#1f211d'
+                                               grid-text-size='12'
+                                               grid-text-weight='normal'
+                                               point-fill-colors='["#4550b1"]'
+                                               goals='[null]'
+                                               events='[null]'
+                                               parse-time="true"
+                                               on-format-data='vm.historicalFormatData'
+                                               ></scriptr-chart>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+             <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 0 , row: 5 }'>
                     <div class="box">
                         <div class="box-content">
                           <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Anemometer" class="box-label">Wind Vane</div>
-                          <div  style="height: calc(100% - 30px)" > {{vm.selectedDevice.STR.value || "--"}} </div>
+                          <div  style="height: calc(100% - 30px)" > <h2>{{vm.selectedDevice.STR.value || "--"}} </h2></div>
                         </div>
                     </div>
                 </li>
              <!--added -->
              
              
-             <li class="myItem" gridster-item='{sizeX: 3, sizeY: 1, col: 0 , row: 2 }'>
-                 <div class="box">
-                     <div class="box-content">
-                         <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Temperature" class="box-label">Temperature</div>
-                         <div  style="height: calc(100% - 30px)" > 
-                             <scriptr-chart
-                                            type='line'
-                                            boxLabel='Temperature'
-                                            xkey='creationDate'
-                                            ykeys='["TC"]'
-                                            labels='["Temperature"]'
-                                            colors='["#F44336"]'
-                                            transport='wss'
-                                            msg-tag='{{vm.msgTag}}'
-                                            api="convergia-demo-app/api/historicalevents"
-                                            api-params="vm.params"
-                                            grid-text-family='Verdana'
-                                            line-width='3'
-                                            point-size='5'
-                                            point-stroke-colors='["rgb(46, 47, 44)"]'
-                                            ymax='auto'
-                                            ymin='auto 0'
-                                            smooth='false'
-                                            hide-hover='auto'
-                                            parse-time='true'
-                                            xlabels='auto'
-                                            xlabel-angle='0'
-                                            goal-stroke-width='1'
-                                            goal-line-colors='["#666633","#999966","#cc6666","#663333"]'
-                                            event-stroke-width='1'
-                                            event-line-colors='["#005a04","#ccffbb","#3a5f0b","#005502"]'
-                                            axes='true'
-                                            grid='true'
-                                            grid-text-color='#1f211d'
-                                            grid-text-size='12'
-                                            grid-text-weight='normal'
-                                            point-fill-colors='["#4550b1"]'
-                                            goals='[null]'
-                                            events='[null]'
-                                            parse-time="true"
-                                            on-format-data='vm.historicalFormatData'
-                                            ></scriptr-chart>
-                         </div>
-                     </div>
-                 </div>
-             </li>
              
-             <li class="myItem" gridster-item='{sizeX: 3, sizeY: 1, col: 0 , row: 2 }'>
-                 <div class="box">
-                     <div class="box-content">
-                         <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Battery" class="box-label">Battery</div>
-                         <div  style="height: calc(100% - 30px)" > 
-                             <scriptr-chart
-                                            type='line'
-                                            boxLabel='Battery'
-                                            xkey='creationDate'
-                                            ykeys='["BAT"]'
-                                            labels='["Battery"]'
-                                            colors='["#2196F3"]'
-                                            transport='wss'
-                                            msg-tag='{{vm.msgTag}}'
-                                            api="convergia-demo-app/api/historicalevents"
-                                            api-params="vm.params"
-                                            grid-text-family='Verdana'
-                                            line-width='3'
-                                            point-size='5'
-                                            point-stroke-colors='["rgb(46, 47, 44)"]'
-                                            ymax='auto'
-                                            ymin='auto 0'
-                                            smooth='false'
-                                            hide-hover='auto'
-                                            parse-time='true'
-                                            xlabels='auto'
-                                            xlabel-angle='0'
-                                            goal-stroke-width='1'
-                                            goal-line-colors='["#666633","#999966","#cc6666","#663333"]'
-                                            event-stroke-width='1'
-                                            event-line-colors='["#005a04","#ccffbb","#3a5f0b","#005502"]'
-                                            axes='true'
-                                            grid='true'
-                                            grid-text-color='#1f211d'
-                                            grid-text-size='12'
-                                            grid-text-weight='normal'
-                                            point-fill-colors='["#4550b1"]'
-                                            goals='[null]'
-                                            events='[null]'
-                                            parse-time="true"
-                                            on-format-data='vm.historicalFormatData'
-                                            ></scriptr-chart>
-                         </div>
-                     </div>
-                 </div>
-             </li>
-             <li class="myItem" gridster-item='{sizeX: 3, sizeY: 1, col: 0 , row: 2 }'>
-                 <div class="box">
-                     <div class="box-content">
-                         <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Humidity" class="box-label">Humidity</div>
-                         <div  style="height: calc(100% - 30px)" > 
-                             <scriptr-chart
-                                            type='line'
-                                            boxLabel='Humidity'
-                                            xkey='creationDate'
-                                            ykeys='[ "HUM"]'
-                                            labels='[ "Humidity"]'
-                                            colors='["#4CAF50"]'
-                                            transport='wss'
-                                            msg-tag='{{vm.msgTag}}'
-                                            api="convergia-demo-app/api/historicalevents"
-                                            api-params="vm.params"
-                                            grid-text-family='Verdana'
-                                            line-width='3'
-                                            point-size='5'
-                                            point-stroke-colors='["rgb(46, 47, 44)"]'
-                                            ymax='auto'
-                                            ymin='auto 0'
-                                            smooth='false'
-                                            hide-hover='auto'
-                                            parse-time='true'
-                                            xlabels='auto'
-                                            xlabel-angle='0'
-                                            goal-stroke-width='1'
-                                            goal-line-colors='["#666633","#999966","#cc6666","#663333"]'
-                                            event-stroke-width='1'
-                                            event-line-colors='["#005a04","#ccffbb","#3a5f0b","#005502"]'
-                                            axes='true'
-                                            grid='true'
-                                            grid-text-color='#1f211d'
-                                            grid-text-size='12'
-                                            grid-text-weight='normal'
-                                            point-fill-colors='["#4550b1"]'
-                                            goals='[null]'
-                                            events='[null]'
-                                            parse-time="true"
-                                            on-format-data='vm.historicalFormatData'
-                                            ></scriptr-chart>
-                         </div>
-                     </div>
-                 </div>
-             </li>
              
-             <li class="myItem" gridster-item='{sizeX: 3, sizeY: 1, col: 0 , row: 2 }'>
-                 <div class="box">
-                     <div class="box-content">
-                         <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Soil moisture" class="box-label">Soil moisture</div>
-                         <div  style="height: calc(100% - 30px)" > 
-                             <scriptr-chart
-                                            type='line'
-                                            boxLabel='Soil moisture'
-                                            xkey='creationDate'
-                                            ykeys='[ "SOIL2"]'
-                                            labels='[ "Soil moisture"]'
-                                            colors='["#4CAF50"]'
-                                            transport='wss'
-                                            msg-tag='{{vm.msgTag}}'
-                                            api="convergia-demo-app/api/historicalevents"
-                                            api-params="vm.params"
-                                            grid-text-family='Verdana'
-                                            line-width='3'
-                                            point-size='5'
-                                            point-stroke-colors='["rgb(46, 47, 44)"]'
-                                            ymax='auto'
-                                            ymin='auto 0'
-                                            smooth='false'
-                                            hide-hover='auto'
-                                            parse-time='true'
-                                            xlabels='auto'
-                                            xlabel-angle='0'
-                                            goal-stroke-width='1'
-                                            goal-line-colors='["#666633","#999966","#cc6666","#663333"]'
-                                            event-stroke-width='1'
-                                            event-line-colors='["#005a04","#ccffbb","#3a5f0b","#005502"]'
-                                            axes='true'
-                                            grid='true'
-                                            grid-text-color='#1f211d'
-                                            grid-text-size='12'
-                                            grid-text-weight='normal'
-                                            point-fill-colors='["#4550b1"]'
-                                            goals='[null]'
-                                            events='[null]'
-                                            parse-time="true"
-                                            on-format-data='vm.historicalFormatData'
-                                            ></scriptr-chart>
-                         </div>
-                     </div>
-                 </div>
-             </li>
              
-             <li class="myItem" gridster-item='{sizeX: 3, sizeY: 1, col: 0 , row: 2 }'>
-                 <div class="box">
-                     <div class="box-content">
-                         <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Anemometer" class="box-label">Anemometer</div>
-                         <div  style="height: calc(100% - 30px)" > 
-                             <scriptr-chart
-                                            type='line'
-                                            boxLabel='Anemometer'
-                                            xkey='creationDate'
-                                            ykeys='[ "ANE"]'
-                                            labels='[ "Anemometer"]'
-                                            colors='["#4CAF50"]'
-                                            transport='wss'
-                                            msg-tag='{{vm.msgTag}}'
-                                            api="convergia-demo-app/api/historicalevents"
-                                            api-params="vm.params"
-                                            grid-text-family='Verdana'
-                                            line-width='3'
-                                            point-size='5'
-                                            point-stroke-colors='["rgb(46, 47, 44)"]'
-                                            ymax='auto'
-                                            ymin='auto 0'
-                                            smooth='false'
-                                            hide-hover='auto'
-                                            parse-time='true'
-                                            xlabels='auto'
-                                            xlabel-angle='0'
-                                            goal-stroke-width='1'
-                                            goal-line-colors='["#666633","#999966","#cc6666","#663333"]'
-                                            event-stroke-width='1'
-                                            event-line-colors='["#005a04","#ccffbb","#3a5f0b","#005502"]'
-                                            axes='true'
-                                            grid='true'
-                                            grid-text-color='#1f211d'
-                                            grid-text-size='12'
-                                            grid-text-weight='normal'
-                                            point-fill-colors='["#4550b1"]'
-                                            goals='[null]'
-                                            events='[null]'
-                                            parse-time="true"
-                                            on-format-data='vm.historicalFormatData'
-                                            ></scriptr-chart>
-                         </div>
-                     </div>
-                 </div>
-             </li>
+            
              
-             <li class="myItem" gridster-item='{sizeX: 3, sizeY: 1, col: 0 , row: 2 }'>
+            
+             
+            
+             
+             <li class="myItem" gridster-item='{sizeX: 3, sizeY: 1, col: 1 , row: 5 }'>
                  <div class="box">
                      <div class="box-content">
                          <div  style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Pluviometer" class="box-label">Pluviometer</div>
