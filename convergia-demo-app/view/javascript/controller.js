@@ -78,7 +78,7 @@ myApp.controller('dashboardCtrl', function($scope, $timeout, wsClient, httpClien
         maxRows: 100,
         columns: 4, // the width of the grid, in columns
         colWidth: 'auto', // can be an integer or 'auto'.  'auto' uses the pixel width of the element divided by 'columns'
-        rowHeight: 'match', // can be an integer or 'match'.  Match uses the colWidth, giving you square widgets.
+        rowHeight: '450', // can be an integer or 'match'.  Match uses the colWidth, giving you square widgets.
         margins: [10, 10], // the pixel distance between each widget
         defaultSizeX: 2, // the default width of a gridster item, if not specifed
         defaultSizeY: 1, // the default height of a gridster item, if not specified

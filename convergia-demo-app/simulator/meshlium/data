@@ -17,7 +17,10 @@ log.setLevel("INFO");
         //Build the url of the ingest api
         const api = "https://<subdomain>.scriptrapps.io/convergia-demo-app/api/ingest?auth_token="+config.anonymousToken;
 				log.info("Generated Ingest API : " + JSON.stringify(api));
-        var devices = [{ id: '2345', lat: "40.7411", long: "-73.9816" }, { id: '1345', lat: "40.74", long: "-73.9899" }, { id: '0345' }];
+        var devices = [
+            { id: '2345', id_wasp: 'MSD_SA',lat: "40.7411", long: "-73.9816" },
+            { id: '1345', id_wasp: 'MSK_SA', lat: "40.74", long: "-73.9899" },
+            { id: '0345' ,id_wasp: 'MSV_SA' }];
         var values = ["TC",
             "BAT",
             "PLV1",
@@ -34,7 +37,7 @@ log.setLevel("INFO");
         var dataSnap =
         {
             "id": randomDevice.id,
-            "id_wasp":"MSK_SA",
+            "id_wasp":randomDevice.id_wasp,
             "id_secret":"696418FDC337DE58",
             
             "location": {
