@@ -30,6 +30,7 @@ var defaultLocation={
    "lon":"0",
     "lat":"0"
 }
-
+var usersGroups=["scriptrio"]
+var devicesGroups=["scriptrio"]
 
 var expiry = 60;

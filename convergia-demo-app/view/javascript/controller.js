@@ -39,6 +39,33 @@ myApp.controller('mapCtrl', function($scope, $timeout, wsClient, httpClient, hea
     }
 });
 
+myApp.controller('rulesCtrl', function(httpClient, $sce, $timeout,$routeParams) {
+    var vm = this;
+    var params = {};
+    params["scriptName"] = $routeParams.id;
+    
+     vm.editorUrl = null;
+    httpClient
+        .get("convergia-demo-app/api/rules/getGenericRuleEditor", null)
+        .then(
+        function(data, response) {
+            vm.editorUrl = data;
+            if(params["scriptName"]){
+                vm.rulesrc = $sce.trustAsResourceUrl(data +  '/alerts_' + params["scriptName"]+"&pluginName=SimpleDecisionTable");
+            }else{
+                vm.rulesrc = $sce.trustAsResourceUrl(data +  '/alerts&pluginName=SimpleDecisionTable');
+            }
+            
+             $timeout(function() {
+               $(".loading-frame").css("display", "none")
+               $(".allFrame").css("display","")
+            }, 2000);
+        },
+        function(err) {
+            console.log('ERROR');
+        });
+});
+
 //dashboard controller
 myApp.controller('dashboardCtrl', function($scope, $timeout, wsClient, httpClient, headerItemsJson, menuItemsJson, $window, $location, mapConstants, $sce, $routeParams) {
     var vm = this;

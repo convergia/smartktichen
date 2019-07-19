@@ -4,6 +4,7 @@
 - [Install dependencies](#install-dependencies)
 - [Configure the application](#configure-the-application)
 - [How to](#how-to)
+- [Using the application](#using-the-application)
 
 ## Install the application
 - From the scriptr.io web IDE, click the arrow on the right of "New Script" on the bottom left corner of the screen then select "Install Module"
@@ -62,6 +63,18 @@ In the tree view on the left side of the scriptr.io web IDE
 
 - Scroll to **/convergia-demo-app/entities/config** and open the config script
 - Replace the **<anonymous-token>** value of the  **var anonymousToken** variable with your own anonymous token
+  
+ ### Configure editor group
+
+- Click on your email address in the top-right of the IDE workspace
+- Choose Device Directory
+- Add new Group **"editor"** if not existed
+- Add your login device to the editor group
+
+### Configure the email address to send alerts to
+
+- Open the **convergia-demo-app/entities/config** script
+- Modify the "TO" field of the "email" variable. Currently set to the account owner
 
 ## How to
 
@@ -79,3 +92,33 @@ To get your account token:
 - In the drop-down list, click on Account
 - Select the Info tab (should be selected by default)
 - Copy the value of the anonymous token field.
+
+# Using the application
+
+## How to add rules using the decision table
+
+Metrics are encoded is the payload as follows:
+"TC" ,BAT", "PLV1", "PLV2", "PLV3", "SOIL2", "ANE", "STR", "PRES", "HUM"
+You can use these values to create new rules using the decision table:
+*the below apply whether you use the decision table from the app's UI or from the web IDE*
+- In the decision table, click "+New Condition"
+  - use one of the metrics as the condition (column on the left of the table)
+  - in the "type" column, select the type of the metric (string, number, etc.)
+- If you want the rule to be specific to this metric, click "+New Rule"
+  - in the new column (Rule n), add an expression that matches the type (e.g. < 35, if number)
+- If you want to create a rule that combines this metric to existing ones
+  - if this is a new rule, click "+New Rule" then create an expression for each of the metric in the Rule column
+  - if this is an existing rule, add an expression for the metric in the corresponding column
+- Click "+New Action" if you want to add a new action, **or reuse an existing action**
+- In the action row, add a predefined parameter
+
+**Important**: you can't create an expression using other conditions.
+
+## About rule actions and predefined action parameters
+
+Actions and their corresponding predefined parameters **are defined by developers** (in the code) before they can be used in decision tables.
+- The current version of the application supports two actions: sending emails and logging alerts.
+- Predefined parameters are defined in the **convergia-demo-app/entities/helper/mail/templates** script. 
+
+I update the code in Renzo's account to handle High humidity and reflected this in the decision table.
+I also removed the row you added.  

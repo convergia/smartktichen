@@ -23,24 +23,29 @@ log.setLevel("INFO");
 try{
     //Ingest the request params or data
     var requestParams = request.body || request.parameters;
-    //prepare the data obj
-
-    log.info("requestParams : "+JSON.stringify( requestParams));
+    if (typeof(requestParams) == "string") {
+        requestParams = JSON.parse(requestParams);
+    }
+  
+    log.info("requestParams : "+JSON.stringify(requestParams));
     var data = {
-        id:requestParams.id,
-        id_wasp:requestParams.id_wasp,
-        id_secret:requestParams.id_secret,
-        updated_filed:requestParams.sensor,
+        "id":requestParams.id_wasp,
+        "id_wasp":requestParams.id_wasp,
+        "sensor_id":requestParams.id,
+        "id_secret":requestParams.id_secret,
+        "updated_filed":requestParams.sensor,
         location:""
 
-    }
+    };
+
     data[requestParams.sensor]=requestParams.value;
     //build valid location if location not empty in params 
-    if(isNumeric(requestParams.location.lat) && isNumeric(requestParams.location.lon)){
+    if(requestParams.location && isNumeric(requestParams.location.lat) && isNumeric(requestParams.location.lon)){
         data.location=""+parseFloat(requestParams.location.lat).toFixed(4)+ "," +parseFloat(requestParams.location.lon).toFixed(4)
     }else{
-      if(config.locations[data.id]){
-        data.location=""+parseFloat(config.locations[data.id].lat).toFixed(4)+ "," +parseFloat(config.locations[data.id].lon).toFixed(4)
+        log.info("location for " + data.id_wasp + " " +  JSON.stringify(config.locations[data.id_wasp]));
+      if(config.locations[data.id_wasp]){
+        data.location=""+parseFloat(config.locations[data.id_wasp].lat).toFixed(4)+ "," +parseFloat(config.locations[data.id_wasp].lon).toFixed(4)
       }else{
         data.location=""+parseFloat(config.defaultLocation.lat).toFixed(4)+ "," +parseFloat(config.defaultLocation.lon).toFixed(4)
       }
@@ -69,27 +74,18 @@ try{
     //if not location defined then delete it
     if(!data.location){
         delete data.location;
-    }
-    
-    
+    }       
    
-	log.info("data : "+JSON.stringify( data));
+    log.info("data : "+JSON.stringify( data));
 
     //add the event
-    
-    var eventSaved = deviceManager.createDeviceEvent(data).metadata.status=="success";
-    
-    
+    var eventSaved = deviceManager.createDeviceEvent(data).metadata.status=="success";   
     
     //proccess the event to check if any alert if not the current request for gps data
     var alertProcessed=alertManager.processData(data);
     
-   
-
     //publish the data to channel
     var dataPublished=notificationManager.publish(data);
-
-    
 
     //return the result
     return  eventSaved && alertProcessed && dataPublished;
