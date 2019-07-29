@@ -4,15 +4,15 @@
 var menuItems = {
   "mainMenu": "menu1",
   "menu1": [
-    { "id": "1", "iconClass": "fa fa-map", "label": "Map", "route": "#/main", "active": "true" },
-    { "id": "2", "iconClass": "fa fa-warning", "label": "Dashboard", "route": "#/dashboard", "active": "false" },
-    { "id": "2", "iconClass": "fa fa-warning", "label": "Reports", "route": "#/reports", "active": "false" },
-    { "id": "2", "iconClass": "fa fa-warning", "label": "Alerts", "route": "#/alerts", "active": "false" },
-    { "id": "2", "iconClass": "fa fa-warning", "label": "Control", "route": "#/control", "active": "false" },
-    { "id": "2", "iconClass": "fa fa-warning", "label": "A.I", "route": "#/ai", "active": "false" },
-    { "id": "2", "iconClass": "fa fa-warning", "label": "Add Device", "route": "#/add-device", "active": "false" },
-    { "id": "3", "iconClass": "fa fa-list-alt", "label": "Add Rule", "route": "#/rules", "active": "false" },
-    { "id": "2", "iconClass": "fa fa-warning", "label": "Info", "route": "#/info", "active": "false" },
+    { "id": "1", "iconClass": "fa fa-fw fa-map", "label": "Map", "route": "#/main", "active": "true" },
+    { "id": "2", "iconClass": "fa fa-fw fa-sliders", "label": "Dashboard", "route": "#/dashboard", "active": "false" },
+    { "id": "2", "iconClass": "fa fa-fw fa-file", "label": "Reports", "route": "#/reports", "active": "false" },
+    { "id": "2", "iconClass": "fa fa-fw fa-warning", "label": "Alerts", "route": "#/alerts", "active": "false" },
+    { "id": "2", "iconClass": "fa fa-fw fa-gear", "label": "Control", "route": "#/control", "active": "false" },
+    { "id": "2", "iconClass": "fa fa-fw fa-info", "label": "A.I", "route": "#/ai", "active": "false" },
+    { "id": "2", "iconClass": "fa fa-fw fa-user-plus", "label": "Add Device", "route": "#/add-device", "active": "false" },
+    { "id": "3", "iconClass": "fa fa-fw fa-list-alt", "label": "Add Rule", "route": "#/rules", "active": "false" },
+    { "id": "2", "iconClass": "fa fa-fw fa-info-circle", "label": "Info", "route": "#/info", "active": "false" },
   ]
 };
 
