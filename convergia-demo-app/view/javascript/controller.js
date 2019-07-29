@@ -131,5 +131,28 @@ myApp.controller('dashboardCtrl', function($scope, $timeout, wsClient, httpClien
 });
 
 
+myApp.controller('reportsCtrl', function(httpClient, $sce, $timeout,$routeParams) {
+    var vm = this;
+    var params = {};
+    
+});
+
+myApp.controller('controlCtrl', function(httpClient, $sce, $timeout,$routeParams) {
+    var vm = this;
+    var params = {};
+    
+});
+
+myApp.controller('aiCtrl', function(httpClient, $sce, $timeout,$routeParams) {
+    var vm = this;
+    var params = {};
+    
+});
+
+myApp.controller('addDeviceCtrl', function(httpClient, $sce, $timeout,$routeParams) {
+    var vm = this;
+    var params = {};
+    
+});
 
 
