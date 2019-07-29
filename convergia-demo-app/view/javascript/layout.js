@@ -35,7 +35,8 @@ var routingItems = {
     { "route": "reports", "template": "/convergia-demo-app/view/html/views/reports/reports.html", controller: "reportsCtrl as vm" },
     { "route": "control", "template": "/convergia-demo-app/view/html/views/control/control.html", controller: "controlCtrl as vm" },
     { "route": "ai", "template": "/convergia-demo-app/view/html/views/ai/ai.html", controller: "aiCtrl as vm" },
-    { "add-device": "reports", "template": "/convergia-demo-app/view/html/views/devices/add-device.html", controller: "addDeviceCtrl as vm" },
+    { "route": "add-device", "template": "/convergia-demo-app/view/html/views/devices/add-device.html", controller: "addDeviceCtrl as vm" },
+    { "route": "info", "template": "/convergia-demo-app/view/html/views/info/info.html", controller: "infoCtrl as vm" },
     
     { "route": "logout", "template": "/convergia-demo-app/view/html/logout.html" }
   ]
