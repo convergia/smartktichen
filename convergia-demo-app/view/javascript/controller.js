@@ -154,5 +154,10 @@ myApp.controller('addDeviceCtrl', function(httpClient, $sce, $timeout,$routePara
     var params = {};
     
 });
+myApp.controller('infoCtrl', function(httpClient, $sce, $timeout,$routeParams) {
+    var vm = this;
+    var params = {};
+    
+});
 
 
