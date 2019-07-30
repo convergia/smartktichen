@@ -1,7 +1,18 @@
 //layout params
 
-//menu items
+//menu items user
 var menuItems = {
+  "mainMenu": "menu1",
+  "menu1": [
+    { "id": "1", "iconClass": "fa fa-fw fa-map", "label": "Map", "route": "#/main", "active": "true" },
+    { "id": "2", "iconClass": "fa fa-fw fa-sliders", "label": "Dashboard", "route": "#/dashboard", "active": "false" },
+    { "id": "2", "iconClass": "fa fa-fw fa-file", "label": "Reports", "route": "#/reports", "active": "false" },
+    { "id": "2", "iconClass": "fa fa-fw fa-warning", "label": "Alerts", "route": "#/alerts", "active": "false" },
+    { "id": "2", "iconClass": "fa fa-fw fa-info-circle", "label": "Info", "route": "#/info", "active": "false" },
+  ]
+};
+//menu items admin
+var menuItemsAdmin = {
   "mainMenu": "menu1",
   "menu1": [
     { "id": "1", "iconClass": "fa fa-fw fa-map", "label": "Map", "route": "#/main", "active": "true" },

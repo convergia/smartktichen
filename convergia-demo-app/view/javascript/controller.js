@@ -1,12 +1,12 @@
 //Angular js controllers 
 
 //app controller
-myApp.controller('appCtrl', function($scope, $timeout, wsClient, httpClient, headerItemsJson, menuItemsJson, $window, $location, mapConstants, $sce, $routeParams) {
+myApp.controller('appCtrl', function($scope, $timeout, wsClient, httpClient, headerItemsJson, menuItemsJson,menuItemsAdminJson, $window, $location, mapConstants, $sce, $routeParams) {
     var vm = this;
     vm.scope = $scope;
     vm.headerItems = headerItemsJson;
   	vm.isAdmin=false;
-  vm.userGroups=[];
+  	vm.userGroups=[];
     vm.user = {"login": JSON.parse($.cookie('user')).name};
     vm.menuItems = menuItemsJson;
     
@@ -19,7 +19,12 @@ myApp.controller('appCtrl', function($scope, $timeout, wsClient, httpClient, hea
 
           vm.userGroups = data;
           vm.isAdmin=vm.userGroups.includes("admin");
-          vm.user.login=vm.isAdmin?vm.user.login+"(Admin)":vm.user.login;
+          
+          
+          if(vm.isAdmin){
+            vm.user.login=vm.user.login+"(Admin)";
+            vm.menuItems = menuItemsAdminJson;
+          }
         },
         function(err) {
             console.log('ERROR');

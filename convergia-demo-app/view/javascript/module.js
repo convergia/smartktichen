@@ -3,6 +3,7 @@ var myApp = angular.module('myApp', ["Layout",  "WsClient", "HttpClient", "Map",
 
 myApp
     .constant("menuItemsJson",  menuItems)
+		.constant("menuItemsAdminJson",  menuItemsAdmin)
     .constant("headerItemsJson", headerItems)
     .constant("routingJson", routingItems)
     .config(httpsConfig)
