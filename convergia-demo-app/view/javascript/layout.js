@@ -29,7 +29,7 @@ var menuItemsAdmin = {
 
 //header items
 var headerItems = {
-  "logo": "https://i.ibb.co/gMTVwVK/logo-160-croped.png",
+  "logo": "https://i.ibb.co/TmfS643/logo-450.png",
   "items": [],
   "logout": { "icon": "fa fa-sign-out", "label": "Logout", "route": "#/logout" },
   "appname":"CxC Smart Agriculture"
