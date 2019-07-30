@@ -5,12 +5,25 @@ myApp.controller('appCtrl', function($scope, $timeout, wsClient, httpClient, hea
     var vm = this;
     vm.scope = $scope;
     vm.headerItems = headerItemsJson;
+  	vm.isAdmin=false;
+  vm.userGroups=[];
     vm.user = {"login": JSON.parse($.cookie('user')).name};
     vm.menuItems = menuItemsJson;
     
     
     vm.init = function() {
-        
+        httpClient
+        .get("convergia-demo-app/api/login/userGroups", null)
+        .then(
+        function(data, response) {
+
+          vm.userGroups = data;
+          vm.isAdmin=vm.userGroups.includes("admin");
+          vm.user.login=vm.isAdmin?vm.user.login+"(Admin)":vm.user.login;
+        },
+        function(err) {
+            console.log('ERROR');
+        });
     }
    
 });

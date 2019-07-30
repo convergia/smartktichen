@@ -28,8 +28,8 @@ body {font-family: 'Roboto', sans-serif; color: #5d5d5d;}
     padding-top: 8px;
     font-size: 21px;
     color: #612480;
-    width: calc(100% - 300px);
-    /* margin: 0 auto; */
+    /*width: calc(100% - 500px);
+     margin: 0 auto; */
     text-align: center;
 }
 
