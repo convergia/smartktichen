@@ -20,7 +20,8 @@ var menuItems = {
 var headerItems = {
   "logo": "https://i.ibb.co/gMTVwVK/logo-160-croped.png",
   "items": [],
-  "logout": { "icon": "fa fa-sign-out", "label": "Logout", "route": "#/logout" }
+  "logout": { "icon": "fa fa-sign-out", "label": "Logout", "route": "#/logout" },
+  "appname":"CxC Smart Agriculture"
 };
 
 //angular js routs
