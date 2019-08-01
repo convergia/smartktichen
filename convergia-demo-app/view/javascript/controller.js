@@ -1,7 +1,7 @@
 //Angular js controllers 
 
 //app controller
-myApp.controller('appCtrl', function($scope, $timeout, wsClient, httpClient, headerItemsJson, menuItemsJson,menuItemsAdminJson, $window, $location, mapConstants, $sce, $routeParams) {
+myApp.controller('appCtrl', function($scope,$rootScope, $timeout, wsClient, httpClient, headerItemsJson, menuItemsJson,menuItemsAdminJson, $window, $location, mapConstants, $sce, $routeParams) {
     var vm = this;
     vm.scope = $scope;
     vm.headerItems = headerItemsJson;
@@ -19,7 +19,7 @@ myApp.controller('appCtrl', function($scope, $timeout, wsClient, httpClient, hea
 
           vm.userGroups = data;
           vm.isAdmin=vm.userGroups.includes("admin");
-          
+          $rootScope.isAdmin=vm.isAdmin;
           
           if(vm.isAdmin){
             vm.user.login=vm.user.login+"(Admin)";
@@ -149,30 +149,38 @@ myApp.controller('dashboardCtrl', function($scope, $timeout, wsClient, httpClien
 });
 
 
-myApp.controller('reportsCtrl', function(httpClient, $sce, $timeout,$routeParams) {
+myApp.controller('reportsCtrl', function($scope,$rootScope, httpClient, $sce, $timeout,$routeParams) {
+  	
+  
+    var vm = this;
+    var params = {};
+  console.log($rootScope.isAdmin);
+    
+});
+
+myApp.controller('controlCtrl', function($scope,$rootScope,httpClient, $sce, $timeout,$routeParams) {
     var vm = this;
     var params = {};
     
 });
 
-myApp.controller('controlCtrl', function(httpClient, $sce, $timeout,$routeParams) {
+myApp.controller('aiCtrl', function($scope,$rootScope,httpClient, $sce, $timeout,$routeParams) {
     var vm = this;
     var params = {};
     
 });
 
-myApp.controller('aiCtrl', function(httpClient, $sce, $timeout,$routeParams) {
+myApp.controller('addDeviceCtrl', function($scope,$rootScope,httpClient, $sce, $timeout,$routeParams) {
     var vm = this;
     var params = {};
     
 });
-
-myApp.controller('addDeviceCtrl', function(httpClient, $sce, $timeout,$routeParams) {
+myApp.controller('infoCtrl', function($scope,$rootScope,httpClient, $sce, $timeout,$routeParams) {
     var vm = this;
     var params = {};
     
 });
-myApp.controller('infoCtrl', function(httpClient, $sce, $timeout,$routeParams) {
+myApp.controller('dashboardHomeCtrl', function($scope,$rootScope,httpClient, $sce, $timeout,$routeParams) {
     var vm = this;
     var params = {};
     
