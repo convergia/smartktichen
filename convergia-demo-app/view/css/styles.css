@@ -31,6 +31,7 @@ body {font-family: 'Roboto', sans-serif; color: #5d5d5d;}
     /*width: calc(100% - 500px);
      margin: 0 auto; */
     text-align: center;
+      padding-left: 30%;
 }
 
 @media (min-width:768px) {
