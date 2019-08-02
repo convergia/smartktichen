@@ -180,9 +180,29 @@ myApp.controller('infoCtrl', function($scope,$rootScope,httpClient, $sce, $timeo
     var params = {};
     
 });
-myApp.controller('dashboardHomeCtrl', function($scope,$rootScope,httpClient, $sce, $timeout,$routeParams) {
+myApp.controller('dashboardHomeCtrl', function( $location,$scope,$rootScope,httpClient, $sce, $timeout,$routeParams) {
     var vm = this;
     var params = {};
+  
+  	// only for current demo the dashboard home will redirect to the first device dashboard
+  	httpClient
+        .get("convergia-demo-app/api/devicelist", null)
+        .then(
+        function(data, response) {
+          console.log(data);
+          
+          if (data === undefined || data.length == 0) {
+    				// array empty or does not exist
+          }else{
+             var deviceId=data[0].id;
+             console.log(deviceId);
+             $location.path("/dashboard/deviceId/"+deviceId);
+          }
+            
+        },
+        function(err) {
+            console.log('ERROR');
+        });
     
 });
 
