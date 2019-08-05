@@ -17,6 +17,6 @@ if(getDevice.metadata.status == "success"){
     }
     
     var ruleGroup = _.intersection(userGroups,  availableRuleGroups)[0];
-    var editorUrl = "https://embedded.scriptr.io?auth_token="+authToken+"&menu=0&tree=0&console=0&name=convergia-demo-app/entities/rules";
+    var editorUrl = "https://convergia-embedded.scriptr.io?auth_token="+authToken+"&menu=0&tree=0&console=0&name=convergia-demo-app/entities/rules";
 	return editorUrl
 }

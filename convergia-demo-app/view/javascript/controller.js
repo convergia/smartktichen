@@ -1,16 +1,34 @@
 //Angular js controllers 
 
 //app controller
-myApp.controller('appCtrl', function($scope, $timeout, wsClient, httpClient, headerItemsJson, menuItemsJson, $window, $location, mapConstants, $sce, $routeParams) {
+myApp.controller('appCtrl', function($scope,$rootScope, $timeout, wsClient, httpClient, headerItemsJson, menuItemsJson,menuItemsAdminJson, $window, $location, mapConstants, $sce, $routeParams) {
     var vm = this;
     vm.scope = $scope;
     vm.headerItems = headerItemsJson;
+  	vm.isAdmin=false;
+  	vm.userGroups=[];
     vm.user = {"login": JSON.parse($.cookie('user')).name};
     vm.menuItems = menuItemsJson;
     
     
     vm.init = function() {
-        
+        httpClient
+        .get("convergia-demo-app/api/login/userGroups", null)
+        .then(
+        function(data, response) {
+
+          vm.userGroups = data;
+          vm.isAdmin=vm.userGroups.includes("admin");
+          $rootScope.isAdmin=vm.isAdmin;
+          
+          if(vm.isAdmin){
+            vm.user.login=vm.user.login+"(Admin)";
+            vm.menuItems = menuItemsAdminJson;
+          }
+        },
+        function(err) {
+            console.log('ERROR');
+        });
     }
    
 });
@@ -131,5 +149,61 @@ myApp.controller('dashboardCtrl', function($scope, $timeout, wsClient, httpClien
 });
 
 
+myApp.controller('reportsCtrl', function($scope,$rootScope, httpClient, $sce, $timeout,$routeParams) {
+  	
+  
+    var vm = this;
+    var params = {};
+  console.log($rootScope.isAdmin);
+    
+});
+
+myApp.controller('controlCtrl', function($scope,$rootScope,httpClient, $sce, $timeout,$routeParams) {
+    var vm = this;
+    var params = {};
+    
+});
+
+myApp.controller('aiCtrl', function($scope,$rootScope,httpClient, $sce, $timeout,$routeParams) {
+    var vm = this;
+    var params = {};
+    
+});
+
+myApp.controller('addDeviceCtrl', function($scope,$rootScope,httpClient, $sce, $timeout,$routeParams) {
+    var vm = this;
+    var params = {};
+    
+});
+myApp.controller('infoCtrl', function($scope,$rootScope,httpClient, $sce, $timeout,$routeParams) {
+    var vm = this;
+    var params = {};
+    
+});
+myApp.controller('dashboardHomeCtrl', function( $location,$scope,$rootScope,httpClient, $sce, $timeout,$routeParams) {
+    var vm = this;
+    var params = {};
+  
+  	// only for current demo the dashboard home will redirect to the first device dashboard
+  	httpClient
+        .get("convergia-demo-app/api/devicelist", null)
+        .then(
+        function(data, response) {
+          console.log(data);
+          
+          if (data === undefined || data.length == 0) {
+    				// array empty or does not exist
+          }else{
+             var deviceId=data[0].id;
+             console.log(deviceId);
+             $location.path("/dashboard/deviceId/"+deviceId);
+          }
+            
+        },
+        function(err) {
+            console.log('ERROR');
+        });
+    
+});
 
 

@@ -24,7 +24,15 @@ body {font-family: 'Roboto', sans-serif; color: #5d5d5d;}
     background: #283746;}
 .bg-grey-dark {background: #dedede;}
 .light-bg {background: #f1f4f9;}
-
+.appname {
+    padding-top: 8px;
+    font-size: 21px;
+    color: #612480;
+    /*width: calc(100% - 500px);
+     margin: 0 auto; */
+    text-align: center;
+      padding-left: 30%;
+}
 
 @media (min-width:768px) {
   main {display: flex; min-height: calc(100vh - 45px);}
@@ -144,14 +152,15 @@ border-color: #632080!important;
 header {box-shadow: 0 0 2px #888;}
 header, .logo {background: #ccc;}
 
-.logo img {margin: 7px 3px;}
-.username {background: #662483; height: 45px;}
+.logo img {    margin: 3px 3px;
+    width: 160px;}
+.username {background: #612480; height: 45px;}
 .side-bar {background: #f7f5fa;}
 .level-bg-1 { background: #d8d8d8!important;}
 .side-bar.md .nav-pills>li a {text-indent: 4px;}
-.side-bar .nav>li.active>a {background-color: rgba(255,255,255,0.7); }
+.side-bar .nav>li.active>a {background-color: #f6a000; }
 .side-bar .nav-pills>li strong {font-size: 11px; color: #716b7a;}
-.side-bar .nav-pills>li i {color: #662483; font-size: 1.1em;}
+.side-bar .nav-pills>li i {color: #612480; font-size: 1.1em;}
 
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {color: #5d5d5d;}
 .dropdown-menu,
