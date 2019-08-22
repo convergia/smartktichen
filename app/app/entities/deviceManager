@@ -1,0 +1,150 @@
+var document = require("document");
+var device = require("device");
+var utils = require("app/entities/utils");
+
+var _= require("modules/underscore/underscore.js")._;
+
+var log = require("log");
+log.setLevel("INFO");
+
+var event_prefix = "device_event_";
+var type = "hardware";
+
+
+function getLatestDeviceEntry(id) {
+   var key = event_prefix + id;;
+  
+   var params = {
+       "query" : "key like \""+key+"_%\"",
+       "fields": "*",
+       "sort": "creationDate<date:DESC>",
+       "resultsPerPage": 1
+   }
+
+   var result = document.query(params);
+   if(result.metadata.status == "success" && result.result.documents.length > 0) {
+        return result.result.documents[0];
+   } else {
+        return null;
+   }
+}
+
+function getDeviceAlertsEntries(id) {
+   var key = event_prefix ;
+   if(id){
+     key+=id+"_";
+   }
+  log.info("key is: "+key)
+   var params = {
+       "query" : "key like \""+key+"%\" and event_type in [\"alert\"]",
+       "fields": "*",
+       "sort": "creationDate<date:DESC>"
+        
+   }
+   
+   var result = document.query(params);
+   if(result.metadata.status == "success" && result.result.documents.length > 0) {
+        return result.result.documents;
+   } else {
+        return null;
+   }
+}
+/**
+ * @function listHistory
+ * @param {String} id: the device's id
+ * @return {ArrayList} list of historical device data
+ */
+function getDeviceHistoricalEntries(id) {
+   var key = event_prefix + id;;
+   
+   var params = {
+       "query" : "key like \""+key+"_%\"",
+       "fields": "*"
+   }
+   
+   var result = document.query(params);
+   if(result.metadata.status == "success" && result.result.documents.length > 0) {
+        return result.result.documents;
+   } else {
+        return null;
+   }
+}
+
+function buildDeviceEventDocument(entry, data) {
+    _.extendOwn(entry, data);
+    delete entry.auth_token;
+    delete entry.versionNumber;
+    delete entry.latest;
+    delete entry.creator;
+  	delete entry["apsdb.update"];
+  	
+  
+    //MFE: Go get previous device event data and mix it with payload and the entry
+		//autofill missing data
+ 		log.info("entry from buildDeviceEventDocument is "+ JSON.stringify(entry))
+  	var latestEvent=getLatestDeviceEntry(entry.id);
+  	if(latestEvent){
+      for(var key in entry){
+        if(latestEvent[key] && !entry[key]  ){
+          entry[key]=latestEvent[key];
+        }
+      }
+    }
+  	log.info("entry after filling missing data from buildDeviceEventDocument is "+ JSON.stringify(entry))
+  	//end auto fill missing data
+    entry["event_type"] = ["event"];
+    entry["key"] = event_prefix + entry.id + "_" + new Date().getTime();
+    entry["meta.types"] = {
+          "temperature": "numeric",
+          "humidity": "numeric",
+          "pressure": "numeric"
+      }
+    return entry;
+}
+
+function saveDeviceEvent(entry) {
+   log.info("[app/entities/devicemanager] saving device event."+JSON.stringify(entry))
+    log.info("[app/entities/devicemanager] saving device event."+JSON.stringify(document.save(entry)))
+  // return ;
+}
+
+
+function buildDeviceDefinitionDocument(entry) {
+    entry["id"] = entry.id;
+    entry["password"] = utils.generate();
+    entry["type"] = type;
+    return entry;
+}
+
+function saveDeviceDefinition(entry) {
+   return device.save(entry);
+}
+
+function getDeviceDefinition(id) {
+    var params = {
+       "query" : "id =\""+ id +"\"",
+       "fields": "country,city,source,locationType,locationSection,physicalEnvironment,sensor,address,long,lat,event_type,id"
+   }
+   var result = device.query(params);
+   if(result.metadata.status == "success") {
+        return result.result.devices[0];
+   } else {
+        return null;
+   }
+}
+
+
+function getAllDevicesDefinition() {
+
+   var params = {
+       "query" : "type =\""+ type +"\"",
+       "fields": "*"
+   }
+   
+   var result = device.query(params);
+   if(result.metadata.status == "success" && result.result.devices.length > 0) {
+        return result.result.devices;
+   } else {
+        return null;
+   }
+}

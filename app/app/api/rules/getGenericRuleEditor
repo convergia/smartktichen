@@ -1,0 +1,24 @@
+var device = require("device");
+var user = require("user");
+var config = require("app/config/config");
+
+//fetch device and authtoken 
+//in case of user we should bring token from request since the user has many tokens 
+// so in all cases it is better if we take hte auth from request
+var authorization =request.headers.authorization;
+var authToken = authorization.substring(7, authorization.length);
+
+var getDevice = device.get(request.user.id);
+
+if(getDevice.metadata.status=="failure"){
+  getDevice=user.get(request.user.id);
+  
+  
+}
+if(getDevice.metadata.status == "success"){
+     
+    var editorUrl = "https://convergia-embedded.scriptr.io?auth_token="+authToken+"&menu=0&tree=0&console=0&name=app/entities/rules/decisionTable&pluginName=SimpleDecisionTable";
+	return editorUrl
+}
+
+//Maybe we return here a permission denied

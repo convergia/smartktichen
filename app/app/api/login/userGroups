@@ -1,0 +1,19 @@
+var device = require("device");
+var user = require("user");
+var getDevice = device.get(request.user.id);
+if(getDevice.metadata.status=="failure"){
+  getDevice=user.get(request.user.id);
+}
+if(getDevice.metadata.status == "success"){
+    var userGroups = getDevice.result["groups"];
+      
+    if (userGroups == null) {
+        userGroups = ["user"];
+    } else if (typeof userGroups == 'string') {
+        userGroups = [ userGroups ];
+    }
+    
+    
+	return userGroups;
+}
+return [];
