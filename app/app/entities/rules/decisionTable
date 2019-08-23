@@ -33,10 +33,10 @@ if(typeof pl != "object") {
        decision.push({ "sendEmail": "HIGH_TEMPERATURE","isAlert": "true","alertType": "HIGH_TEMPERATURE" });
 	} 
 	  if((pl != null && pl["temperature"] != undefined && pl["temperature"] >0) && (pl != null && pl["_le_temperature"] != undefined && pl["_le_temperature"] <=0)){
-       decision.push({ "gms": "R140","isAlert": "true","alertType": "FREEZ_RECOVER" });
+       decision.push({ "isAlert": "true","alertType": "FREEZ_RECOVER" });
 	} 
 	  if((pl != null && pl["temperature"] != undefined && pl["temperature"] <=0) && (pl != null && pl["_le_temperature"] != undefined && pl["_le_temperature"] >0)){
-       decision.push({ "gms": "E140","isAlert": "true","alertType": "FREEZ" });
+       decision.push({ "isAlert": "true","alertType": "FREEZ" });
 	} 
 }
 //RULES EVALUATION END
