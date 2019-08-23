@@ -1,12 +1,16 @@
 //take the payload received in case renzo cannot change it and transform it
 
 //make sensor value a key and make value value its value
-var fileds=["WT",
+var fileds=["TC",
             "BAT",
-            "COND",
-            "ORP",
-            "DO",
-            "PH"];
+            "PLV1",
+            "PLV2",
+            "PLV3",
+            "SOIL2",
+            "ANE",
+            "STR",
+            "PRES",
+            "HUM"];
 function transform(data){
   var x=data;
   
