@@ -1,6 +1,6 @@
 var expiry = 60;
 
-const subDomain="convergia-marvette";
+const subDomain="<subdomain>";
 var dmpDeviceBroker = "myDmpBroker";
 
 var defaultApp = "smart-agriculture";
