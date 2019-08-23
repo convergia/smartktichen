@@ -28,7 +28,7 @@ var config = require("./config");
             "DO",
             "PH"];
         var randomDevice ={ id: '2345', id_wasp: 'MSD_SA',lat: "-33.4008511", long: "-70.54576139" } //devices[Math.floor(Math.random() * devices.length)];
-        var randomValue = "WT"//values[Math.floor(Math.random() * values.length)];
+        var randomValue = values[Math.floor(Math.random() * values.length)];
         var value=getRandomValue(randomValue);
         //Generate random data to simulate the device data
         var dataSnap =
