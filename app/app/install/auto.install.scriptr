@@ -2,12 +2,16 @@ var responseObject = {};
 var channels = require("channel");
 var devices = require("device");
 var groups = require("group");
+var users = require("user");
 
 /** Create a group editor that allows its users to access the scriptr ide plugins, ex: decision table **/
 var editorGroup = "editor";
 var step2 = groups.create(editorGroup);
 responseObject["groupCreation_"+editorGroup] = JSON.stringify(step2);
-
+/** Create a group admin that allows its users to access admin rules **/
+var adminGroup = "admin";
+var step3 = groups.create(adminGroup);
+responseObject["groupCreation_"+adminGroup] = JSON.stringify(step3);
 
 
 /** Create Anonymous publish channel used to receive requests from browser **/
@@ -41,12 +45,7 @@ var defaultDevice = { //This device is used by to authenticate a single device
 }
 
 var devicesList = [
-    {//Device used to login to iot app
-        "id":"demo",
-        "password" : "demo",
-        "name" : "demo",
-        "groups": ["editor"]
-    },
+   
     { //This device is used by to authenticate the messaging of group of devices to scriptr example, used for the authentication with the mqtt bridge, or to add the messaging queue
         "id":"myDmpBroker",
         "password" : "demo",
@@ -61,6 +60,31 @@ devicesList.forEach(function(params) {
 
     var step7= devices.generateToken(params.id);
     responseObject["deviceToken_"+params.id] = JSON.stringify(step7);
+});
+
+
+//create users to be used to login to the app
+var usersList = [
+    {//Device used to login to iot app
+        "id":"demo",
+        "password" : "demo",
+        "name" : "demo",
+        "groups": []
+    },
+    {//Device used to login to iot app
+        "id":"admin",
+        "password" : "admin",
+        "name" : "admin",
+        "groups": ["editor","admin"]
+    }
+    
+];
+
+usersList.forEach(function(params) {
+   	var step= users.save(params);
+    responseObject["userCreation_"+params.id] = JSON.stringify(step);
+
+   
 });
 
 

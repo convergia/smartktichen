@@ -77,6 +77,13 @@ myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $rou
     vm.phFormatData = function(data){
         return data.latest.ph;
     }
+    vm.anemometerFormatData = function(data){
+        return data.latest.anemometer;
+    }
+    
+    vm.humidityFormatData = function(data){
+        return data.latest.humidity;
+    }
     
     vm.proximityFormatData = function(data){
         return data.latest.proximity;
