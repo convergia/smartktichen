@@ -14,7 +14,7 @@
   - Path: /app
   - Branch: leave empty or type **master**
   - Destination folder: /
-
+- Run the script in the path **/app/install/auto.install.scriptr** to setup the environment 
 
 
 ## Install dependencies
