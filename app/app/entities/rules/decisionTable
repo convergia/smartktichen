@@ -22,6 +22,7 @@ for(key in le){
 
 var log = require("log"); 
 log.setLevel("info");
+
 //PRESCRIPT END
 
 //RULES EVALUATION START
@@ -32,10 +33,10 @@ if(typeof pl != "object") {
        decision.push({ "sendEmail": "HIGH_TEMPERATURE","isAlert": "true","alertType": "HIGH_TEMPERATURE" });
 	} 
 	  if((pl != null && pl["temperature"] != undefined && pl["temperature"] >0) && (pl != null && pl["_le_temperature"] != undefined && pl["_le_temperature"] <=0)){
-       decision.push({ "isAlert": "true","alertType": "FREEZ_RECOVER" });
+       decision.push({ "isAlert": "true","alertType": "FREEZ_RECOVER","msteam": "FR" });
 	} 
 	  if((pl != null && pl["temperature"] != undefined && pl["temperature"] <=0) && (pl != null && pl["_le_temperature"] != undefined && pl["_le_temperature"] >0)){
-       decision.push({ "isAlert": "true","alertType": "FREEZ" });
+       decision.push({ "isAlert": "true","alertType": "FREEZ","msteam": "F" });
 	} 
 }
 //RULES EVALUATION END
