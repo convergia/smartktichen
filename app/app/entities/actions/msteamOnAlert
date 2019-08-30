@@ -1,0 +1,82 @@
+var config = require("app/config/config");
+var _ = require("modules/underscore/underscore.js")._;
+var mscModule = require('msteam/MicrosoftTeams');
+
+var log = require("log");
+log.setLevel("INFO");
+
+function execute(event, signal) {
+	if(!signal){
+    return;
+  }
+  
+  
+var mt=new mscModule.MicrosoftTeams();
+var cnMngr=mt.getConnectorManager();
+var myConnector=cnMngr.getConnector("general");
+
+  var url = "https://"+config.subDomain+".scriptrapps.io/smart-agriculture/index#/dashboard/deviceId/"+event.id+"?temperature="+event.temperature;//TODO move the api to config
+  var msg = {
+    "@context": "https://schema.org/extensions",
+    "@type": "MessageCard",
+    "potentialAction": [
+        {
+            "@type": "OpenUri",
+            "name": "View in dashboard",
+            "targets": [
+                {
+                    "os": "default",
+                    "uri": url
+                }
+            ]
+        }
+    ],
+    "sections": [
+        {
+            "facts": [
+                {
+                    "name": "Event:",
+                    "value": getEventName(signal)
+                },
+                {
+                    "name": "EventCode:",
+                    "value": signal
+                },
+                {
+                    "name": "Sensor Value:",
+                    "value": event.temperature
+                }
+            ],
+            "text": "Event Released for device: MSK_SA"
+        }
+    ],
+    "summary": "CxC Smart Agriculture",
+    "themeColor": "612480",
+    "title": "CxC Smart Agriculture"
+};
+
+log.info("[app/entities/actions/msteamOnAlert] Msg is: " + JSON.stringify(msg));
+  try {
+		
+    var result =  myConnector.send(
+    msg
+);
+    log.info("[app/entities/actions/msteamOnAlert] returned from msTeams: " + JSON.stringify(result));
+
+    //return xmlToJson(result);
+  } catch (exception) {
+    log.info("[app/entities/actions/msteamOnAlert] error: " +  JSON.stringify(exception));
+    //return exception;
+  }
+
+}
+function getEventName(event){
+  switch(event){
+    case "F":
+      return "Freez";
+      break;
+      case "FR":
+      return "Freez Recover";
+      break;
+  }
+}
