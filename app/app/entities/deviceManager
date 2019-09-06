@@ -148,3 +148,18 @@ function getAllDevicesDefinition() {
         return null;
    }
 }
+
+function getDevicesIdList(searchData) {
+
+   var params = {
+       "query" : "type =\""+ type +"\" ",
+       "fields": "id,name"
+   }
+   
+   var result = device.query(params);
+   if(result.metadata.status == "success" && result.result.devices.length > 0) {
+        return result.result.devices;
+   } else {
+        return null;
+   }
+}

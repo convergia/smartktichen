@@ -1,4 +1,72 @@
-   myApp.controller('myAppCtrl', function($scope,$rootScope, constants, $sce,httpClient, wsClient, headerItemsJson, menuItemsJson,menuItemsAdminJson) {
+myApp.controller('autocompCtrl', function($scope, httpClient, $q, $log, $location, $timeout){
+
+	var vm = this;
+  getAllIds(); //call query of all devices IDs
+
+	vm.scope = $scope;
+
+	vm.isDisabled = false;
+	//vm.noCache = true;
+
+	vm.querySearch   = querySearch;
+	vm.selectedItemChange = selectedItemChange;
+	vm.searchTextChange   = searchTextChange;
+
+	var getAllDevicesId = [];
+  
+
+	function querySearch (inputTxt) {//search function
+//console.log("QS getAllDevicesId: ", getAllDevicesId["$$state"].value);
+    if (getAllDevicesId.length > 0) {
+      var results = inputTxt ? getAllDevicesId.filter(createFilterFor(inputTxt)) : getAllDevicesId , deferred;
+      if (self.simulateQuery) {
+        deferred = $q.defer();
+        $timeout(function () { deferred.resolve(results); }, Math.random() * 1000, false);
+        return deferred.promise;
+      } else {
+        return results;
+      }
+      return results;
+  	}
+	}
+
+  function getAllIds() { //get All devices Id function, set data in getAllDevicesId array
+		httpClient.get("app/api/getDeviceIdList", null ).then(
+			function(data, response) {
+        var newData = data.map(function (repo) {//modifing result to add "value"
+          repo.value = repo.name.toLowerCase();//add "value" data for search purpose
+          return repo;
+        });
+        getAllDevicesId = newData;
+			},
+			function(err) {
+				console.log('ERROR', error);
+			}
+		);
+  }
+
+	function createFilterFor(query) {//search function filter on "value" data
+		var lowercaseQuery = query.toLowerCase();
+		return function filterFn(item) {
+			return (item.value.indexOf(lowercaseQuery) === 0);
+		};
+	}
+
+	function searchTextChange(text) {
+    getAllIds();// called to reload all devices if one is added on the fly
+//		$log.info('Text changed to ' + text);
+	}
+
+	function selectedItemChange(item) {
+//		$log.info('Item changed to ' + JSON.stringify(item));
+    if( item.name!=null && item.name!='') {
+    	$location.path("/dashboard/deviceId/"+item.name);
+    }
+	}
+
+});
+
+myApp.controller('myAppCtrl', function($scope,$rootScope, constants, $sce,httpClient, wsClient, headerItemsJson, menuItemsJson,menuItemsAdminJson) {
     	var vm = this;  
        vm.scope = $scope;
        if(constants.appTitle){
@@ -304,7 +372,7 @@ myApp.controller('infoCtrl', function($scope,$rootScope,httpClient, $sce, $timeo
     
 });
 myApp.controller('dashboardHomeCtrl', function( $location,$scope,$rootScope,httpClient, $sce, $timeout,$routeParams) {
-    var vm = this;
+/*    var vm = this;
     var params = {};
   
   	// only for current demo the dashboard home will redirect to the first device dashboard
@@ -326,7 +394,7 @@ myApp.controller('dashboardHomeCtrl', function( $location,$scope,$rootScope,http
         function(err) {
             console.log('ERROR');
         });
-    
+  */  
 });
 
 
