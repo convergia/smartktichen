@@ -1,1 +1,28 @@
-<h1>Empty</h1>
+<div ng-controller="autocompCtrl as vm" layout="column" ng-cloak >
+  <md-content class="md-padding">
+    <form ng-submit="$event.preventDefault()">
+      <label id="favoriteStateLabel">Search for a device ID</label>
+      <md-autocomplete style="min-width: 100px;"
+          ng-disabled="vm.isDisabled"
+          md-no-cache="vm.noCache"
+          md-selected-item="vm.selectedItem"
+          md-search-text-change="vm.searchTextChange(vm.searchText)"
+          md-search-text="vm.searchText"
+          md-selected-item-change="vm.selectedItemChange(item)"
+          md-items="item in vm.querySearch(vm.searchText)"
+          md-item-text="item.name"
+          md-min-length="1"
+          placeholder="Ex. MS"
+          input-aria-labelledby="favoriteStateLabel"
+          input-aria-describedby="autocompleteDetailedDescription">
+        <md-item-template>
+          <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.name}}</span>
+        </md-item-template>
+        <md-not-found>
+          No device ID matching "{{vm.searchText}}" were found.
+        </md-not-found>
+      </md-autocomplete>
+
+    </form>
+  </md-content>
+</div>

@@ -9,7 +9,7 @@ myApp.constant("constants", {
    sources : {
     "simulator": { 
    	  "mapMarker": {
-          url: "https://i.ibb.co/Jzcnn6F/map-pin.png"
+          url: "https://convergia-cdn.s3.amazonaws.com/map_pin.png"
    	  }
     }
   },

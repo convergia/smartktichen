@@ -1,28 +1,50 @@
 
-myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $routeParams, constants) {
+myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $routeParams, constants, _) {
     var vm = this;
+  
+	  // list of all charts accessible through the select box
+  	// array of objects consisting of a name and an url of the file that will be included by ng-include
+  	// "code" has been added to support external call to chart from gauge
+    vm.graph = [
+      { code:"temperature", name: 'Temperature', url: '/smart-agriculture/view/views/dashboard/graph_temp.html'},
+      { code:"battery", name: 'Battery', url: '/smart-agriculture/view/views/dashboard/graph_bat.html'},
+      { code:"anemometer", name: 'Wind speed', url: '/smart-agriculture/view/views/dashboard/graph_anemo.html'},
+/*      { code:"winddir",name: 'Wind direction', url: '/smart-agriculture/view/views/dashboard/graph_wind.html'},*/
+      { code:"pressure", name: 'Pressure', url: '/smart-agriculture/view/views/dashboard/graph_press.html'},
+      { code:"humidity", name: 'Humidity', url: '/smart-agriculture/view/views/dashboard/graph_humid.html'},
+      { code:"soil",name: 'Soil moisture', url: '/smart-agriculture/view/views/dashboard/graph_soil.html'}
+    ];
+    vm.selectedGraphLeft = vm.graph[0];//default selection of first chart/left
+  	vm.selectedGraphRight = vm.graph[1];//default selection of second chart/right
+  
     vm.icons = constants.infoWindows.icons;
     vm.deviceKey = null;
     vm.gridsterOptions = {
-        pushing: true,
-		floating: true,
+        pushing: false,
+				floating: false,
         minRows: 1, // the minimum height of the grid, in rows
         maxRows: 100,
-        columns: 4, // the width of the grid, in columns
+        columns: 6, // the width of the grid, in columns
         colWidth: 'auto', // can be an integer or 'auto'.  'auto' uses the pixel width of the element divided by 'columns'
-        rowHeight: '450', // can be an integer or 'match'.  Match uses the colWidth, giving you square widgets.
+        rowHeight: '150', // can be an integer or 'match'.  Match uses the colWidth, giving you square widgets.
         margins: [10, 10], // the pixel distance between each widget
         defaultSizeX: 2, // the default width of a gridster item, if not specifed
         defaultSizeY: 1, // the default height of a gridster item, if not specified
         mobileBreakPoint: 1024, // if the screen is not wider that this, remove the grid layout and stack the items
         minColumns: 1,
         resizable: {
-            enabled: true
+            enabled: false
         },
         draggable: {
-            enabled: true
+            enabled: false
         }
     };
+
+  vm.metricBoxClicked=function(tag){
+    var selected=_.where(vm.graph, {code: tag})[0];
+    console.log(selected)
+    vm.selectedGraphLeft=selected;
+  }
 
     vm.init = function(){
         if($routeParams && $routeParams.deviceId) {
@@ -88,8 +110,28 @@ myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $rou
     vm.proximityFormatData = function(data){
         return data.latest.proximity;
     }
-    
+
+   
     vm.accelerometerFormatData= function(data){
         return {"x": data.latest.acc_x, "y": data.latest.acc_y, "z": data.latest.acc_z};
     }
+
+
+    vm.pluviometer1FormatData = function(data){
+      return data.latest.pluviometer_1;
+    }
+    vm.pluviometer2FormatData = function(data){
+      return data.latest.pluviometer_2;
+    }
+    vm.pluviometer3FormatData = function(data){
+      return data.latest.pluviometer_3;
+    }
+    vm.soilMoistureFormatData = function(data){
+      return data.latest.soil_moisture;
+    }
+    vm.windDirFormatData = function(data){
+      return data.latest.wind_direction;
+    }
+
+
 });

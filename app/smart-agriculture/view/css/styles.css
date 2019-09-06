@@ -25,13 +25,22 @@ body {font-family: 'Roboto', sans-serif; color: #5d5d5d;}
 .bg-grey-dark {background: #dedede;}
 .light-bg {background: #f1f4f9;}
 .appname {
-    padding-top: 8px;
-    font-size: 21px;
-    color: #F6A000;
-    /*width: calc(100% - 500px);
-     margin: 0 auto; */
-    text-align: center;
-      padding-left: 30%;
+  /*padding-top: 8px;*/
+  font-size: 20px;
+  color: #5e5e5e;
+  /*width: calc(100% - 500px);
+  margin: 0 auto; */
+  text-align: center;
+  /*padding-left: 30%;*/
+  background-image: url('https://convergia-cdn.s3.amazonaws.com/cxcagriculture/cxc_agriculture.png');
+  background-repeat: no-repeat;
+  background-size: 1.8em;
+  background-position-y: 4px;
+  margin-left: 28%;
+  padding-left: 40px;
+  text-transform: uppercase;
+  line-height: 2em;
+  padding-top: 0;
 }
 
 @media (min-width:768px) {
@@ -39,7 +48,8 @@ body {font-family: 'Roboto', sans-serif; color: #5d5d5d;}
 .menu-wrap {margin-top: 25px!important; display: flex; height: auto!important;}
    main>section{flex: 1; box-sizing: border-box; width: 100%; overflow: hidden;}
   .page-content {margin-top: 25px;}
-  .page-content {height: calc(100vh - 45px); position: relative;}
+/*  .page-content {height: calc(100vh - 45px); position: relative;}*/
+  .page-content {height: 100%; position: relative;}
 
 }
 
@@ -149,21 +159,21 @@ border-color: #632080!important;
 .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active {background: #a94442;}
 .btn {font-size: 13px;border: none;box-shadow: none;text-shadow: none;}
 .tooltip-inner {font-weight: normal; font-family: 'texgyreherosregular'; font-size: 12px;}
-header {box-shadow: 0 0 2px #888;}
+header {box-shadow: 0 0 8px #888;}
 header, .logo {background: #fff;}
 
 .logo img {    margin: 3px 3px;
     width: 160px;}
 .username {background: #612480; height: 45px;}
-.side-bar {background: #612480;}
+.side-bar {background: #fff;}
 .level-bg-1 { background: #d8d8d8!important;}
 .side-bar.md .nav-pills>li a {text-indent: 4px;}
-.side-bar .nav>li.active>a {background-color: #761F86; }
-.side-bar .nav>li.active>a>strong {color: #F6A000; }
-.side-bar .nav>li.active>a>i {color: #F6A000; }
+.side-bar .nav>li.active>a {background-color: #F6A000; }
+.side-bar .nav>li.active>a>strong {color: #FFF; }
+.side-bar .nav>li.active>a>i {color: #FFF; }
 
-.side-bar .nav-pills>li strong {font-size: 11px; color: #fff;}
-.side-bar .nav-pills>li i {color: #fff; font-size: 1.1em;}
+.side-bar .nav-pills>li strong {font-size: 11px; color: #612480;}
+.side-bar .nav-pills>li i {color: #612480; font-size: 1.1em;}
 
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {color: #5d5d5d;}
 .dropdown-menu,
@@ -266,3 +276,98 @@ button[disabled=disabled], button:disabled {
   outline: 0;
 }
 
+select.select-chart {
+  height: 30px;
+  line-height: 30px;
+  width: 100%;
+}
+
+/** override backgrounds **/
+.page-content, .gridster-loaded, md-content {
+	background-color: #efefef;
+}
+
+/** innergrid + Metric box override **/
+div.innergrid {
+	padding: 20px;
+  background-color: #FFF;
+  border-radius: 1em;
+  margin-bottom: 20px;
+}
+div.innergrid .metric-box img {
+	text-indent:-9999px;
+  width: 0px;
+}
+div.innergrid #disabledOverlay{
+  border-color: #EFEFEF!important;
+	background-color: rgba(80, 80, 80, 0.5);
+  border-radius: 1em;
+}
+div.innergrid .metric-box-icon {
+	width: 0px;height: 1px;
+}
+div.innergrid .metric-box-value-unit{
+  width: 100%;
+}
+div.innergrid .metric-box-value{
+  width: 50%;
+  text-align: right;
+}
+div.innergrid .metric-box-unit{
+  width: 50%;
+  text-align: left;
+}
+div.innergrid .metric-box-value div, div.innergrid .metric-box-unit div{
+	text-align: inherit;
+  margin: 0 2px 0 2px;
+}
+
+/*** override Metric box ***/
+.metric-box{
+  border-radius: 1em;
+}
+#disabledOverlay{
+  border-color: #EFEFEF!important;
+  border-radius: 1em;
+}
+.metric-box-label{
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 22px;
+}
+.metric-box-action{
+  width: auto;
+}
+.metric-box-action img{
+}
+.metric-box-head{
+  height: 32px;
+}
+.metric-box-body{
+}
+.metric-box-value-unit {
+	display: flex;
+  flex-direction: row;
+}
+.metric-box-icon{
+  width: 100%;
+  text-align: right;
+} 
+.metric-box-icon img{
+  width: 64px;
+	height: 64px;
+} 
+.metric-box-value{
+  font-size: 1.8em;
+  width: auto;
+} 
+.metric-box-unit{
+  font-size: 1.5em;
+  width: auto;
+}
+
+.metric-box-unit div{
+	text-align: inherit;
+  margin: 0 2px 0 2px;
+}
