@@ -1,0 +1,186 @@
+/**
+* The dataFakeDevice_x api is used as simulator to simulate the payloads sent from the devices
+* It call the Ingest Api with payload with random data from within a specific range
+* @module dataFakeDevice_x
+* @return
+*
+*/
+// to retreive data
+var deviceManager = require("app/entities/deviceManager");
+var utils = require("app/entities/utils");
+//
+var http = require("http");
+var subdomain = require("subdomain");
+var log = require("log");
+log.setLevel("INFO");
+
+var config = require("./config");
+
+// retrieve last current data from device
+const deviceKey = "MSD_SA";
+var devices = [deviceManager.getLatestDeviceEntry(deviceKey)];
+var data =  utils.format(devices);
+
+if(data && data[deviceKey] && data[deviceKey][0] && data[deviceKey][0][0]) {//we have data
+//  selectedDevice = data[deviceKey][0][0];
+//  latest = selectedDevice;
+  latest = data[deviceKey][0][0];
+
+//var my_obj_str = JSON.stringify(data[deviceKey][0]);
+//console.log("result stringify : "+my_obj_str );
+//console.log("result[device] : "+ data[deviceKey][0][0].battery.value);
+
+  var tcValue = parseInt( ((latest.temperature===undefined)? 20 : latest.temperature.value));
+  var batValue = parseInt( ((latest.battery===undefined)? 100 : latest.battery.value) );
+  var moistValue = parseInt( ((latest.soil_moisture===undefined)? 6000 : latest.soil_moisture.value) );
+  var anemoValue =  parseInt( ((latest.anemometer===undefined)? 15 : latest.anemometer.value) );
+  var windValue =  ((latest.wind_direction===undefined)? "E" : latest.wind_direction.value);
+  var pressValue = parseInt( ((latest.pressure===undefined)? 93453 : latest.pressure.value) );
+  var humidValue = parseInt( ((latest.humidity===undefined)? 50 : latest.humidity.value) );
+
+/*
+	console.log("tcValue: "+tcValue);
+  console.log("batValue: "+batValue);
+  console.log("moistValue: "+moistValue);
+  console.log("anemoValue: "+anemoValue);
+  console.log("windValue: "+windValue);
+  console.log("pressValue: "+pressValue);
+  console.log("humidValue: "+humidValue);
+*/
+
+} else {// we dont have data?
+  console.log("we dont have data for device: "+deviceKey);
+}
+
+
+//
+const api = "https://"+config.subDomain+".scriptrapps.io/app/api/subscription/subscriber?auth_token="+config.dmpBrokerToken;
+var setTC = setAppropriateValue("TC", tcValue);
+var dataSnap =
+    {
+      "id": "2345",
+      "id_wasp":deviceKey,
+      "id_secret":"696418FDC337DE58",
+      "sensor": "TC",
+      "value": setTC,
+			"TC" : setTC,
+			"BAT" : setAppropriateValue("BAT", batValue),
+			"SOIL2" : setAppropriateValue("SOIL2", moistValue),
+			"ANE" : setAppropriateValue("ANE", anemoValue),
+			"STR" : setAppropriateValue("STR", windValue),
+			"PRES" : setAppropriateValue("PRES", pressValue),
+			"HUM" : setAppropriateValue("HUM", humidValue)
+    };
+
+var callResult = http.request({
+  "url": api,
+  "method": "POST",
+  "bodyString": JSON.stringify(dataSnap),
+  "headers": {
+    "Content-Type": "application/json"
+  }
+});
+return [callResult, dataSnap];
+
+//Build the url of the ingest api
+/*const api = "https://"+config.subDomain+".scriptrapps.io/app/api/subscription/subscriber?auth_token="+config.dmpBrokerToken
+			+"&id=2345"
+			+"&id_wasp="+deviceKey
+			+"&id_secret=696418FDC337DE58"
+			+"&TC="+setAppropriateValue("TC", tcValue)
+			+"&BAT="+setAppropriateValue("BAT", batValue)
+			+"&SOIL2="+setAppropriateValue("SOIL2", moistValue)
+			+"&ANE="+setAppropriateValue("ANE", anemoValue)
+			+"&STR="+setAppropriateValue("STR", windValue)
+			+"&PRES="+setAppropriateValue("PRES", pressValue)
+			+"&HUM="+setAppropriateValue("HUM", humidValue);
+
+var callResult = http.request(requestParams);
+
+if (callResult.status == "201") {
+    // lets parse the body of the response
+    var post = JSON.parse(callResult.body);
+    return post;
+}
+*/
+
+
+/** 
+* Random appropriate value for each sensor
+* @function setAppropriateValue
+* @param {String} [tag] the sensor tag
+* @param {Number} [currentValue] current value of sensor
+* @return{mix Number/String} the generated approriate to sensor Random value
+*/
+
+function setAppropriateValue(tag, currentValue) {
+  if(tag=="TC"){
+    var step = getRandomArbitrary(1, 2);
+    var finaleValue = getRandomArbitrary( Math.max(currentValue-step, 5) , Math.max(currentValue+step, 30) )
+    return finaleValue.toFixed(2);
+  }
+  else if(tag=="BAT"){
+    var step = 0.2;
+    var finaleValue = ((currentValue-step >0)? currentValue-step : 100);//reset to 100% or new value
+    return finaleValue.toFixed(2);
+  }
+  else if(tag=="SOIL2"){
+    var step = getRandomInt(50, 500);
+    var finaleValue =  getRandomArbitrary( Math.max(currentValue-step, 5000) , Math.max(currentValue+step, 8000) );
+    return finaleValue.toFixed(2);
+
+  }
+  else if(tag=="ANE"){
+    var step = getRandomInt(1, 15);
+    var finaleValue = getRandomArbitrary( Math.max(currentValue-step, 0) , Math.max(currentValue+step, 30 ) );
+    return finaleValue.toFixed(2);
+
+  }
+  else if(tag=="STR"){
+    var windType = ["E", "NE", "SE", "S"];
+		var randomItem = windType[Math.floor(Math.random()*windType.length)];
+		return randomItem;
+  }
+  else if(tag=="PRES"){
+    var step = getRandomInt(1000, 2000);
+    return getRandomInt( Math.max(currentValue-step, 90000) , Math.max(currentValue+step, 110000 ) );
+
+  }
+  else if(tag=="HUM"){
+    var step = getRandomArbitrary(0, 5);
+    var finaleValue = getRandomArbitrary( Math.max(currentValue-step, 0) , Math.max(currentValue+step, 100 ) );
+    return finaleValue.toFixed(2);
+
+  }
+  else {
+    console.log('no tag');
+	 return 0;
+  }
+}
+
+
+/**
+* Random Int limits included
+* 
+* @function getRandomInt
+* @param {Number} [min] the minimum limit
+* @param {Number} [max] the maximum limit
+* @return{Number} the generated Random Int
+*
+*/
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+/**
+* Random Arbitrary
+* 
+* @function getRandomArbitrary
+* @param {Number} [min] the minimum limit
+* @param {Number} [max] the maximum limit
+* @return{Number} the generated Random Arbitrary
+*
+*/
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
+

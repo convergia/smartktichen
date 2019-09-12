@@ -1,3 +1,5 @@
+//var log = require("log"); 
+//log.setLevel("info");
 //take the payload received in case renzo cannot change it and transform it
 
 //make sensor value a key and make value value its value
@@ -15,12 +17,24 @@ function transform(data){
   var x=data;
   
   //fill object with empty fileds for the wanted fileds so he can properly load previous data to build healhty object
-  for (var i = 0; i < fileds.length; i++)
+/*  for (var i = 0; i < fileds.length; i++)
   {
 		x[fileds[i]]="";
-  }
+  }*/
   //merge sensor and value as key-pair
-  
+//log.info("data.PLV3:\n" + data.PLV3);
+
+  x["TC"]= ((data.TC===undefined)? "" : data.TC);
+  x["BAT"]= ((data.BAT===undefined)? "" : data.BAT);
+  x["PLV1"]= ((data.PLV1===undefined)? "" : data.PLV1);
+  x["PLV2"]= ((data.PLV2===undefined)? "" : data.PLV2);
+  x["PLV3"]= ((data.PLV3===undefined)? "" : data.PLV3);
+  x["SOIL2"]= ((data.SOIL2===undefined)? "" : data.SOIL2);
+  x["ANE"]= ((data.ANE===undefined)? "" : data.ANE);
+  x["STR"]= ((data.STR===undefined)? "" : data.STR);
+  x["PRES"]=((data.PRES===undefined)? "" : data.PRES);
+  x["HUM"]= ((data.HUM===undefined)? "" : data.HUM);
+
   x[data.sensor]=data.value;
   
   return x;
