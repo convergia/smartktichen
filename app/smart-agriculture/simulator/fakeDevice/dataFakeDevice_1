@@ -117,7 +117,7 @@ function setAppropriateValue(tag, currentValue) {
   if(tag=="TC"){
     var step = getRandomArbitrary(1, 2);
     var finaleValue = getRandomArbitrary( Math.max(currentValue-step, 5) , Math.max(currentValue+step, 30) )
-    return finaleValue.toFixed(2);
+    return finaleValue.toFixed(1);
   }
   else if(tag=="BAT"){
     var step = 0.2;
