@@ -1,4 +1,4 @@
-myApp.controller('autocompCtrl', function($scope, httpClient, $q, $log, $location, $timeout){
+myApp.controller('autocompCtrl', function($scope, httpClient, $q, $log, $location, $timeout, $attrs){
 
 	var vm = this;
   getAllIds(); //call query of all devices IDs
@@ -11,6 +11,7 @@ myApp.controller('autocompCtrl', function($scope, httpClient, $q, $log, $locatio
 	vm.querySearch   = querySearch;
 	vm.selectedItemChange = selectedItemChange;
 	vm.searchTextChange   = searchTextChange;
+	vm.locationPath = $attrs.locationPath;
 
 	var getAllDevicesId = [];
   
@@ -59,8 +60,9 @@ myApp.controller('autocompCtrl', function($scope, httpClient, $q, $log, $locatio
 
 	function selectedItemChange(item) {
 //		$log.info('Item changed to ' + JSON.stringify(item));
-    if( item.name!=null && item.name!='') {
-    	$location.path("/dashboard/deviceId/"+item.name);
+    if( item && item.name!=null && item.name!='') {
+    	//$location.path("/dashboard/deviceId/"+item.name);
+      $location.path(vm.locationPath+item.name);
     }
 	}
 

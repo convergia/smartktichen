@@ -50,7 +50,10 @@ var routingItems = {
     {"route": "rules", "template": "/app/view/html/views/genericRules/genericAllRule.html", controller: "rulesCtrl as vm"},    
     {"route": "logout", "template": "/login/view/logout.html"},  
     { "route": "dashboard-home", "template": "/app/view/html/views/dashboard/dashboard-home.html", controller: "dashboardHomeCtrl as vm" },
-    { "route": "reports", "template": "/app/view/html/views/reports/reports.html", controller: "reportsCtrl as vm" },
+
+    { "route": "reports", "template": "/smart-agriculture/view/views/reports/reports-home.html"},
+    { "route": "reports/deviceId/:deviceId*", "template": "/smart-agriculture/view/views/reports/reports.html","controller": "saReportsCtrl as vm"},
+
     { "route": "control", "template": "/app/view/html/views/control/control.html", controller: "controlCtrl as vm" },
     { "route": "ai", "template": "/app/view/html/views/ai/ai.html", controller: "aiCtrl as vm" },
     { "route": "add-device", "template": "/app/view/html/views/devices/add-device.html", controller: "addDeviceCtrl as vm" },
