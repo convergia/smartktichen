@@ -1,0 +1,52 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.1/xlsx.core.min.js"></script>
+<section class="page-inner" ng-controller="saReportsCtrl as vm" ng-init="vm.init();">
+  <div class="col-xs-12">
+
+    <div ng-include="'/smart-water/view/views/reports/reports-home.html'"></div>
+
+
+    <div class="box-content" style="text-align: left;">
+
+      <a class="exportButton" ng-click="vm.ExcelfileExport()">Export Raw Data Table</a>
+
+      <div style="height: calc(100% - 30px); box-sizing: border-box;" >
+
+        <table id="sjs-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Battery</th>
+              <th>Temperature</th>
+              <th>Pluviometer Current hour</th>
+              <th>Pluviometer Previous hour</th>
+              <th>Pluviometer Last 24H</th>
+              <th>Soil moisture</th>
+              <th>Anemometer</th>
+              <th>Wind direction</th>
+              <th>Pressure</th>
+              <th>Humidity</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat = "subject in vm.subjects">
+              <td>{{ subject.creationDate | date:'yyyy/dd/MM HH:mm:ss' }}</td>
+              <td>{{ subject.battery }}</td>
+              <td>{{ subject.temperature }}</td>
+              <td>{{ subject.pluviometer_1 }}</td>
+              <td>{{ subject.pluviometer_2 }}</td>
+              <td>{{ subject.pluviometer_3 }}</td>
+              <td>{{ subject.soil_moisture }}</td>
+              <td>{{ subject.anemometer }}</td>
+              <td>{{ subject.wind_direction }}</td>
+              <td>{{ subject.pressure }}</td>
+              <td>{{ subject.humidity }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+  </div>
+</section>

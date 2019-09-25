@@ -135,3 +135,66 @@ myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $rou
 
 
 });
+
+myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $routeParams, constants, _, $filter) {
+
+  var vm = this;
+  vm.deviceKey = null;
+
+  vm.init = function(){
+    if($routeParams && $routeParams.deviceId) {
+      vm.deviceKey = $routeParams.deviceId;
+      vm.params = {"id":  vm.deviceKey }
+//      vm.tag = "dashboard_" +  vm.deviceKey;
+//      vm.tag = "grid";
+//     wsClient.subscribe(vm.tag, vm.consumeData.bind(vm), $scope.$id); 
+      httpClient.get("app/api/getDeviceHistory", vm.params).then(
+        function(data, response) {
+
+          vm.subjects = data;
+//          vm.consumeData(data)
+        },
+        function(err) {
+          console.log('ERROR', error);
+        });
+    }
+  }
+/*  vm.consumeData = function(data) {
+
+    if(data.latest) {
+      data = data.latest
+      vm.latest =  data;
+      console.log(vm.latest)
+    }
+    if(data && data[vm.deviceKey] && data[vm.deviceKey][0] && data[vm.deviceKey][0][0]) {
+      vm.selectedDevice = data[vm.deviceKey][0][0];
+      vm.latest = vm.selectedDevice
+      console.log(vm.selectedDevice)
+    }
+  }
+
+
+
+  vm.historicalFormatData = function(data){
+    if(data.historical) 
+      return data.historical;
+    else
+      return data;
+  }
+  vm.batteryFormatData = function(data) {
+    return data.latest.battery;
+  }*/
+  vm.item_date = new Date();
+  var fileDate = $filter('date')(vm.item_date, "yyyy-MM-dd");
+  var filePrefix = "cxc-sa-";
+    
+  vm.ExcelfileExport = function(){
+	
+    var fileName = filePrefix+vm.deviceKey+"_export_"+fileDate+".xlsx";
+
+    var wb = XLSX.utils.table_to_book(document.getElementById('sjs-table'));
+    XLSX.writeFile(wb, fileName);
+  }
+
+
+});
