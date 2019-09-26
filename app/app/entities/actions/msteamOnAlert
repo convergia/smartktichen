@@ -6,61 +6,64 @@ var log = require("log");
 log.setLevel("INFO");
 
 function execute(event, signal) {
-	if(!signal){
+  if(!signal){
     return;
   }
-  
-  
-var mt=new mscModule.MicrosoftTeams();
-var cnMngr=mt.getConnectorManager();
-var myConnector=cnMngr.getConnector("general");
 
-  var url = "https://"+config.subDomain+".scriptrapps.io/smart-agriculture/index#/dashboard/deviceId/"+event.id+"?temperature="+event.temperature;//TODO move the api to config
+
+  var mt=new mscModule.MicrosoftTeams();
+  var cnMngr=mt.getConnectorManager();
+  var myConnector=cnMngr.getConnector("general");
+
+//  var url = "https://"+config.subDomain+".scriptrapps.io/smart-agriculture/index#/dashboard/deviceId/"+event.id+"?temperature="+event.temperature;//TODO move the api to config
+  
+  var url = "https://"+config.subDomain+".scriptrapps.io/smart-agriculture/index#/dashboard/deviceId/"+event.id+"?chart=".getEventConfig(event, signal).chart;
+
   var msg = {
     "@context": "https://schema.org/extensions",
     "@type": "MessageCard",
     "potentialAction": [
-        {
-            "@type": "OpenUri",
-            "name": "View in dashboard",
-            "targets": [
-                {
-                    "os": "default",
-                    "uri": url
-                }
-            ]
-        }
+      {
+        "@type": "OpenUri",
+        "name": "View in dashboard",
+        "targets": [
+          {
+            "os": "default",
+            "uri": url
+          }
+        ]
+      }
     ],
     "sections": [
-        {
-            "facts": [
-                {
-                    "name": "Event:",
-                    "value": getEventName(signal)
-                },
-                {
-                    "name": "EventCode:",
-                    "value": signal
-                },
-                {
-                    "name": "Sensor Value:",
-                    "value": event.temperature
-                }
-            ],
-            "text": "Event Released for device: MSK_SA"
-        }
+      {
+        "facts": [
+          {
+            "name": "Event:",
+            "value": getEventConfig(event, signal).txt
+          },
+          {
+            "name": "EventCode:",
+            "value": signal
+          },
+          {
+            "name": "Sensor Value:",
+            "value": getEventConfig(event, signal).value
+          }
+        ],
+        "text": "Event Released for device: "+event.id
+      }
     ],
     "summary": "CxC Smart Agriculture",
     "themeColor": "612480",
     "title": "CxC Smart Agriculture"
-};
+  };
 
-log.info("[app/entities/actions/msteamOnAlert] Msg is: " + JSON.stringify(msg));
+  log.info("[app/entities/actions/msteamOnAlert] Msg is: " + JSON.stringify(msg));
   try {
-		
+
     var result =  myConnector.send(
-    msg
-);
+      msg
+    );
     log.info("[app/entities/actions/msteamOnAlert] returned from msTeams: " + JSON.stringify(result));
 
     //return xmlToJson(result);
@@ -70,13 +73,19 @@ log.info("[app/entities/actions/msteamOnAlert] Msg is: " + JSON.stringify(msg));
   }
 
 }
-function getEventName(event){
-  switch(event){
+
+function getEventConfig(event, signal){
+  var eConf = {"txt":"","value":""};
+  switch(signal){
     case "F":
-      return "Freez";
+      eConf = {"txt":"Freez", "value":event.temperature, "chart":"temperature"};
       break;
-      case "FR":
-      return "Freez Recover";
+    case "FR":
+      eConf = {"txt":"Freez Recover", "value":event.temperature, "chart":"temperature"}
+      break;
+    case "LOWBAT":
+      eConf = {"txt": "Low battery", "value":event.battery, "chart":"battery"};
       break;
   }
+  return eConf
 }

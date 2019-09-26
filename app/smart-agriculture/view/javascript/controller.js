@@ -1,10 +1,11 @@
 
-myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $routeParams, constants, _) {
+myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $routeParams, constants, _, $routeParams) {
     var vm = this;
   
 	  // list of all charts accessible through the select box
   	// array of objects consisting of a name and an url of the file that will be included by ng-include
   	// "code" has been added to support external call to chart from gauge
+  
     vm.graph = [
       { code:"temperature", name: 'Temperature', url: '/smart-agriculture/view/views/dashboard/graph_temp.html'},
       { code:"battery", name: 'Battery', url: '/smart-agriculture/view/views/dashboard/graph_bat.html'},
@@ -17,6 +18,13 @@ myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $rou
     vm.selectedGraphLeft = vm.graph[0];//default selection of first chart/left
   	vm.selectedGraphRight = vm.graph[1];//default selection of second chart/right
   
+/* form url param to select chert */
+  	if($routeParams.chart){
+      var selected=_.where(vm.graph, {code: $routeParams.chart})[0];
+      vm.selectedGraphLeft=selected;
+    }
+/* \ */
+
     vm.icons = constants.infoWindows.icons;
     vm.deviceKey = null;
     vm.gridsterOptions = {
