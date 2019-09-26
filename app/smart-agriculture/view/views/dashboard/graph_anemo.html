@@ -4,10 +4,11 @@
     <div style="height: calc(100% - 30px)" >
       <scriptr-chart
                      type='line'
-                     boxLabel='PH'
+                     boxLabel='Wind speed'
                      xkey='creationDate'
                      ykeys='["anemometer"]'
                      labels='["Wind speed"]'
+                     post-units='&nbsp;km/h'
                      colors='["#FCC717","#38B9D6", "#1DBC68"]'
                      transport='wss'
                      msg-tag='{{vm.tag}}'
