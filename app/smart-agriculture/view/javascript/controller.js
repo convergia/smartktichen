@@ -144,7 +144,7 @@ myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $rou
 
 });
 
-myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $routeParams, constants, _, $filter) {
+myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $routeParams, constants, _, $filter, $timeout) {
 
   var vm = this;
   vm.deviceKey = null;
@@ -153,45 +153,18 @@ myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $
     if($routeParams && $routeParams.deviceId) {
       vm.deviceKey = $routeParams.deviceId;
       vm.params = {"id":  vm.deviceKey }
-//      vm.tag = "dashboard_" +  vm.deviceKey;
-//      vm.tag = "grid";
-//     wsClient.subscribe(vm.tag, vm.consumeData.bind(vm), $scope.$id); 
+
       httpClient.get("app/api/getDeviceHistory", vm.params).then(
         function(data, response) {
 
           vm.subjects = data;
-//          vm.consumeData(data)
         },
         function(err) {
           console.log('ERROR', error);
         });
     }
   }
-/*  vm.consumeData = function(data) {
 
-    if(data.latest) {
-      data = data.latest
-      vm.latest =  data;
-      console.log(vm.latest)
-    }
-    if(data && data[vm.deviceKey] && data[vm.deviceKey][0] && data[vm.deviceKey][0][0]) {
-      vm.selectedDevice = data[vm.deviceKey][0][0];
-      vm.latest = vm.selectedDevice
-      console.log(vm.selectedDevice)
-    }
-  }
-
-
-
-  vm.historicalFormatData = function(data){
-    if(data.historical) 
-      return data.historical;
-    else
-      return data;
-  }
-  vm.batteryFormatData = function(data) {
-    return data.latest.battery;
-  }*/
   vm.item_date = new Date();
   var fileDate = $filter('date')(vm.item_date, "yyyy-MM-dd");
   var filePrefix = "cxc-sa-";
@@ -204,5 +177,109 @@ myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $
     XLSX.writeFile(wb, fileName);
   }
 
+vm.savePDF = function() {
+    var quotes = document.getElementById('chartsContainer');
+    html2canvas(quotes, {
+      onrendered: function(canvas) {
+        //! MAKE YOUR PDF
+        var pdf = new jsPDF('p', 'pt', 'a4');
+
+        for (var i = 0; i <= quotes.clientHeight/980; i++) {//980
+          //! This is all just html2canvas stuff
+          var srcImg  = canvas;
+          var sX	  = 0;
+          var sY	  = 930*i;
+          var sWidth  = 778;
+          var sHeight = 930;
+          var dX	  = 0;
+          var dY	  = 0;
+          var dWidth  = 778;
+          var dHeight = 930;
+
+          window.onePageCanvas = document.createElement("canvas");
+          onePageCanvas.setAttribute('width', 778);
+          onePageCanvas.setAttribute('height', 930);//1120
+          var ctx = onePageCanvas.getContext('2d');
+
+          ctx.drawImage(srcImg,sX,sY,sWidth,sHeight,dX,dY,dWidth,dHeight);
+
+          var canvasDataURL = onePageCanvas.toDataURL("image/png", 1.0);
+
+          var width		 = onePageCanvas.width;
+          var height		= onePageCanvas.clientHeight;
+
+          if (i > 0) {
+            pdf.addPage(595, 842);
+          }
+          pdf.setPage(i+1);
+          pdf.addImage(canvasDataURL, 'PNG', 0, 0, (width*.72), (height*.71));
+
+        }
+        var fileName = filePrefix+vm.deviceKey+"_export_"+fileDate+".pdf";
+        pdf.save(fileName);
+      }
+    });
+  }
+
+
+  var nbrImage = 0;
+  var nbrCharts = 0;
+  var nrDiv = document.getElementsByClassName('png-container');
+  
+  vm.convertTopng = function(event) {
+		event.target.disabled = true;
+
+    var DOMURL = self.URL || self.webkitURL || self;
+    var svgObj = document.getElementsByTagName('svg');
+    
+    nbrCharts = svgObj.length;
+
+    angular.forEach(svgObj, function (value, key) {
+
+      var svgElem = value;
+      var svgString = new XMLSerializer().serializeToString(svgElem);
+
+
+      //var canvas = document.getElementById("canvaselm");
+      var canvas = document.createElement("canvas");
+      canvas.width = 760;
+      canvas.height = 400;
+
+      var ctx = canvas.getContext("2d");
+      var DOMURL = self.URL || self.webkitURL || self;
+      var img = new Image();
+      var svg = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
+
+      var url = DOMURL.createObjectURL(svg);
+
+      img.onload = function() {
+        ctx.drawImage(img, 0, 0);
+        var png = canvas.toDataURL("image/png");
+        document.querySelector('#png-container'+key).innerHTML = '<img src="'+png+'"/>';
+        DOMURL.revokeObjectURL(png);
+        nbrImage++;
+        if(nbrImage>=nbrCharts) {
+          $timeout(vm.savePDF() , Math.random() * 1000, false);
+        }
+      };
+      img.src = url;
+      svgElem.style.display = 'none';
+
+
+    });
+
+  }
+
+  vm.historicalFormatData = function(data){
+    nbrCharts++;
+
+    if(nbrCharts >= nrDiv.length ) $('#exportPdfButton').show();
+
+    if(data.historical) {
+      return data.historical;
+    } else {
+      return data;
+  	}
+  }  
 
 });
