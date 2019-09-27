@@ -1,15 +1,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.1/xlsx.core.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+
 <section class="page-inner" ng-controller="saReportsCtrl as vm" ng-init="vm.init();">
   <div class="col-xs-12">
 
-    <div ng-include="'/smart-water/view/views/reports/reports-home.html'"></div>
-
+    <div ng-include="'/smart-agriculture/view/views/reports/reports-home.html'"></div>
 
     <div class="box-content" style="text-align: left;">
 
       <strong>Device Id : </strong>{{vm.deviceKey}}
 
       <a class="exportButton" ng-click="vm.ExcelfileExport()">Export Raw Data Table</a>
+
+      <button style="display: none;" id="exportPdfButton" ng-click="vm.convertTopng($event)">Export Processed Data</button>
 
       <div style="height: calc(100% - 30px); box-sizing: border-box;" >
 
@@ -50,5 +55,27 @@
       </div>
 
     </div>
+
+    <div id="chartsContainer">
+      <div ng-include="'/smart-agriculture/view/views/dashboard/graph_bat.html'"></div>
+      <div class="png-container" id="png-container0"></div>
+
+      <div ng-include="'/smart-agriculture/view/views/dashboard/graph_temp.html'"></div>
+      <div class="png-container" id="png-container1"></div>
+      
+      <div ng-include="'/smart-agriculture/view/views/dashboard/graph_soil.html'"></div>
+      <div class="png-container" id="png-container2"></div>
+
+      <div ng-include="'/smart-agriculture/view/views/dashboard/graph_anemo.html'"></div>
+			<div class="png-container" id="png-container3"></div>
+      
+      <div ng-include="'/smart-agriculture/view/views/dashboard/graph_press.html'"></div>
+      <div class="png-container" id="png-container4"></div>
+
+      <div ng-include="'/smart-agriculture/view/views/dashboard/graph_humid.html'"></div>
+      <div class="png-container" id="png-container5"></div>
+
+    </div>
+
   </div>
 </section>
