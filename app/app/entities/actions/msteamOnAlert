@@ -15,11 +15,10 @@ function execute(event, signal) {
   var cnMngr=mt.getConnectorManager();
   var myConnector=cnMngr.getConnector("general");
   
-  var chartParam = getEventConfig(event, signal).chart;
+  var params = getEventConfig(event, signal);
 
-  
-  //var url = "https://"+config.subDomain+".scriptrapps.io/smart-agriculture/index#/dashboard/deviceId/"+event.id+"?chart=".chartParam;
-  var url = "https://"+config.subDomain+".scriptrapps.io/smart-agriculture/index#/dashboard/deviceId/"+event.id;
+  var url = "https://"+config.subDomain+".scriptrapps.io/smart-agriculture/index#/dashboard/deviceId/"+event.id+"?chart=" + params.chart;
+  //var url = "https://"+config.subDomain+".scriptrapps.io/smart-agriculture/index#/dashboard/deviceId/"+event.id;
 
   var msg = {
     "@context": "https://schema.org/extensions",
