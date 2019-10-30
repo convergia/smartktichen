@@ -27,7 +27,10 @@ body {
   align-items: center;
 }
 .element {display: flex; }
-.doors-img {border-radius: 8px 0 0 8px; background-color: rgba(0,0,0,0.2); }
+.doors-img {
+  border-radius: 8px 0 0 8px;
+  background-color:#662483;
+}
 
 .btn-primary {background-color: #612480;border-color: #612480;}
 .btn-primary:hover {background-color: #612480;}

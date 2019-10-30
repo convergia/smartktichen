@@ -25,7 +25,7 @@ body {font-family: 'Roboto', sans-serif; color: #5d5d5d;}
 .bg-grey-dark {background: #dedede;}
 .light-bg {background: #f1f4f9;}
 .appname {
-  /*padding-top: 8px;*/
+  padding-top: 8px;
   font-size: 20px;
   color: #5e5e5e;
   /*width: calc(100% - 500px);
@@ -35,16 +35,15 @@ body {font-family: 'Roboto', sans-serif; color: #5d5d5d;}
   background-image: url('https://convergia-cdn.s3.amazonaws.com/cxcagriculture/cxc_agriculture.png');
   background-repeat: no-repeat;
   background-size: 1.8em;
-  background-position-y: 4px;
+  background-position-y: 10px;
   margin-left: 28%;
   padding-left: 40px;
   text-transform: uppercase;
   line-height: 2em;
-  padding-top: 0;
 }
 
 @media (min-width:768px) {
-  main {display: flex; min-height: calc(100vh - 45px);}
+  main {display: flex; min-height: calc(100vh - 60px);margin-top: 15px;}
 .menu-wrap {margin-top: 25px!important; display: flex; height: auto!important;}
    main>section{flex: 1; box-sizing: border-box; width: 100%; overflow: hidden;}
   .page-content {margin-top: 25px;}
@@ -128,7 +127,10 @@ header, .logo, .side-bar {
 
 .tooltip-inner {font-weight: normal; font-family: "Arial";}
 
-.logo {padding: 0 0 0 0;}
+.logo {
+  padding: 0 0 0 0;
+  padding-left: 10px;
+}
 
 .loading-frame, .loading-frame {text-align:center; z-index: 2;     padding-top: 100px ;width: 100%; height: 100%; position: absolute;background: rgba(255,255,255,1);}
 
@@ -159,15 +161,26 @@ border-color: #632080!important;
 .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active {background: #a94442;}
 .btn {font-size: 13px;border: none;box-shadow: none;text-shadow: none;}
 .tooltip-inner {font-weight: normal; font-family: 'texgyreherosregular'; font-size: 12px;}
-header {box-shadow: 0 0 8px #888;}
+header {
+  box-shadow: 0 0 8px #888;
+	height: 60px;
+}
 header, .logo {background: #fff;}
 
-.logo img {    margin: 3px 3px;
-    width: 160px;}
-.username {background: #612480; height: 45px;}
+.logo img {
+  margin: 10px 3px 3px 8px;
+  width: 160px;
+}
+.username {
+  background: #612480;
+  height: 60px;
+}
+.dropdown {
+  padding-top: 10px;
+}
 .side-bar {background: #fff;}
 .level-bg-1 { background: #d8d8d8!important;}
-.side-bar.md .nav-pills>li a {text-indent: 4px;}
+.side-bar.md .nav-pills>li a {text-indent: 4px;padding-left: 10px;}
 .side-bar .nav>li.active>a {background-color: #F6A000; }
 .side-bar .nav>li.active>a>strong {color: #FFF; }
 .side-bar .nav>li.active>a>i {color: #FFF; }
