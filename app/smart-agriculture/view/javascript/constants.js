@@ -7,10 +7,13 @@ myApp.constant("constants", {
     "poweredBy": '//scriptr-cdn.s3.amazonaws.com/carwash/images/powered-by-scriptr.png'
   },
    sources : {
-    "simulator": { 
+    "simulator": {
    	  "mapMarker": {
-          url: "https://convergia-cdn.s3.amazonaws.com/map_pin.png"
-   	  }
+        url: "https://convergia-cdn.s3.amazonaws.com/map_pin.png"
+   	  },
+      "icon" : {
+      	url: "https://convergia-cdn.s3.amazonaws.com/map_pin.png"
+      }
     }
   },
   mapDefaultCenter:"-33.4008511,-70.54576277",
@@ -29,6 +32,8 @@ myApp.constant("constants", {
       "address": '<img alt="Embedded Image"  src="//s3.amazonaws.com/scriptr-cdn/common/images/building.png" />',
       "locationType": '<img alt="Embedded Image"    src="//s3.amazonaws.com/scriptr-cdn/common/images/industrial.png" />',
       "time": '<img  alt="Embedded Image"    src="//s3.amazonaws.com/scriptr-cdn/common/images/time.png" />',
+      "ctime": '<img alt="Embedded Image" src="//convergia-cdn.s3.amazonaws.com/time.png" />',
+			"battery": '<img alt="Embedded Image" src="//convergia-cdn.s3.amazonaws.com/battery.png" />',
       "luminosity": '<img  alt="Embedded Image"    src="//s3.amazonaws.com/scriptr-cdn/common/images/light.png" />',
       "device": ' <img   alt="Embedded Image" src="//s3.amazonaws.com/scriptr-cdn/common/images/device.png">',
       "proximity": '<img alt="Embedded Image"  src="//s3.amazonaws.com/scriptr-cdn/common/images/proximity.png" />',
