@@ -13,7 +13,7 @@
                 <i class="fa fa-spinner fa-spin" aria-hidden="true"></i> 
             </div>
         </div>
-        <div gridster="vm.gridsterOptions" ng-if="vm.deviceKey != null">
+        <div gridster="vm.gridsterOptionsMB" ng-if="vm.deviceKey != null">
           <ul>
 
             <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 0, row: 0 }'>
@@ -37,7 +37,7 @@
                                  >
               </scriptr-metricbox>
             </li>
-            <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 1, row: 0 }'>
+            <!--<li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 1, row: 0 }'>
               <scriptr-metricbox 
                                  transport="wss" 
                                  value="vm.selectedDevice.battery.value"
@@ -57,8 +57,8 @@
                                  background-color="#fff"
                                  >
               </scriptr-metricbox>
-            </li>
-            <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 2, row: 0 }'>
+            </li>-->
+            <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 1, row: 0 }'>
               <scriptr-metricbox 
                                  transport="wss" 
                                  value="vm.selectedDevice.humidity.value"
@@ -79,7 +79,7 @@
                                  >
               </scriptr-metricbox>
             </li>
-            <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 3, row: 0 }'>
+            <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 2, row: 0 }'>
               <scriptr-metricbox 
                                  transport="wss" 
                                  value="vm.selectedDevice.pressure.value"
@@ -100,7 +100,7 @@
                                  >
               </scriptr-metricbox>
             </li>
-            <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 4, row: 0 }'>
+            <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 3, row: 0 }'>
               <scriptr-metricbox 
                                  transport="wss" 
                                  value="vm.selectedDevice.wind_direction.value"
@@ -121,7 +121,7 @@
                                  >
               </scriptr-metricbox>
             </li>
-            <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 5, row: 0 }'>
+            <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 4, row: 0 }'>
               <scriptr-metricbox 
                                  transport="wss" 
                                  value="vm.selectedDevice.anemometer.value"

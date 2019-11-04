@@ -1,4 +1,3 @@
-
 myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $routeParams, constants, _, $routeParams) {
     var vm = this;
   
@@ -27,6 +26,26 @@ myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $rou
 
     vm.icons = constants.infoWindows.icons;
     vm.deviceKey = null;
+  vm.gridsterOptionsMB = {
+    pushing: false,
+    floating: false,
+    minRows: 1, // the minimum height of the grid, in rows
+    maxRows: 2,
+    columns: 5, // the width of the grid, in columns
+    colWidth: 'auto', // can be an integer or 'auto'.  'auto' uses the pixel width of the element divided by 'columns'
+    rowHeight: '150', // can be an integer or 'match'.  Match uses the colWidth, giving you square widgets.
+    margins: [10, 10], // the pixel distance between each widget
+    defaultSizeX: 1, // the default width of a gridster item, if not specifed
+    defaultSizeY: 1, // the default height of a gridster item, if not specified
+    mobileBreakPoint: 1024, // if the screen is not wider that this, remove the grid layout and stack the items
+
+    resizable: {
+      enabled: false
+    },
+    draggable: {
+      enabled: false
+    }
+  };
     vm.gridsterOptions = {
         pushing: false,
 				floating: false,
@@ -141,7 +160,12 @@ myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $rou
       return data.latest.wind_direction;
     }
 
-
+  vm.setFocus = function() {
+		document.querySelector('#autocompDivId').style.display = "block";
+    setTimeout(function() {
+      document.querySelector('#autoCompleteId').focus();
+    }, 0);
+  }
 });
 
 myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $routeParams, constants, _, $filter, $timeout) {
