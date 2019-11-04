@@ -1,6 +1,21 @@
 body {font-family: 'Roboto', sans-serif; color: #5d5d5d;}
 
-
+/** autocomplete in dashboard **//* modif 31/10/19 */
+#autocompDivId {
+  display: none;
+  margin-top: -40px;
+}
+.summary .icon {
+	float: left;
+  margin: 40px 10px 0 0;
+  display: block;
+  width: 30px;height: 30px;
+  line-height: 30px;
+}
+.summary .icon img{width: 30px;}
+.summary strong{
+  margin-top: 20px;
+}
 /** tabs ***/
 .nav-styled {}
 .nav-styled>li a {background: #d8d8d8; color: #222; border-radius: 0; margin: 0 1px; padding: 4px 15px;}
@@ -13,7 +28,7 @@ body {font-family: 'Roboto', sans-serif; color: #5d5d5d;}
 .radius0 {border-radius: 0!important;}
 .full-width {width: 100%!important;}
 .pdb2 {padding-bottom: 2px;}
-.summary .fnt16 {line-height: 1.4em;}
+.summary .fnt16 {line-height: 40px;}
 .mt10 {margin-top: 10px;}
 .level-bg-1 {
     background: #4c5d6f!important;
