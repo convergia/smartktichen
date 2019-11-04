@@ -1,6 +1,9 @@
 myApp.controller('autocompCtrl', function($scope, httpClient, $q, $log, $location, $timeout, $attrs){
 
 	var vm = this;
+  vm.unFocus = function () {
+    document.querySelector('#autocompDivId').style.display = "none";
+  }
   getAllIds(); //call query of all devices IDs
 
 	vm.scope = $scope;
