@@ -21,7 +21,7 @@ var menuItemsAdmin = {
     { "id": "2", "iconClass": "fa fa-fw fa-warning", "label": "Alerts", "route": "#/alerts", "active": "false" },
     { "id": "2", "iconClass": "fa fa-fw fa-gear", "label": "Control", "route": "#/control", "active": "false" },
     { "id": "2", "iconClass": "fa fa-fw fa-info", "label": "A.I", "route": "#/ai", "active": "false" },
-    { "id": "2", "iconClass": "fa fa-fw fa-user-plus", "label": "Add Device", "route": "#/add-device", "active": "false" },
+    { "id": "2", "iconClass": "fa fa-fw fa-user-plus", "label": "Manage Devices", "route": "#/list-devices", "active": "false" },
     { "id": "3", "iconClass": "fa fa-fw fa-list-alt", "label": "Add Rule", "route": "#/rules", "active": "false" },
     { "id": "2", "iconClass": "fa fa-fw fa-info-circle", "label": "Info", "route": "#/info", "active": "false" },
   ]
@@ -57,6 +57,8 @@ var routingItems = {
     { "route": "control", "template": "/app/view/html/views/control/control.html", controller: "controlCtrl as vm" },
     { "route": "ai", "template": "/app/view/html/views/ai/ai.html", controller: "aiCtrl as vm" },
     { "route": "add-device", "template": "/app/view/html/views/devices/add-device.html", controller: "addDeviceCtrl as vm" },
+    { "route": "list-devices", "template": "/app/view/html/views/devices/list-devices.html" },
+
     { "route": "info", "template": "/app/view/html/views/info/info.html", controller: "infoCtrl as vm" },
     { "route": "404", "template": "/app/view/html/views/404/404.html" },
      {"route": "changePassword", "template": "/app/view/html/views/identity/changePassword.html", controller: "changePasswordCtrl as vm"}
