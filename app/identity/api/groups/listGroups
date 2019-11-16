@@ -1,0 +1,15 @@
+var errorHandler = require("/UIComponents/userManagement/backend/lib/ErrorHandler");
+var errorHandler = new errorHandler.ErrorHandler();
+var groups = require("group");
+
+var log = require("log")
+log.setLevel("INFO");
+
+var users =[];
+var response = groups.list();
+
+if(response.metadata.status == "failure") {
+  return response.metadata;
+} else {
+  return response.result.groups;
+}

@@ -458,3 +458,74 @@ button:disabled#exportPdfButton, button[disabled]#exportPdfButton {
 #chartsContainer div {background-color: white;}
 #chartsContainer .png-container {background-color: white;margin-bottom: 10px;}
 #chartsContainer .box-label { font-size: 1.5em; font-weight: bold; }
+
+/* identity/devices */
+#detailwindow {
+  display: none;
+  z-index: 4;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  min-width: 400px;
+  transform: translate(-50%,-50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 7px 1px rgba(0,0,0,0.3);
+}
+#detailwindow button {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%;
+  display: block; border: 0px none;
+  margin: 0px; padding: 0px; position: absolute;
+  cursor: pointer;
+  user-select: none;
+  top: -6px; right: -6px;
+  width: 30px; height: 30px;
+  outline: currentcolor none medium;"
+}
+.device-box{
+  border-radius: 0.5em;
+  border: 1px solid #CECECE;
+  padding: 10px;margin: 0 10px 10px 0;
+  width: 100%;
+  background: #FFF;
+  position: relative;
+  float: left;
+  width: 240px;
+}
+.device-box-content {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.device-box-label {
+  width: 100%;
+  text-align: left !important;
+  display: flex;
+  flex-direction: column;
+  line-height: 28px;
+}
+.device-box-head {
+  font-weight: 600;
+}
+.device-box-body {
+  flex-direction: column;
+  line-height: 20px;
+}
+.device-box-body div i {
+  font-size: 12px;
+  color: #9c9c9c;
+}
+
+.device-box-action {
+  width: auto;
+  font-size: 2rem;
+  text-align: right;
+}
+
+.device-box-action a {
+  cursor: pointer;
+  padding: 4px;
+	display: inline-block;
+}

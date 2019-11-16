@@ -1,0 +1,34 @@
+var paramsEvaluator = require("/UIComponents/userManagement/backend/lib/ParamsEvaluator");
+var errorHandler = require("/UIComponents/userManagement/backend/lib/ErrorHandler");
+var devices = require("device");
+var log = require("log");
+log.setLevel("INFO");
+
+log.info("request.body.id: "+request.body.id);
+log.info("request.body['id']: "+request.body['id']);
+
+var errorHandler = new errorHandler.ErrorHandler();
+/**
+Nadim: ne marche pas bien que le param est présent
+//Check if required params
+var requiredParams = ["id"];
+var paramsEvaluator = new paramsEvaluator.ParamsEvaluator();
+hasAllRequiredParams = paramsEvaluator.hasRequiredParams(request.body, requiredParams)
+if(!hasAllRequiredParams.success) {
+  return errorHandler.buildError("missing_parameter", "Parameter \""+hasAllRequiredParams.param+ "\" is required.");
+}*/
+
+if( request.body==null ) {
+	return errorHandler.buildError("missing_parameter", "Parameter \""+hasAllRequiredParams.param+ "\" is required.");
+}
+if( request.body["id"]=="" ) {
+	return errorHandler.buildError("missing_parameter", "Parameter \""+hasAllRequiredParams.param+ "\" is required.");
+}
+
+var response = devices.delete(request.body["id"]);
+
+if(response.metadata.status == "failure") {
+  return response.metadata;
+} else {
+  return {"status": "success"};
+}

@@ -1,0 +1,39 @@
+<section class="page-inner" >
+
+  <div class="col-xs-12">
+    <div class="mt10">
+      <a type="button" class="btn btn-default" class="btn btn-success"  ng-click="$ctrl.addItem()" >Add new device</a>
+    </div>
+
+    <div class="management-list" ng-init="$ctrl.loadItems()">
+
+      <h5 class="box-title text-uppercase fntmontessart">Existing Devices</h5>
+
+      <div ng-if="$ctrl.message" uib-alert ng-class="'alert-' + ( $ctrl.message.type || 'default')  + ' m10'" close="$ctrl.closeAlert()" dismiss-on-timeout="5000">{{$ctrl.message.content}}</div>
+      <!--<div class="search-wrap">
+        <input ng-model="$ctrl.searchItem" placeholder="Select item" class="form-control search-text"> <span ng-click="$ctrl.resetSearchItem()"><i class="fa fa-times"></i></span>
+      </div>
+      <div id="searchTextResults" class="form-control user-search">-->
+
+          <item ng-repeat="(key, item) in $ctrl.items | filter: $ctrl.searchItem | orderBy:'item' track by $index" 
+                item="item.id"
+                lastmod="item.lastModifiedDate"
+                on-update="$ctrl.updateItem(item.id)" 
+                on-delete="$ctrl.deleteItem(item.id)" 
+                on-list-tokens='$ctrl.listTokens(item.id)' 
+                on-revoke-token='$ctrl.revokeToken(item.id)' 
+                on-renew-token='$ctrl.renewToken(item.id)' 
+                has-update="$ctrl.hasUpdate" 
+                has-delete="$ctrl.hasDelete"
+                has-list-tokens="$ctrl.hasListTokens" 
+                has-revoke-token="$ctrl.hasRevokeToken"
+                has-renew-token="$ctrl.hasRenewToken">
+          </item>
+
+      <!--</div>-->
+    </div>
+	</div>
+<section>
+
+
+</div>

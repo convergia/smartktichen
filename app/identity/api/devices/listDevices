@@ -1,0 +1,41 @@
+var log = require("log");
+log.setLevel("INFO");
+
+//var devices = require("device");
+
+var deviceManager = require("app/entities/deviceManager");
+
+var device = require("device");
+
+
+
+var documents = [];
+
+var type = "hardware";
+var response = device.query({ "query" : "type =\""+ type +"\"", "fields":"id", "sort":"name<string:DESC>"});
+
+if(response.metadata.status == "failure") {
+  return response.metadata;
+} else {
+//  return response.result.devices;
+  devices = response.result.devices;
+
+  if(devices) {
+    for(var j = 0; j < devices.length; j++) {
+    	var reformDevice = {};
+//      console.log(devices[j].id)
+      var entry = deviceManager.getLatestDeviceEntry(devices[j].id);
+      if(entry) {
+      	reformDevice = {"id": devices[j].id, "lastModifiedDate": entry.lastModifiedDate };
+        
+      } else {
+      	reformDevice = {"id": devices[j].id };
+      	
+      }
+      documents.push(reformDevice)
+    }
+
+  }
+
+  return documents;
+}
