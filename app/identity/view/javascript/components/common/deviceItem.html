@@ -1,0 +1,16 @@
+<div class="device-box">
+  <div ng-if="$ctrl.disabled" id="disabledOverlay"></div>
+  <div class="device-box-content">
+    <div class="device-box-label">
+      <div class="device-box-head">{{ $ctrl.item }}</div>
+      <div class="device-box-body">
+        <div><i>Last data reception</i></div>
+        <div>{{ $ctrl.lastmod  | date:'MM/dd/yyyy hh:mm:ss' }}</div>
+      </div>
+    </div>
+    <div class="device-box-action" >
+      <a title="Edit" ng-if="$ctrl.hasUpdate" ng-click="$ctrl.updateItem(item)"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+      <a title="Delete" ng-if="$ctrl.hasDelete" ng-click="$ctrl.deleteItem(item)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+    </div>
+  </div>
+</div>

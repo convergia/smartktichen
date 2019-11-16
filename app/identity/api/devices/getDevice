@@ -1,0 +1,26 @@
+var paramsEvaluator = require("/UIComponents/userManagement/backend/lib/ParamsEvaluator");
+var errorHandler = require("/UIComponents/userManagement/backend/lib/ErrorHandler");
+var devices = require("device");
+
+var errorHandler = new errorHandler.ErrorHandler();
+
+var log = require("log")
+log.setLevel("INFO");
+
+
+//Check if required params
+var requiredParams = ["id"];
+var paramsEvaluator = new paramsEvaluator.ParamsEvaluator();
+hasAllRequiredParams = paramsEvaluator.hasRequiredParams(request.parameters, requiredParams)
+if(!hasAllRequiredParams.success) {
+  return errorHandler.buildError("missing_parameter", "Parameter \""+hasAllRequiredParams.param+ "\" is required.");
+}
+
+
+var response = devices.get(request.parameters["id"])
+
+if(response.metadata.status == "failure") {
+  return response.metadata;
+} else {
+  return response.result;
+}
