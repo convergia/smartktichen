@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ["Layout", "schemaForm", "WsClient", "HttpClient", "DataService", "MetricBox", "Map", "Chart", "Grid", "Gauge", "ngTagsInput", "gridster", "Button", "Accelerometer", "ui.bootstrap", "ngRoute", "pascalprecht.translate", "ui.select", "ui.codemirror", 'schemaForm-datepicker', 'schemaForm-timepicker', 'schemaForm-datetimepicker', 'ngMaterial', "ngAnimate"]);
+var myApp = angular.module('myApp', ["Layout", "schemaForm", "WsClient", "HttpClient", "DataService", "MetricBox", "Map", "Chart", "Grid", "Gauge", "ngTagsInput", "gridster", "Button", "Accelerometer", "ui.bootstrap", "ngRoute", "pascalprecht.translate", "ui.select", "ui.codemirror", 'schemaForm-datepicker', 'schemaForm-timepicker', 'schemaForm-datetimepicker', 'ngMaterial', "ngAnimate", "Identity"]);
 
 myApp
     .constant("menuItemsJson",  menuItems)

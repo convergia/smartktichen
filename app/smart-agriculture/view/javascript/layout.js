@@ -53,7 +53,7 @@ var routingItems = {
 
     { "route": "reports", "template": "/smart-agriculture/view/views/reports/reports-home.html"},
     { "route": "reports/deviceId/:deviceId*", "template": "/smart-agriculture/view/views/reports/reports.html","controller": "saReportsCtrl as vm"},
-
+    
     { "route": "control", "template": "/app/view/html/views/control/control.html", controller: "controlCtrl as vm" },
     { "route": "ai", "template": "/app/view/html/views/ai/ai.html", controller: "aiCtrl as vm" },
     { "route": "add-device", "template": "/app/view/html/views/devices/add-device.html", controller: "addDeviceCtrl as vm" },
