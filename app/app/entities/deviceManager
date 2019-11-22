@@ -12,7 +12,7 @@ var type = "hardware";
 
 
 function getLatestDeviceEntry(id) {
-   var key = event_prefix + id;;
+   var key = event_prefix + id;
   
    var params = {
        "query" : "key like \""+key+"_%\"",
@@ -49,6 +49,45 @@ function getDeviceAlertsEntries(id) {
         return null;
    }
 }
+
+/**
+ * 
+ */
+function countDeviceEntriesByTime(id, timeStart, timeEnd) {
+
+  var params = {
+    "query" : "id =\""+ id +"\" AND creationDate<numeric> >= "+timeStart+" AND creationDate<numeric> <= "+timeEnd+" ",
+    "fields": "key",
+		"count": true
+  }
+log.info("params are: "+params.query);
+
+  var result = document.query(params);
+  if(result.metadata.status == "success" && result.result.documents.length > 0) {
+    //return result.result.documents;
+    return result.result;
+  } else {
+    return 0;
+  }
+}
+function getDeviceEntriesByTime(id, timeStart, timeEnd, pageNum) {
+
+  var params = {
+    "query" : "id =\""+ id +"\" AND creationDate<numeric> >= "+timeStart+" AND creationDate<numeric> <= "+timeEnd+" ",
+    "fields": "*",
+    "sort": "creationDate<date:DESC>",
+    "pageNumber": pageNum
+  }
+
+//  log.info("params are: "+params.query);
+
+  var result = document.query(params);
+  if(result.metadata.status == "success" && result.result.documents.length > 0) {
+    return result.result.documents;
+  } else {
+    return null;
+  }
+}
 /**
  * @function listHistory
  * @param {String} id: the device's id
@@ -62,6 +101,27 @@ function getDeviceHistoricalEntries(id) {
        "fields": "*"
    }
    
+   var result = document.query(params);
+   if(result.metadata.status == "success" && result.result.documents.length > 0) {
+        return result.result.documents;
+   } else {
+        return null;
+   }
+}
+function getDeviceHistoricalPositionEntries(id) {
+   var key = event_prefix + id;;
+   
+/*   var params = {
+       "query" : "key like \""+key+"_%\"",
+       "fields": "*"
+   }*/
+    var params = {
+      "query" : "id =\""+ id +"\"",
+      "fields": "long,lat,creationDate",
+      "sort": "creationDate<date:DESC>",
+   }
+
+  
    var result = document.query(params);
    if(result.metadata.status == "success" && result.result.documents.length > 0) {
         return result.result.documents;

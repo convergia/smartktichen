@@ -17,5 +17,36 @@ if(typeof query == 'string'){
     }
 }
 
-var devices = deviceManager.getDeviceHistoricalEntries(query.id);
+if(query.timeStart==null ) {//last "50" records
+  var devices = deviceManager.getDeviceHistoricalEntries(query.id);
+
+} else {//with dates
+
+  var counting = deviceManager.countDeviceEntriesByTime(query.id, query.timeStart, query.timeEnd );
+//log.info("counting: "+JSON.stringify(counting));
+
+  var devices = [];
+  var devicesGlob = [];
+
+  if(counting.count>0) {
+    var bouclePage = counting.count/50;
+    bouclePage = Math.ceil(bouclePage);
+    if(bouclePage>10) bouclePage = 10; //limite max
+
+
+    for(var pn=0; pn<bouclePage; pn++){
+      var pageNum = pn+1;
+      var devicesPg = deviceManager.getDeviceEntriesByTime(query.id, query.timeStart, query.timeEnd, pageNum );
+
+      devicesGlob = devices.concat(devicesPg);
+
+    }
+    devices = devicesGlob;
+
+  }
+
+//  pageNum = 1;
+//  var devices = deviceManager.getDeviceEntriesByTime(query.id, query.timeStart, query.timeEnd, pageNum );
+}
+if(devices==null) devices = [];
 return devices;
