@@ -1,0 +1,45 @@
+<!-- begin row -->
+<div class="row">
+  <!-- begin summary -->
+  <div class="col-xs-12 panel stuck summary radius0 pdb2">
+    <section>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+
+
+        <div class="icon text-center" ng-bind-html="vm.icons.id"></div>
+        <strong>Device Id</strong> 
+        <div class="nb fnt16" ng-click="vm.setFocus()" >{{vm.deviceKey}}</span>&nbsp;<span ng-if="!vm.deviceKey"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span></div>
+
+<div ng-controller="autocompCtrl as vm" layout="column" ng-cloak location-path="/reports/deviceId/" id="autocompDivId" >
+  
+    <form ng-submit="$event.preventDefault()">
+      <md-autocomplete style="min-width: 100px;"
+                       md-input-id="autoCompleteId"
+                       ng-disabled="vm.isDisabled"
+                       md-no-cache="vm.noCache"
+                       md-selected-item="vm.selectedItem"
+                       md-search-text-change="vm.searchTextChange(vm.searchText)"
+                       md-search-text="vm.searchText"
+                       md-selected-item-change="vm.selectedItemChange(item)"
+                       md-items="item in vm.querySearch(vm.searchText)"
+                       md-item-text="item.name"
+                       md-min-length="0"
+                       placeholder="Ex. MS"
+                       ng-blur="vm.unFocus()">
+        <md-item-template>
+          <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.name}}</span>
+        </md-item-template>
+        <md-not-found>
+          No device ID matching "{{vm.searchText}}" were found.
+        </md-not-found>
+      </md-autocomplete>
+
+    </form>
+  
+</div>
+
+      </div>
+
+    </section>
+	</div>
+</div>

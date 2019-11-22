@@ -173,35 +173,127 @@ myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $
   var vm = this;
   vm.deviceKey = null;
 
+  /* search */
+  vm.icons = constants.infoWindows.icons;
+  vm.setFocus = function() {
+		document.querySelector('#autocompDivId').style.display = "block";
+    setTimeout(function() {
+      document.querySelector('#autoCompleteId').focus();
+    }, 0);
+  }
+  /* \ */
+  const monthNames = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  vm.includes =  {
+    battery: '/smart-agriculture/view/views/dashboard/graph_bat.html?',
+    temprature : '/smart-agriculture/view/views/dashboard/graph_temp.html?',
+    soil: '/smart-agriculture/view/views/dashboard/graph_soil.html?',
+    anemo: '/smart-agriculture/view/views/dashboard/graph_anemo.html?',
+    press: '/smart-agriculture/view/views/dashboard/graph_press.html?',
+    humid: '/smart-agriculture/view/views/dashboard/graph_humid.html?'
+  };
+
+  vm.startDate = null;
+  vm.endDate = null;
+  vm.getDateRangeStart = "";
+  vm.getDateRangeEnd = "";
+
+  vm.setoutput = {
+    name: 'fifty'
+  };
+
+  vm.onSetTime = function(date){
+		var ts = Date.parse(date);
+    var topLimitTs = ts+(86400000-1)//+23h59:59.999
+
+    vm.params = {
+      "id":  vm.deviceKey,
+      "timeStart": ts,
+      "timeEnd": topLimitTs
+    }
+    var showDate = new Date(ts);
+		vm.getDateRangeStart = "For "+monthNames[showDate.getMonth()]+" "+showDate.getDate()+" "+showDate.getFullYear();
+    vm.getDateRangeEnd ="";
+    
+    vm.loadRecords();
+  }
+
+  vm.startDateOnSetTime = function(date){
+    vm.startDate = Date.parse(date);
+    vm.params = {
+      "id":  vm.deviceKey,
+      "timeStart": vm.startDate,
+      "timeEnd": vm.endDate
+    }
+    var showDate = new Date(vm.startDate);
+		vm.getDateRangeStart = "From "+monthNames[showDate.getMonth()]+" "+showDate.getDate()+" "+showDate.getFullYear();
+
+    if(vm.endDate!=null) vm.loadRecords();
+  }
+
+	vm.endDateOnSetTime = function(date){
+    vm.endDate = Date.parse(date)+(86400000-1);//+23h59:59.999;
+    vm.params = {
+      "id":  vm.deviceKey,
+      "timeStart": vm.startDate,
+      "timeEnd": vm.endDate
+    }
+    var showDate = new Date(vm.endDate);
+    vm.getDateRangeEnd = " To "+monthNames[showDate.getMonth()]+" "+showDate.getDate()+" "+showDate.getFullYear();
+
+    if(vm.startDate!=null) vm.loadRecords();
+  }
+
   vm.init = function(){
     if($routeParams && $routeParams.deviceId) {
       vm.deviceKey = $routeParams.deviceId;
-      vm.params = {"id":  vm.deviceKey }
-
-      httpClient.get("app/api/getDeviceHistory", vm.params).then(
-        function(data, response) {
-
-          vm.subjects = data;
-        },
-        function(err) {
-          console.log('ERROR', error);
-        });
+			vm.fiftyRecords();
     }
   }
 
+  vm.fiftyRecords = function(){
+    vm.params = {"id":  vm.deviceKey }
+    vm.getDateRangeStart ="Last 50 records";vm.getDateRangeEnd ="";
+    vm.loadRecords();
+  }
+
+  vm.loadRecords = function(){
+    $('#exportPdfButton').hide();
+
+    httpClient.get("app/api/getDeviceHistory", vm.params).then(
+      function(data, response) {
+        vm.subjects = data;
+      },
+      function(err) {
+        console.log('ERROR', err);
+      });
+		var refresh = Date.now();
+    $scope.vm.includeBat = vm.includes.battery+refresh;
+    $scope.vm.includeTemp = vm.includes.temperature+refresh;
+    $scope.vm.includeSoil = vm.includes.soil+refresh;
+    $scope.vm.includeAnemo = vm.includes.anemo+refresh;
+    $scope.vm.includePress = vm.includes.press+refresh;
+    $scope.vm.includeHumid = vm.includes.humid+refresh;
+
+    vm.startDate = null;
+    vm.endDate = null;
+
+    $('#exportPdfButton').prop( "disabled", false );
+  }
+
+
+	/* documents export */
   vm.item_date = new Date();
   var fileDate = $filter('date')(vm.item_date, "yyyy-MM-dd");
-  var filePrefix = "cxc-sa-";
-    
-  vm.ExcelfileExport = function(){
-	
-    var fileName = filePrefix+vm.deviceKey+"_export_"+fileDate+".xlsx";
+  var filePrefix = "cxc-sw-";
 
-    var wb = XLSX.utils.table_to_book(document.getElementById('sjs-table'));
+  vm.ExcelfileExport = function(){
+	  var fileName = filePrefix+vm.deviceKey+"_export_"+fileDate+".xlsx";
+
+    var wb = XLSX.utils.table_to_book(document.getElementById('report-table'));
     XLSX.writeFile(wb, fileName);
   }
 
-vm.savePDF = function() {
+  vm.savePDF = function() {
     var quotes = document.getElementById('chartsContainer');
     html2canvas(quotes, {
       onrendered: function(canvas) {
@@ -252,6 +344,7 @@ vm.savePDF = function() {
   
   vm.convertTopng = function(event) {
 		event.target.disabled = true;
+    nbrImage = 0;
 
     var DOMURL = self.URL || self.webkitURL || self;
     var svgObj = document.getElementsByTagName('svg');

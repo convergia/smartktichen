@@ -1,16 +1,63 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.1/xlsx.core.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 
 <section class="page-inner" ng-controller="saReportsCtrl as vm" ng-init="vm.init();">
   <div class="col-xs-12">
 
-    <div ng-include="'/smart-agriculture/view/views/reports/reports-home.html'"></div>
+    <div ng-include="'/smart-agriculture/view/views/reports/reports-header.html'"></div>
 
+    <sub style="display: block;line-height: 12px;">rem: results by date may vary depending on your time zone</sub>
     <div class="box-content" style="text-align: left;">
 
-      <strong>Device Id : </strong>{{vm.deviceKey}}
+      <div class="report-option-choice">
+        <div class="report-option-cell">
+          <label style="float: left;">
+            <input type="radio" ng-model="vm.setoutput.name" value="bydate">
+            By day
+          </label>
+          <div style="float: left;" ng-if="vm.setoutput.name=='bydate'">
+            <scriptr-date-time-picker 
+                                      type="dropDownInput"
+                                      start-date-config="{ startView:'day', minView:'day' }"
+                                      on-set-time="vm.onSetTime"
+                                      >
+            </scriptr-date-time-picker>
+          </div>
+        </div>
+
+        <div class="report-option-cell">
+          <label style="float: left;">
+            <input type="radio" ng-model="vm.setoutput.name" value="byrange">
+            By date range
+          </label>
+          <div style="float: left;" ng-if="vm.setoutput.name=='byrange'">
+            <scriptr-date-time-picker
+                                      type="range"
+                                      start-date-config="{ startView:'day', minView:'day' }"
+                                      end-date-config="{ startView:'day', minView:'day' }"
+                                      on-set-time="vm.onSetTime" 
+                                      start-date-on-set-time="vm.startDateOnSetTime"
+                                      end-date-on-set-time="vm.endDateOnSetTime"
+                                      >
+            </scriptr-date-time-picker>
+
+          </div>
+        </div>
+
+        <div class="report-option-cell">
+          <label>
+            <input type="radio" ng-change="vm.fiftyRecords()" ng-model="vm.setoutput.name" value="fifty">
+            Last 50 records
+          </label>
+
+        </div>
+
+      </div>
+      <div class="date-selection">Selection: {{vm.getDateRangeStart}}{{vm.getDateRangeEnd}}</div>
+
+      <!--<strong>Device Id : </strong>{{vm.deviceKey}}-->
 
       <a class="exportButton" ng-click="vm.ExcelfileExport()">Export Raw Data Table</a>
 
@@ -18,36 +65,27 @@
 
       <div style="height: calc(100% - 30px); box-sizing: border-box;" >
 
-        <table id="sjs-table">
+        <table id="report-table">
           <thead>
             <tr>
               <th>Date</th>
               <th>Battery</th>
               <th>Temperature</th>
-              <th>Pluviometer Current hour</th>
-              <th>Pluviometer Previous hour</th>
-              <th>Pluviometer Last 24H</th>
-              <th>Soil moisture</th>
-              <th>Anemometer</th>
-              <th>Wind direction</th>
-              <th>Pressure</th>
-              <th>Humidity</th>
+              <th>Water Conductivity</th>
+              <th>O.R.P.</th>
+              <th>D.O.</th>
+              <th>pH</th>
             </tr>
           </thead>
-
           <tbody>
             <tr ng-repeat = "subject in vm.subjects">
               <td>{{ subject.creationDate | date:'yyyy/dd/MM HH:mm:ss' }}</td>
               <td>{{ subject.battery }}</td>
               <td>{{ subject.temperature }}</td>
-              <td>{{ subject.pluviometer_1 }}</td>
-              <td>{{ subject.pluviometer_2 }}</td>
-              <td>{{ subject.pluviometer_3 }}</td>
-              <td>{{ subject.soil_moisture }}</td>
-              <td>{{ subject.anemometer }}</td>
-              <td>{{ subject.wind_direction }}</td>
-              <td>{{ subject.pressure }}</td>
-              <td>{{ subject.humidity }}</td>
+              <td>{{ subject.water_conductivity }}</td>
+              <td>{{ subject.oxidation_reduction_potential }}</td>
+              <td>{{ subject.dissolved_oxygen }}</td>
+              <td>{{ subject.ph }}</td>
             </tr>
           </tbody>
         </table>
@@ -57,22 +95,22 @@
     </div>
 
     <div id="chartsContainer">
-      <div ng-include="'/smart-agriculture/view/views/dashboard/graph_bat.html'"></div>
+      <div ng-include="vm.includeBat"></div>
       <div class="png-container" id="png-container0"></div>
 
-      <div ng-include="'/smart-agriculture/view/views/dashboard/graph_temp.html'"></div>
+      <div ng-include="vm.includeTemp"></div>
       <div class="png-container" id="png-container1"></div>
       
-      <div ng-include="'/smart-agriculture/view/views/dashboard/graph_soil.html'"></div>
+      <div ng-include="vm.includeSoil"></div>
       <div class="png-container" id="png-container2"></div>
 
-      <div ng-include="'/smart-agriculture/view/views/dashboard/graph_anemo.html'"></div>
+      <div ng-include="vm.includeAnemo"></div>
 			<div class="png-container" id="png-container3"></div>
       
-      <div ng-include="'/smart-agriculture/view/views/dashboard/graph_press.html'"></div>
+      <div ng-include="vm.includePress"></div>
       <div class="png-container" id="png-container4"></div>
 
-      <div ng-include="'/smart-agriculture/view/views/dashboard/graph_humid.html'"></div>
+      <div ng-include="vm.includeHumid"></div>
       <div class="png-container" id="png-container5"></div>
 
     </div>

@@ -400,9 +400,52 @@ div.innergrid .metric-box-value div, div.innergrid .metric-box-unit div{
   margin: 0 2px 0 2px;
 }
 
-/* reports */
-table {
-  border-spacing: 1;
+/* Reports */
+div.report-option-cell .dropdown-menu { padding: 0; }
+div.report-option-cell .table > tbody > tr > td.active {
+  background-color: #d4bddf;
+}
+div.report-option-choice{
+  display: flex;flex-direction: row;
+  background-color: #FFF;
+  margin-right: -15px;margin-left: -15px;
+}
+div.report-option-cell{
+  width: 400px;
+  padding: 0 20px 0 20px;
+}
+div.report-option-cell label{
+  line-height: 50px;cursor: pointer;width: 140px;
+}
+div.report-option-cell .input-group { width: 140px; }
+div.report-option-cell .dropdown-menu { width: 240px; }
+div.report-option-cell .dropdown label{
+  line-height: 24px;cursor: default;font-weight: 400;
+}
+div.date-selection {
+  border-top: 1px solid #d4bddf;
+  background-color: #FFF;
+  height: 24px;line-height: 24px;
+  margin-right: -15px;margin-left: -15px;
+  padding-left: 20px;
+  font-weight: 700;
+}
+
+table.day-view {
+  border-spacing: 1px;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  width: 100%;
+  margin: 0 auto;
+}
+table.day-view th {
+  text-align: center;
+  width: 60px;
+  padding-left: 20px;
+}
+#report-table, .table-bordered {
+  border-spacing: 1px;
   border-collapse: collapse;
   background: white;
   border-radius: 10px;
@@ -411,17 +454,18 @@ table {
   margin: 0 auto;
   position: relative;
 }
-thead tr {
-  padding: 10px 0;
-  background: #612480;
+
+#report-table thead tr, .table-bordered thead tr {
+  line-height: 30px;
+  background-color: #612480;
 }
-th {
+#report-table th, .table-bordered th {
   color: #fff;text-align: center;
   width: 260px;
   padding-left: 20px;
 }
-td {border: 1px solid lightgrey;text-align: right;padding: 0 4px 0 10px;line-height: 26px;}
-tr:nth-child(2n) { background-color: #f0f0f0; }
+#report-table td {border: 1px solid lightgrey;text-align: right;padding: 0 4px 0 10px;line-height: 26px;}
+#report-table tr:nth-child(2n) { background-color: #f0f0f0; }
 
 a.exportButton, #exportPdfButton {
   background-repeat: no-repeat;
