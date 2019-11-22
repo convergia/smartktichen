@@ -26,7 +26,7 @@ if(query.timeStart==null ) {//last "50" records
 //log.info("counting: "+JSON.stringify(counting));
 
   var devices = [];
-  var devicesGlob = [];
+  //var devicesGlob = [];
 
   if(counting.count>0) {
     var bouclePage = counting.count/50;
@@ -38,10 +38,10 @@ if(query.timeStart==null ) {//last "50" records
       var pageNum = pn+1;
       var devicesPg = deviceManager.getDeviceEntriesByTime(query.id, query.timeStart, query.timeEnd, pageNum );
 
-      devicesGlob = devices.concat(devicesPg);
+      devices = devices.concat(devicesPg);
 
     }
-    devices = devicesGlob;
+    //devices = devicesGlob;
 
   }
 
