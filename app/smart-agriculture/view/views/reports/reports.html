@@ -95,24 +95,157 @@
     </div>
 
     <div id="chartsContainer">
+      <table id="tableChartsContainer" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
       <div ng-include="vm.includeBat"></div>
       <div class="png-container" id="png-container0"></div>
-
+          </td>
+          <td>
+            <div class="recap">
+              <ul class="ng-scope">
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Max</span>
+                  <span style="font-weight: 700;color: #3AAC4D;">{{vm.sumMax0}} %</span>
+                </li>
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Average</span>
+                  <span style="font-weight: 700;color: #FCAF3E;">{{vm.sumAvg0}} %</span>
+                </li>
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Min</span>
+                  <span style="font-weight: 700;color: #EF2929;">{{vm.sumMin0}} %</span>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
       <div ng-include="vm.includeTemp"></div>
       <div class="png-container" id="png-container1"></div>
+          </td>
+          <td>
+            <div class="recap">
+              <ul class="ng-scope">
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Max</span>
+                  <span style="font-weight: 700;color: #3AAC4D;">{{vm.sumMax1}} °C</span>
+                </li>
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Average</span>
+                  <span style="font-weight: 700;color: #FCAF3E;">{{vm.sumAvg1}} °C</span>
+                </li>
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Min</span>
+                  <span style="font-weight: 700;color: #EF2929;">{{vm.sumMin1}} °C</span>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
       
+        <tr>
+          <td>
       <div ng-include="vm.includeSoil"></div>
       <div class="png-container" id="png-container2"></div>
+          </td>
+          <td>
+            <div class="recap">
+              <ul class="ng-scope">
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Max</span>
+                  <span style="font-weight: 700;color: #3AAC4D;">{{vm.sumMax2}} Hz</span>
+                </li>
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Average</span>
+                  <span style="font-weight: 700;color: #FCAF3E;">{{vm.sumAvg2}} Hz</span>
+                </li>
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Min</span>
+                  <span style="font-weight: 700;color: #EF2929;">{{vm.sumMin2}} Hz</span>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
 
+        <tr>
+          <td>
       <div ng-include="vm.includeAnemo"></div>
 			<div class="png-container" id="png-container3"></div>
+          </td>
+          <td>
+            <div class="recap">
+              <ul class="ng-scope">
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Max</span>
+                  <span style="font-weight: 700;color: #3AAC4D;">{{vm.sumMax3}} km/h</span>
+                </li>
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Average</span>
+                  <span style="font-weight: 700;color: #FCAF3E;">{{vm.sumAvg3}} km/h</span>
+                </li>
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Min</span>
+                  <span style="font-weight: 700;color: #EF2929;">{{vm.sumMin3}} km/h</span>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
       
+        <tr>
+          <td>
       <div ng-include="vm.includePress"></div>
       <div class="png-container" id="png-container4"></div>
+          </td>
+          <td>
+            <div class="recap">
+              <ul class="ng-scope">
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Max</span>
+                  <span style="font-weight: 700;color: #3AAC4D;">{{vm.sumMax4}} Pa</span>
+                </li>
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Average</span>
+                  <span style="font-weight: 700;color: #FCAF3E;">{{vm.sumAvg4}} Pa</span>
+                </li>
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Min</span>
+                  <span style="font-weight: 700;color: #EF2929;">{{vm.sumMin4}} Pa</span>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
 
+        <tr>
+          <td>
       <div ng-include="vm.includeHumid"></div>
       <div class="png-container" id="png-container5"></div>
-
+          </td>
+          <td>
+            <div class="recap">
+              <ul class="ng-scope">
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Max</span>
+                  <span style="font-weight: 700;color: #3AAC4D;">{{vm.sumMax5}} %</span>
+                </li>
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Average</span>
+                  <span style="font-weight: 700;color: #FCAF3E;">{{vm.sumAvg5}} %</span>
+                </li>
+                <li>
+                  <span style="font-weight: 700;" class="ng-binding">Min</span>
+                  <span style="font-weight: 700;color: #EF2929;">{{vm.sumMin5}} %</span>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      
+      </table>
     </div>
 
   </div>

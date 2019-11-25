@@ -503,6 +503,14 @@ button:disabled#exportPdfButton, button[disabled]#exportPdfButton {
 #chartsContainer .png-container {background-color: white;margin-bottom: 10px;}
 #chartsContainer .box-label { font-size: 1.5em; font-weight: bold; }
 
+/* report summary */
+#chartsContainer .recap li { list-style: none;margin-left: -30px;  }
+#chartsContainer .recap { width: 180px;height: 80px; }
+#chartsContainer table { border-collapse: separate;border-spacing: 0 15px;}
+#chartsContainer table td {background-color: #FFF;}
+#chartsContainer table td:nth-child(1) { width: 85% }
+#chartsContainer table td:nth-child(2) { width: 15% }
+
 /* identity/devices */
 #detailwindow {
   display: none;

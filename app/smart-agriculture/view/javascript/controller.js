@@ -185,7 +185,7 @@ myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $
   const monthNames = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   vm.includes =  {
     battery: '/smart-agriculture/view/views/dashboard/graph_bat.html?',
-    temprature : '/smart-agriculture/view/views/dashboard/graph_temp.html?',
+    temperature : '/smart-agriculture/view/views/dashboard/graph_temp.html?',
     soil: '/smart-agriculture/view/views/dashboard/graph_soil.html?',
     anemo: '/smart-agriculture/view/views/dashboard/graph_anemo.html?',
     press: '/smart-agriculture/view/views/dashboard/graph_press.html?',
@@ -266,6 +266,36 @@ myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $
       function(err) {
         console.log('ERROR', err);
       });
+
+    httpClient.get("app/api/getDeviceDataSummary", vm.params).then(
+      function(data, response) {
+        vm.summaries = data[0];
+
+        $scope.vm.sumMax0 = vm.summaries.batteryMax;
+        $scope.vm.sumMax1 = vm.summaries.tempMax;
+        $scope.vm.sumMax2 = vm.summaries.smMax;
+        $scope.vm.sumMax3 = vm.summaries.aneMax;
+        $scope.vm.sumMax4 = vm.summaries.pressMax;
+        $scope.vm.sumMax5 = vm.summaries.humMax;
+
+        $scope.vm.sumMin0 = vm.summaries.batteryMin;
+        $scope.vm.sumMin1 = vm.summaries.tempMin;
+        $scope.vm.sumMin2 = vm.summaries.smMin;
+        $scope.vm.sumMin3 = vm.summaries.aneMin;
+        $scope.vm.sumMin4 = vm.summaries.pressMin;
+        $scope.vm.sumMin5 = vm.summaries.humMin;
+
+        $scope.vm.sumAvg0 = ((vm.summaries.batteryMax+vm.summaries.batteryMin)/2).toFixed(2);
+        $scope.vm.sumAvg1 = ((vm.summaries.tempMax+vm.summaries.tempMin)/2).toFixed(2);
+        $scope.vm.sumAvg2 = ((vm.summaries.smMax+vm.summaries.smMin)/2).toFixed(2);
+        $scope.vm.sumAvg3 = ((vm.summaries.aneMax+vm.summaries.aneMin)/2).toFixed(2);
+        $scope.vm.sumAvg4 = ((vm.summaries.pressMax+vm.summaries.pressMin)/2).toFixed(2);
+        $scope.vm.sumAvg5 = ((vm.summaries.humMax+vm.summaries.humMin)/2).toFixed(2);
+      },
+      function(err) {
+        console.log('ERROR', err);
+      });
+    
 		var refresh = Date.now();
     $scope.vm.includeBat = vm.includes.battery+refresh;
     $scope.vm.includeTemp = vm.includes.temperature+refresh;
@@ -278,6 +308,10 @@ myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $
     vm.endDate = null;
 
     $('#exportPdfButton').prop( "disabled", false );
+    for(key=0;key<nrDiv.length;key++) {
+    	document.querySelector('#png-container'+key).innerHTML = '';
+    }
+
   }
 
 
@@ -301,19 +335,18 @@ myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $
         var pdf = new jsPDF('p', 'pt', 'a4');
 
         for (var i = 0; i <= quotes.clientHeight/980; i++) {//980
-          //! This is all just html2canvas stuff
           var srcImg  = canvas;
           var sX	  = 0;
           var sY	  = 930*i;
-          var sWidth  = 778;
+          var sWidth  = 758;
           var sHeight = 930;
           var dX	  = 0;
           var dY	  = 0;
-          var dWidth  = 778;
+          var dWidth  = 758;
           var dHeight = 930;
 
           window.onePageCanvas = document.createElement("canvas");
-          onePageCanvas.setAttribute('width', 778);
+          onePageCanvas.setAttribute('width', 758);
           onePageCanvas.setAttribute('height', 930);//1120
           var ctx = onePageCanvas.getContext('2d');
 
@@ -328,7 +361,7 @@ myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $
             pdf.addPage(595, 842);
           }
           pdf.setPage(i+1);
-          pdf.addImage(canvasDataURL, 'PNG', 0, 0, (width*.72), (height*.71));
+          pdf.addImage(canvasDataURL, 'PNG', 0, 0, (width*.70), (height*.70));
 
         }
         var fileName = filePrefix+vm.deviceKey+"_export_"+fileDate+".pdf";
@@ -359,7 +392,7 @@ myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $
 
       //var canvas = document.getElementById("canvaselm");
       var canvas = document.createElement("canvas");
-      canvas.width = 760;
+      canvas.width = 580;
       canvas.height = 400;
 
       var ctx = canvas.getContext("2d");
@@ -389,7 +422,7 @@ myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $
 
   vm.historicalFormatData = function(data){
     nbrCharts++;
-
+console.log("nbrCharts: "+nbrCharts+" "+nrDiv.length);
     if(nbrCharts >= nrDiv.length ) $('#exportPdfButton').show();
 
     if(data.historical) {
