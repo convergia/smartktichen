@@ -1,0 +1,136 @@
+var deviceManager = require("app/entities/deviceManager")
+
+var log = require("log");
+log.setLevel("INFO");
+
+var query = {};
+if(request.body != null){
+	query = request.body;
+}else if(request.parameters.body){
+	query = request.parameters.body;
+} else {
+  query = request.parameters;
+}
+
+if(typeof query == 'string'){
+  	try{
+    	query = JSON.parse(query);   
+    }catch(e){
+      	return "INVALID OR MISSING PARAMETER";
+    }
+}
+
+var devices = [];
+var batteryMax = tempMax = smMax = aneMax = pressMax = humMax = 0;
+var batteryMin = tempMin = smMin = aneMin = pressMin = humMin = 1000000;
+var batt = tempr = smst = anemo = press = hum = 0;
+
+if(query.timeStart==null ) {//last "50" records
+
+  var info = deviceManager.getDeviceHistoricalEntries(query.id);
+  for (var i=0; i< info.length;i++) {
+    
+    batt = ((info[i].battery!=null)? info[i].battery : batteryMax);
+    batteryMax = Math.max( batteryMax, parseFloat(batt) );
+    batteryMin =  Math.min( batteryMin, parseFloat(batt) );
+
+    tempr = ((info[i].temperature!=null)? info[i].temperature : tempMax);
+    tempMax = Math.max( tempMax, parseFloat(tempr) );
+    tempMin =  Math.min( tempMin, parseFloat(tempr) );
+
+    smst = ((info[i].soil_moisture!=null)? info[i].soil_moisture : smMax);
+    smMax = Math.max( smMax, parseFloat(smst) );
+    smMin =  Math.min( smMin, parseFloat(smst) );
+
+    anemo = ((info[i].anemometer!=null)? info[i].anemometer : aneMax);
+    aneMax = Math.max( aneMax, parseFloat(anemo) );
+    aneMin =  Math.min( aneMin, parseFloat(anemo) );
+
+    press = ((info[i].pressure!=null)? info[i].pressure : pressMax);
+    pressMax = Math.max( pressMax, parseFloat(press) );
+    pressMin =  Math.min( pressMin, parseFloat(press) );
+
+    hum = ((info[i].hum!=null)? info[i].hum : humMax);
+    humMax = Math.max( humMax, parseFloat(hum) );
+    humMin =  Math.min( humMin, parseFloat(hum) );
+  }
+
+  devices.push( {
+    "batteryMax": batteryMax,
+    "batteryMin": batteryMin,
+    "tempMax": tempMax,
+    "tempMin": tempMin,
+    "smMax": smMax,
+    "smMin": smMin,
+    "aneMax": aneMax,
+    "aneMin": aneMin,
+    "pressMax": pressMax,
+    "pressMin": pressMin,
+    "humMax": humMax,
+    "humMin": humMin
+  });
+
+} else {//with dates
+
+  var counting = deviceManager.countDeviceEntriesByTime(query.id, query.timeStart, query.timeEnd );
+//log.info("counting: "+JSON.stringify(counting));
+
+  if(counting.count>0) {
+    var bouclePage = counting.count/50;
+    bouclePage = Math.ceil(bouclePage);
+    if(bouclePage>10) bouclePage = 10; //limite max
+
+
+    for(var pn=0; pn<bouclePage; pn++){
+      var pageNum = pn+1;
+      var info = deviceManager.getDeviceEntriesByTime(query.id, query.timeStart, query.timeEnd, pageNum );
+
+      for (var i=0; i< info.length;i++) {
+
+        batt = ((info[i].battery!=null)? info[i].battery : batteryMax);
+        batteryMax = Math.max( batteryMax, parseFloat(batt) );
+        batteryMin =  Math.min( batteryMin, parseFloat(batt) );
+
+        tempr = ((info[i].temperature!=null)? info[i].temperature : tempMax);
+        tempMax = Math.max( tempMax, parseFloat(tempr) );
+        tempMin =  Math.min( tempMin, parseFloat(tempr) );
+
+        smst = ((info[i].soil_moisture!=null)? info[i].soil_moisture : smMax);
+        smMax = Math.max( smMax, parseFloat(smst) );
+        smMin =  Math.min( smMin, parseFloat(smst) );
+
+        anemo = ((info[i].anemometer!=null)? info[i].anemometer : aneMax);
+        aneMax = Math.max( aneMax, parseFloat(anemo) );
+        aneMin =  Math.min( aneMin, parseFloat(anemo) );
+
+        press = ((info[i].pressure!=null)? info[i].pressure : pressMax);
+        pressMax = Math.max( pressMax, parseFloat(press) );
+        pressMin =  Math.min( pressMin, parseFloat(press) );
+
+        hum = ((info[i].hum!=null)? info[i].hum : humMax);
+        humMax = Math.max( humMax, parseFloat(hum) );
+        humMin =  Math.min( humMin, parseFloat(hum) );
+      }
+
+    }
+
+    devices.push( {
+      "batteryMax": batteryMax,
+      "batteryMin": batteryMin,
+      "tempMax": tempMax,
+      "tempMin": tempMin,
+      "smMax": smMax,
+      "smMin": smMin,
+      "aneMax": aneMax,
+      "aneMin": aneMin,
+      "pressMax": pressMax,
+      "pressMin": pressMin,
+      "humMax": humMax,
+      "humMin": humMin
+    });
+
+  }
+
+}
+if(devices==null) devices = [];
+return devices;
