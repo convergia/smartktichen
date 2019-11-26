@@ -106,11 +106,24 @@ myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $rou
     }
 
     vm.historicalFormatData = function(data){
-        if(data.historical) 
-            return data.historical;
-        else
-            return data;
-    }  
+      if(data.historical) {
+        return data.historical;
+      } else {
+        for(var i=0; i<data.length; i++){
+          var d = new Date(data[i].creationDate);
+
+          var date_format = d.getFullYear().toString()
+          +"-"+(('0'+d.getMonth()).slice(-2))
+          +"-"+(('0'+d.getDate()).slice(-2))
+          +" "+(('0'+d.getHours()).slice(-2))
+          +":"+(('0'+d.getMinutes()).slice(-2))
+          +":"+(('0'+d.getSeconds()).slice(-2));
+
+          data[i].creationDate = date_format;//mDate.toLocaleDateString( undefined, options);
+        }
+        return data;
+      }
+    }
 
     vm.batteryFormatData = function(data) {
         return data.latest.battery;
@@ -428,8 +441,20 @@ console.log("nbrCharts: "+nbrCharts+" "+nrDiv.length);
     if(data.historical) {
       return data.historical;
     } else {
+      for(var i=0; i<data.length; i++){
+        var d = new Date(data[i].creationDate);
+
+        var date_format = d.getFullYear().toString()
+        +"-"+(('0'+d.getMonth()).slice(-2))
+        +"-"+(('0'+d.getDate()).slice(-2))
+        +" "+(('0'+d.getHours()).slice(-2))
+        +":"+(('0'+d.getMinutes()).slice(-2))
+        +":"+(('0'+d.getSeconds()).slice(-2));
+
+        data[i].creationDate = date_format;//mDate.toLocaleDateString( undefined, options);
+      }
       return data;
-  	}
+    }
   }  
 
 });
