@@ -50,7 +50,7 @@ if(query.timeStart==null ) {//last "50" records
     pressMax = Math.max( pressMax, parseFloat(press) );
     pressMin =  Math.min( pressMin, parseFloat(press) );
 
-    hum = ((info[i].hum!=null)? info[i].hum : humMax);
+    hum = ((info[i].humidity!=null)? info[i].humidity : humMax);
     humMax = Math.max( humMax, parseFloat(hum) );
     humMin =  Math.min( humMin, parseFloat(hum) );
   }
@@ -107,7 +107,7 @@ if(query.timeStart==null ) {//last "50" records
         pressMax = Math.max( pressMax, parseFloat(press) );
         pressMin =  Math.min( pressMin, parseFloat(press) );
 
-        hum = ((info[i].hum!=null)? info[i].hum : humMax);
+        hum = ((info[i].humidity!=null)? info[i].humidity : humMax);
         humMax = Math.max( humMax, parseFloat(hum) );
         humMin =  Math.min( humMin, parseFloat(hum) );
       }
