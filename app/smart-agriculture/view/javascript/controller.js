@@ -113,7 +113,7 @@ myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $rou
           var d = new Date(data[i].creationDate);
 
           var date_format = d.getFullYear().toString()
-          +"-"+(('0'+d.getMonth()).slice(-2))
+          +"-"+(('0'+(d.getMonth()+1)).slice(-2))
           +"-"+(('0'+d.getDate()).slice(-2))
           +" "+(('0'+d.getHours()).slice(-2))
           +":"+(('0'+d.getMinutes()).slice(-2))
@@ -445,7 +445,7 @@ console.log("nbrCharts: "+nbrCharts+" "+nrDiv.length);
         var d = new Date(data[i].creationDate);
 
         var date_format = d.getFullYear().toString()
-        +"-"+(('0'+d.getMonth()).slice(-2))
+        +"-"+(('0'+(d.getMonth()+1)).slice(-2))
         +"-"+(('0'+d.getDate()).slice(-2))
         +" "+(('0'+d.getHours()).slice(-2))
         +":"+(('0'+d.getMinutes()).slice(-2))
