@@ -22,6 +22,8 @@ log.info("[app/api/subscription/subscriber] received the following payload \n" +
 var body = request.body ? request.body : ((request.rawBody) ? request.rawBody : request.parameters);
 var inputData = typeof(body) == "string" ? JSON.parse(body) : body;
 
+log.info("subscriber received the following data:\n" + JSON.stringify(inputData));
+
   //MFE: in case renzo cannot change payload format to be usabe in jsonmapper as it, call the adaptor under config, this should be in the prescript of the transformation
   
 	inputData=adaptor.transform(inputData); 
@@ -82,7 +84,7 @@ if(!_.isEmpty(data)) {
 
 function processEntry(entry) {
   
-    deviceEvaluator.evaluateDevice(entry);
+    deviceEvaluator.evaluateDevice(entry);//appel de la decision table
     deviceManager.saveDeviceEvent(entry);
     devicePublisher.publishDevice(entry);
 }

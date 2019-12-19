@@ -95,9 +95,14 @@
                 <small>Gas</small>
             </div>
     </section>
-    <section class="clear"></section>
-    <section class="btns-container">
-        <button type="button" ng-click='vm.go("/dashboard/deviceId/"+marker.details.id.value)' class="btn btn-default mt15 mrgr15" ng-cloak>View Dashboard</button>
-        <button type="button" ng-click='vm.go("/alerts/deviceId/"+marker.details.id.value)' class="btn btn-danger mt15" ng-cloak>View Alerts</button>
-    </section>
+	<section class="col-xs-12 pdt10 index-summary mrgb10">
+  </section>
+  <section class="clear"></section>
+  <section class="btns-container">
+    <button type="button" ng-click='vm.go("/dashboard/deviceId/"+marker.details.id.value)' class="btn btn-default mt15 mrgr15" ng-cloak>View Dashboard</button>
+    <button type="button" ng-click='vm.go("/alerts/deviceId/"+marker.details.id.value)' class="btn btn-danger mt15" ng-cloak>View Alerts</button>
+    <button type="button" ng-click='vm.go("/maphistory/deviceId/"+marker.details.id.value)' class="btn btn-default mt15" ng-cloak>View position history</button>
+    <button type="button" ng-click='vm.go("/maphistory/deviceId/"+marker.details.id.value)'
+            class="btn btn-small btn-default mt15" ng-cloak>View position history</button>
+  </section>
 </div>

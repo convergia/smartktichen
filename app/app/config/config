@@ -6,6 +6,7 @@ var dmpDeviceBroker = "myDmpBroker";
 var defaultApp = "smart-agriculture";
 
 var businessRuleScript = "app/entities/rules/decisionTable";
+var businessRuleBlockly = "app/entities/rules/blocklyBusinessRule";
 
 var availableDeviceTypes = [
     require("app/config/meshelium/wasp/config")
