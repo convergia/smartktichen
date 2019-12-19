@@ -23,6 +23,7 @@ var menuItemsAdmin = {
     { "id": "2", "iconClass": "fa fa-fw fa-info", "label": "A.I", "route": "#/ai", "active": "false" },
     { "id": "2", "iconClass": "fa fa-fw fa-user-plus", "label": "Manage Devices", "route": "#/list-devices", "active": "false" },
     { "id": "3", "iconClass": "fa fa-fw fa-list-alt", "label": "Add Rule", "route": "#/rules", "active": "false" },
+    { "id": "3", "iconClass": "fa fa-fw fa-list-alt", "label": "Add Blockly Rule", "route": "#/blockly", "active": "false" },
     { "id": "2", "iconClass": "fa fa-fw fa-info-circle", "label": "Info", "route": "#/info", "active": "false" },
   ]
 };
@@ -47,7 +48,10 @@ var routingItems = {
     {"route": "alerts/deviceId/:deviceId*", "template": "/app/view/html/views/logs/alerts.html","controller": "alertsCtrl as vm"},
     {"route": "alerts", "template": "/app/view/html/views/alerts/alerts.html" },
     {"route": "notifications", "template": "/app/view/html/views/notifications/notifications.html", controller: "notificationCtrl as vm"},
-    {"route": "rules", "template": "/app/view/html/views/genericRules/genericAllRule.html", controller: "rulesCtrl as vm"},    
+    {"route": "rules", "template": "/app/view/html/views/genericRules/genericAllRule.html", controller: "rulesCtrl as vm"},
+
+    {"route": "blockly", "template": "/app/view/html/views/genericRules/genericBlockly.html", controller: "blocklyCtrl as vm"},
+
     {"route": "logout", "template": "/login/view/logout.html"},  
     { "route": "dashboard-home", "template": "/app/view/html/views/dashboard/dashboard-home.html", controller: "dashboardHomeCtrl as vm" },
 

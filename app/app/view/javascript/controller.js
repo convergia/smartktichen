@@ -221,6 +221,24 @@ myApp.controller('rulesCtrl', function(httpClient, $sce, $timeout,$routeParams) 
             console.log('ERROR');
         });
 });
+myApp.controller('blocklyCtrl', function(httpClient, $sce, $timeout,$routeParams) {
+	var vm = this;
+	var params = {};
+	params["scriptName"] = $routeParams.id;
+	httpClient
+		.get("app/api/rules/getGenericBlocklyEditor", null)
+		.then(
+		function(data, response) {
+			vm.rulesrc = $sce.trustAsResourceUrl(data);
+			$timeout(function() {
+				$(".loading-frame").css("display", "none")
+				$(".allFrame").css("display","")
+			}, 2000);
+		},
+		function(err) {
+			console.log('ERROR');
+		});
+});
 
 myApp.controller('alertsCtrl', function(httpClient, $routeParams, constants) {
        var vm = this;

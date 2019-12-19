@@ -1,0 +1,12 @@
+var entry;
+var request;
+var decision;
+
+function decisionBlock(entry, request) {
+  decision = [];
+  if (entry["battery"] < 50) {
+    decision.push({"isAlert": 'true',
+    	"alertType": 'LOWBAT'});
+  }
+  return decision;
+}

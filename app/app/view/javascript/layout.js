@@ -47,7 +47,10 @@ var routingItems = {
     {"route": "alerts/deviceId/:deviceId*", "template": "/app/view/html/views/logs/alerts.html","controller": "alertsCtrl as vm"},
     {"route": "alerts", "template": "/app/view/html/views/alerts/alerts.html" },
     {"route": "notifications", "template": "/app/view/html/views/notifications/notifications.html", controller: "notificationCtrl as vm"},
-    {"route": "rules", "template": "/app/view/html/views/genericRules/genericAllRule.html", controller: "rulesCtrl as vm"},    
+    {"route": "rules", "template": "/app/view/html/views/genericRules/genericAllRule.html", controller: "rulesCtrl as vm"},
+
+    {"route": "blockly", "template": "/app/view/html/views/genericRules/genericBlockly.html", controller: "blocklyCtrl as vm"},
+
     {"route": "logout", "template": "/login/view/logout.html"},  
     { "route": "dashboard-home", "template": "/app/view/html/views/dashboard/dashboard-home.html", controller: "dashboardHomeCtrl as vm" },
     { "route": "reports", "template": "/app/view/html/views/reports/reports.html", controller: "reportsCtrl as vm" },
