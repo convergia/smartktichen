@@ -22,10 +22,17 @@ function classicEvaluateDevice(entry) {
     if(decisions && decisions.metadata && decisions.metadata.status == "failure") {
       throw e;
     } else {
-      log.info("[app/entities/deviceevaluator] Actions processing for event "+JSON.stringify(decisions));
+      log.info("[app/entities/deviceevaluator] 1 Actions processing for event "+JSON.stringify(decisions));
       for(var i = 0; decisions && i < decisions.length; i++){
-        emailAlert.execute(null, entry, decisions[i].sendEmail);
-        msteamAlert.execute( entry, decisions[i].msteam);
+
+        if(decisions[i].sendEmail!==undefined){
+log.info("[app/entities/deviceevaluator] sending e-mail");
+          emailAlert.execute(null, entry, decisions[i].sendEmail);
+        }
+        if(decisions[i].msteam!==undefined){
+log.info("[app/entities/deviceevaluator] sending msteam alert");
+	        msteamAlert.execute( entry, decisions[i].msteam);
+        }
         if(decisions[i].isAlert == "true"){
           recordAsAlert = true; 
           alertType.push(decisions[i].alertType);
@@ -33,7 +40,7 @@ function classicEvaluateDevice(entry) {
       }
     }
   } catch(e) {
-    log.info("[app/entities/deviceevaluator] Actions processing for event "+JSON.stringify(e));
+    log.info("[app/entities/deviceevaluator] 2 Actions processing for event "+JSON.stringify(e));
   } finally {
     log.info("[app/entities/deviceevaluator] End Proccessing Business rule");
     log.info("[app/entities/deviceevaluator] Flag device event as alert: "+ recordAsAlert)
@@ -44,8 +51,19 @@ function classicEvaluateDevice(entry) {
     }
   }
 }
+// blockly
+var deviceManager = require("app/entities/deviceManager");
+var le = {};//latest entries sent to the bloclky function
 
 function blocklyEvaluateDevice(entry) {
+  
+  var latestEntries = deviceManager.getLatestDeviceEntry(entry.id);
+  for(key in latestEntries){
+    le["_le_"+key] = latestEntries[key];//le stands for latest entry
+  }
+  
+  log.info("latest entries: "+JSON.stringify(le));
+
   try {
     var recordAsAlert = false;
     var alertType = [];
@@ -53,17 +71,21 @@ function blocklyEvaluateDevice(entry) {
 
     //var decisions = utils.executeDecisionTable(config.businessRuleBlockly, entry);
     var blocklyrule = require(config.businessRuleBlockly);
-    var decisions = blocklyrule.decisionBlock(entry)
+    var decisions = blocklyrule.decisionRules(entry, le)
 
 //log.info("[app/entities/deviceevaluator] decisions: "+);
 
     if(decisions && decisions.metadata && decisions.metadata.status == "failure") {
       throw e;
     } else {
-      log.info("[app/entities/deviceevaluator] [blockly] Actions processing for event "+JSON.stringify(decisions));
+      log.info("[app/entities/deviceevaluator] 1 [blockly] Actions processing for event "+JSON.stringify(decisions));
       for(var i = 0; decisions && i < decisions.length; i++){
-        emailAlert.execute(null, entry, decisions[i].sendEmail);
-        msteamAlert.execute( entry, decisions[i].msteam);
+        if(decisions[i].sendEmail!==undefined){
+	        emailAlert.execute(null, entry, decisions[i].sendEmail);
+        }
+        if(decisions[i].msteam!==undefined){
+	        msteamAlert.execute( entry, decisions[i].msteam);
+        }
         if(decisions[i].isAlert == "true"){
           recordAsAlert = true; 
           alertType.push(decisions[i].alertType);
@@ -71,7 +93,7 @@ function blocklyEvaluateDevice(entry) {
       }
     }
   } catch(e) {
-    log.info("[app/entities/deviceevaluator] [blockly] Actions processing for event "+JSON.stringify(e));
+    log.info("[app/entities/deviceevaluator] 2 [blockly] Actions processing for event "+JSON.stringify(e));
   } finally {
     log.info("[app/entities/deviceevaluator] [blockly] End Proccessing Business rule");
     log.info("[app/entities/deviceevaluator] [blockly] Flag device event as alert: "+ recordAsAlert)
