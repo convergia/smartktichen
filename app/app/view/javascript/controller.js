@@ -71,55 +71,44 @@ myApp.controller('autocompCtrl', function($scope, httpClient, $q, $log, $locatio
 
 });
 
-myApp.controller('myAppCtrl', function($scope,$rootScope, constants, $sce,httpClient, wsClient, headerItemsJson, menuItemsJson,menuItemsAdminJson) {
-    	var vm = this;  
-       vm.scope = $scope;
-       if(constants.appTitle){
-         vm.appTitle = constants.appTitle;
-       headerItemsJson.appname=constants.appTitle;
-       }
-        
-        vm.user = {"login": JSON.parse($.cookie('user')).name};
-    		vm.menuItems = menuItemsJson;
-       
-       
-       	vm.headerItems = headerItemsJson;
-     
-    
-  	vm.isAdmin=false;
-  	vm.userGroups=[];
-    		console.log(vm.user);
-    
-   vm.init = function() {
-     	httpClient
-        .get("app/api/login/userGroups", null)
-        .then(
-        function(data, response) {
+myApp.controller('myAppCtrl', function($scope, $rootScope, constants, $sce, httpClient, wsClient, headerItemsJson, menuItemsJson) {
+  var vm = this;  
+  vm.scope = $scope;
+  if(constants.appTitle){
+    vm.appTitle = constants.appTitle;
+    headerItemsJson.appname=constants.appTitle;
+  }
 
-          vm.userGroups = data;
-          vm.isAdmin=vm.userGroups.includes("admin");
-          $rootScope.isAdmin=vm.isAdmin;
-          
-          if(vm.isAdmin){
-            vm.user.login=JSON.parse($.cookie('user')).name+"(Admin)";
-            vm.menuItems = menuItemsAdminJson;
-          }
-        },
-        function(err) {
-            console.log('ERROR');
-        });
-     	 wsClient.onClose.then(function(e) {
-          	console.log("websocket closed redirect to login", e);
-            authorization.validateToken()
-           //	if(e.code == "4000" || e.code == "4010") {
-           //    authorization.onTokenInvalid() 
-           // 	} 
-        });
-       
-    
-   }
-       
-     });	
+  vm.user = JSON.parse($.cookie('user'));
+  vm.menuItems = menuItemsJson;
+
+  vm.headerItems = headerItemsJson;
+
+  vm.isAdmin=false;
+  vm.userGroups=vm.user.groups;
+  if(!vm.userGroups) vm.userGroups=[];
+
+  vm.isAdmin=vm.userGroups.includes("admin");
+  $rootScope.isAdmin=vm.isAdmin;
+
+  if(vm.isAdmin){
+    vm.user.login=JSON.parse($.cookie('user')).name+"(Admin)";
+  }
+
+  vm.init = function() {
+
+    wsClient.onClose.then(function(e) {
+      console.log("websocket closed redirect to login", e);
+      authorization.validateToken()
+      //	if(e.code == "4000" || e.code == "4010") {
+      //    authorization.onTokenInvalid() 
+      // 	} 
+    });
+
+
+  }
+
+});	
 
 
 myApp.controller('mapCtrl', function($location, constants, $routeParams) {
