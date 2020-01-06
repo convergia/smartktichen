@@ -8,31 +8,21 @@ var menuItems = {
     { "id": "2", "iconClass": "fa fa-fw fa-sliders", "label": "Dashboard", "route": "#/dashboard-home", "active": "false" },
     { "id": "2", "iconClass": "fa fa-fw fa-file", "label": "Reports", "route": "#/reports", "active": "false" },
     { "id": "2", "iconClass": "fa fa-fw fa-warning", "label": "Alerts", "route": "#/alerts", "active": "false" },
+    { "id": "2", "iconClass": "fa fa-fw fa-gear", "label": "Control", "route": "#/control", "active": "false", "roles":["admin"] },
+    { "id": "2", "iconClass": "fa fa-fw fa-info", "label": "A.I", "route": "#/ai", "active": "false", "roles":["admin"] },
+    { "id": "2", "iconClass": "fa fa-fw fa-user-plus", "label": "Manage Devices", "route": "#/list-devices", "active": "false", "roles":["admin"] },
+    { "id": "3", "iconClass": "fa fa-fw fa-list-alt", "label": "Add Rule", "route": "#/rules", "active": "false", "roles":["admin"] },
+    { "id": "3", "iconClass": "fa fa-fw fa-list-alt", "label": "Add Blockly Rule", "route": "#/blockly", "active": "false", "roles":["admin"] },
     { "id": "2", "iconClass": "fa fa-fw fa-info-circle", "label": "Info", "route": "#/info", "active": "false" },
   ]
 };
-//menu items admin
-var menuItemsAdmin = {
-  "mainMenu": "menu1",
-  "menu1": [
-    { "id": "1", "iconClass": "fa fa-fw fa-map", "label": "Map", "route": "#/map", "active": "true" },
-    { "id": "2", "iconClass": "fa fa-fw fa-sliders", "label": "Dashboard", "route": "#/dashboard-home", "active": "false" },
-    { "id": "2", "iconClass": "fa fa-fw fa-file", "label": "Reports", "route": "#/reports", "active": "false" },
-    { "id": "2", "iconClass": "fa fa-fw fa-warning", "label": "Alerts", "route": "#/alerts", "active": "false" },
-    { "id": "2", "iconClass": "fa fa-fw fa-gear", "label": "Control", "route": "#/control", "active": "false" },
-    { "id": "2", "iconClass": "fa fa-fw fa-info", "label": "A.I", "route": "#/ai", "active": "false" },
-    { "id": "2", "iconClass": "fa fa-fw fa-user-plus", "label": "Manage Devices", "route": "#/list-devices", "active": "false" },
-    { "id": "3", "iconClass": "fa fa-fw fa-list-alt", "label": "Add Rule", "route": "#/rules", "active": "false" },
-    { "id": "3", "iconClass": "fa fa-fw fa-list-alt", "label": "Add Blockly Rule", "route": "#/blockly", "active": "false" },
-    { "id": "2", "iconClass": "fa fa-fw fa-info-circle", "label": "Info", "route": "#/info", "active": "false" },
-  ]
-};
+
 
 var headerItems = {
     "logo": "https://i.ibb.co/TmfS643/logo-450.png",
     "items": [],
     "subitems": [
-        {"id":"1", "iconClass":"fa fa-bell", "label": "Notification Settings", "route":"#/notifications", "active":"false"} ,
+        {"id":"1", "iconClass":"fa fa-bell", "label": "Notification Settings", "route":"#/notifications", "active":"false", "roles":["admin"]} ,
         {"id":"2", "iconClass":"fa fa-bell", "label": "Change Password", "route":"#/changePassword", "active":"false"} 
     ], 
     "logout": {"icon": "fa fa-sign-out", "label": "Logout", "route":"#/logout"},

@@ -99,7 +99,7 @@
     <div >
     	<header-top user="vm.user" on-header-item-click="vm.onHeaderItemClick" header-items="vm.headerItems"></header-top>
         <main>
-     	   <menu class="menu-wrap"  on-menu-item-click="vm.onMenuItemClick" menu-items="vm.menuItems"></menu>
+     	   <menu user="vm.user" class="menu-wrap"  on-menu-item-click="vm.onMenuItemClick" menu-items="vm.menuItems"></menu>
             <section>
               <div class="page-content">
                 <ng-view></ng-view>
