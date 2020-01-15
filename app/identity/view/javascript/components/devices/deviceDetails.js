@@ -46,7 +46,7 @@ self.isUpdate = false;
       };
 
       this.closeDetailWindow = function(){
-        document.querySelector('#detailwindow').style.display = "none";
+        document.querySelector('#detailwindowBloc').style.display = "none";
       }
 
       this.generateToken = function(id) {
@@ -146,7 +146,7 @@ self.isUpdate = true;
             } else {
               self.setAlert(message1, "success");
               $scope.$emit('deviceAdded');
-              $timeout(function () { document.querySelector('#detailwindow').style.display = "none"; }, 5000, false);
+              $timeout(function () { document.querySelector('#detailwindowBloc').style.display = "none"; }, 5000, false);
             }
             console.log("resolve", data)
           }, function(err) {

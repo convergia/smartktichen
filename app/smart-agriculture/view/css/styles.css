@@ -513,8 +513,14 @@ button:disabled#exportPdfButton, button[disabled]#exportPdfButton {
 #chartsContainer table td:nth-child(2) { width: 15% }
 
 /* identity/devices */
-#detailwindow {
+#detailwindowBloc{
   display: none;
+}
+#detailwindowBloc .cover {
+   position: fixed;top: 0;left: 0;background: rgba(0,0,0,0.3);z-index: 3;width: 100%;height: 100%;
+}
+
+#detailwindow {
   z-index: 4;
   position: absolute;
   left: 50%;
@@ -545,11 +551,16 @@ button:disabled#exportPdfButton, button[disabled]#exportPdfButton {
   position: relative;
   float: left;
   width: 240px;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
+}
+.device-box:hover{
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.4),0 1px 1px 0 rgba(0,0,0,.34),0 2px 1px -1px rgba(0,0,0,.32);
 }
 .device-box-content {
   width: 100%;
   display: flex;
   flex-direction: row;
+  
 }
 
 .device-box-label {
@@ -577,8 +588,11 @@ button:disabled#exportPdfButton, button[disabled]#exportPdfButton {
   text-align: right;
 }
 
-.device-box-action a {
-  cursor: pointer;
-  padding: 4px;
+.device-box-action button {
+  padding: 0;
 	display: inline-block;
+  width: 32px;
+  height: 32px;
+  margin-top: 2px;
+  border: 1px solid lightgray;
 }

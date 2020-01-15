@@ -9,8 +9,8 @@
       </div>
     </div>
     <div class="device-box-action" >
-      <a title="Edit" ng-if="$ctrl.hasUpdate" ng-click="$ctrl.updateItem(item)"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-      <a title="Delete" ng-if="$ctrl.hasDelete" ng-click="$ctrl.deleteItem(item)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+      <button title="{{'IDENTITY.EDIT' | translate}}" ng-if="$ctrl.hasUpdate" ng-click="$ctrl.updateItem(item)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+      <button title="{{'IDENTITY.DELETE' | translate}}" ng-if="$ctrl.hasDelete" ng-click="$ctrl.deleteItem(item)"><i class="fa fa-trash" aria-hidden="true"></i></button>
     </div>
   </div>
 </div>

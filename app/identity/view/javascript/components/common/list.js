@@ -51,13 +51,13 @@ angular.module('Generic', [])
     },
 
     this.updateItem = function(item) {
-document.querySelector('#detailwindow').style.display = "block";
+document.querySelector('#detailwindowBloc').style.display = "block";
 
       this.onUpdate({"item": item});
     }
     
     this.addItem = function() {
-document.querySelector('#detailwindow').style.display = "block";
+document.querySelector('#detailwindowBloc').style.display = "block";
       this.onAdd();
     }
     
