@@ -71,8 +71,26 @@ myApp.controller('autocompCtrl', function($scope, httpClient, $q, $log, $locatio
 
 });
 
-myApp.controller('myAppCtrl', function($scope, $rootScope, constants, $sce, httpClient, wsClient, headerItemsJson, menuItemsJson) {
-  var vm = this;  
+myApp.controller('myAppCtrl', function($scope, $rootScope, constants, $sce, httpClient, wsClient, headerItemsJson, menuItemsJson, $translate) {
+
+  //Menu
+  $translate('MENU.MAP').then(function (headline) { menuItems["menu1"][0]["label"] = headline; });
+  $translate('MENU.DASHB').then(function (headline) { menuItems["menu1"][1]["label"] = headline; });
+  $translate('MENU.REPORTS').then(function (headline) { menuItems["menu1"][2]["label"] = headline; });
+  $translate('MENU.ALERTS').then(function (headline) { menuItems["menu1"][3]["label"] = headline; });
+  $translate('MENU.CONTROL').then(function (headline) { menuItems["menu1"][4]["label"] = headline; });
+  $translate('MENU.AI').then(function (headline) { menuItems["menu1"][5]["label"] = headline; });
+  $translate('MENU.DEVICEMAN').then(function (headline) { menuItems["menu1"][6]["label"] = headline; });
+  $translate('MENU.ADDRULE').then(function (headline) { menuItems["menu1"][7]["label"] = headline; });
+  $translate('MENU.INFO').then(function (headline) { menuItems["menu1"][8]["label"] = headline; });
+  
+  $translate('HEADERMENU.NOTIFSETTING').then(function (headline) { headerItems["subitems"][0]["label"] = headline; });
+  $translate('HEADERMENU.CHANGEPASS').then(function (headline) { headerItems["subitems"][1]["label"] = headline; });
+  $translate('HEADERMENU.LOGOUT').then(function (headline) { headerItems["logout"]["label"] = headline; });
+
+  var vm = this;
+  $rootScope.lang = $.cookie('lang');
+
   vm.scope = $scope;
   if(constants.appTitle){
     vm.appTitle = constants.appTitle;
@@ -97,6 +115,8 @@ myApp.controller('myAppCtrl', function($scope, $rootScope, constants, $sce, http
 
   vm.init = function() {
 
+    $translate.use($rootScope.lang);
+
     wsClient.onClose.then(function(e) {
       console.log("websocket closed redirect to login", e);
       authorization.validateToken()
@@ -104,44 +124,43 @@ myApp.controller('myAppCtrl', function($scope, $rootScope, constants, $sce, http
       //    authorization.onTokenInvalid() 
       // 	} 
     });
-
-
   }
 
 });	
 
 
-myApp.controller('mapCtrl', function($location, constants, $routeParams) {
-    var vm = this;
-    vm.deviceKey = null;
+myApp.controller('mapCtrl', function($location, constants, $routeParams, $translate, $rootScope) {
+  var vm = this;
+  vm.deviceKey = null;
 
-    vm.sources = constants.sources;
-    vm.icons = constants.infoWindows.icons;
-    vm.defaultCenter=constants.mapDefaultCenter;
-    vm.go = function(path) {
-        $location.path(path)
-    }
+  vm.sources = constants.sources;
+  vm.icons = constants.infoWindows.icons;
+  vm.defaultCenter=constants.mapDefaultCenter;
+  vm.go = function(path) {
+    $location.path(path)
+  }
     
     vm.init = function() {
-         if($routeParams && $routeParams.deviceId) {
-             vm.deviceKey = $routeParams.deviceId;
-             vm.params = {"id":  vm.deviceKey }
-             vm.tag = "dashboard_" +  vm.deviceKey;
-         }
+      $translate.use($rootScope.lang);
+      if($routeParams && $routeParams.deviceId) {
+        vm.deviceKey = $routeParams.deviceId;
+        vm.params = {"id":  vm.deviceKey }
+        vm.tag = "dashboard_" +  vm.deviceKey;
+      }
     }
-    
+
     vm.onSelectAsset = function(data) {
-        if(data){
-            vm.selectedDevice = data;
-            vm.params = {"id": data.assetId}
+      if(data){
+        vm.selectedDevice = data;
+        vm.params = {"id": data.assetId} 
+      }
+      if($routeParams && $routeParams.deviceId != data.assetId )
+        $location.path("/map/deviceId/"+data.assetId)
         }
-        if($routeParams && $routeParams.deviceId != data.assetId )
-        	$location.path("/map/deviceId/"+data.assetId)
-    }
-    
+
     vm.setMarkerIcon = function(data, marker){
-        marker.icon =  constants.sources[marker.source]["mapMarker"]
-        return marker
+      marker.icon =  constants.sources[marker.source]["mapMarker"]
+      return marker
     }
 });
     
@@ -222,7 +241,7 @@ myApp.controller('blocklyCtrl', function(httpClient, $sce, $timeout,$routeParams
 			$timeout(function() {
 				$(".loading-frame").css("display", "none")
 				$(".allFrame").css("display","")
-			}, 2000);
+			}, 250);
 		},
 		function(err) {
 			console.log('ERROR');
@@ -411,143 +430,154 @@ myApp.controller('dashboardHomeCtrl', function( $location,$scope,$rootScope,http
 
 
 
-myApp.controller('changePasswordCtrl', function ($scope, $rootScope, wsClient, httpClient, $sce, $route, $routeParams, $interval, $filter, $location, $cookies, $timeout) {
-    var vm = this;
-    var changePasswordApi = "login/api/changePassword";
-  
-  
-    var changePasswordForm = 
-    {
+myApp.controller('changePasswordCtrl', function ($scope, $rootScope, wsClient, httpClient, $sce, $route, $routeParams, $interval, $filter, $location, $cookies, $timeout, $translate) {
+  var vm = this;
+  var changePasswordApi = "login/api/changePassword";
+
+  var psw5 = "Password changed successfully.";
+  var psw6 = "Invalid current password.";
+
+  var changePasswordForm = 
+      {
         "form" : [ {
-            "type" : "section",
-            "htmlClass" : "row",
-            "items" : [   
-                
-                 {
-                    "type" : "section",
-                    "htmlClass" : "col-xs-4",
-                    "items" : [
-                        {
-                            "key" : "oldPassword",
-                            "type": "password"
-                        },
-                        {
-                            "key" : "newPassword",
-                            "type": "password",
-                            "ngModelOptions": { allowInvalid: true },
-                            "onChange": function(modelValue, form, model, scope) {
-                                console.log(model)
-                                if(modelValue != model["confirmPassword"])
-                                    scope.$root.$broadcast('schemaForm.error.newPassword','doNotMatch',false);
-                                else {
-                                    scope.$root.$broadcast('schemaForm.error.newPassword','doNotMatch',true);
-                                    scope.$root.$broadcast('schemaForm.error.confirmPassword','doNotMatch',true);
-                                }
-                             }
-                        },
-                        {
-                            "key" : "confirmPassword",
-                            "type": "password",
-                            "ngModelOptions": { allowInvalid: true },
-                            "onChange": function(modelValue, form, model, scope) {
-                                console.log(model)
-                                 if(modelValue != model["newPassword"])
-                                    scope.$root.$broadcast('schemaForm.error.confirmPassword','doNotMatch',false);
-                                 else {
-                                     scope.$root.$broadcast('schemaForm.error.newPassword','doNotMatch',true);
-                                     scope.$root.$broadcast('schemaForm.error.confirmPassword','doNotMatch',true);
-                                 }
-                             }
-                        }
-                 	]
-                 }
-            ]
+          "type" : "section",
+          "htmlClass" : "row",
+          "items" : [   
+
+            {
+              "type" : "section",
+              "htmlClass" : "col-xs-4",
+              "items" : [
+                {
+                  "key" : "oldPassword",
+                  "type": "password"
+                },
+                {
+                  "key" : "newPassword",
+                  "type": "password",
+                  "ngModelOptions": { allowInvalid: true },
+                  "onChange": function(modelValue, form, model, scope) {
+                    console.log(model)
+                    if(modelValue != model["confirmPassword"])
+                      scope.$root.$broadcast('schemaForm.error.newPassword','doNotMatch',false);
+                    else {
+                      scope.$root.$broadcast('schemaForm.error.newPassword','doNotMatch',true);
+                      scope.$root.$broadcast('schemaForm.error.confirmPassword','doNotMatch',true);
+                    }
+                  }
+                },
+                {
+                  "key" : "confirmPassword",
+                  "type": "password",
+                  "ngModelOptions": { allowInvalid: true },
+                  "onChange": function(modelValue, form, model, scope) {
+                    console.log(model)
+                    if(modelValue != model["newPassword"])
+                      scope.$root.$broadcast('schemaForm.error.confirmPassword','doNotMatch',false);
+                    else {
+                      scope.$root.$broadcast('schemaForm.error.newPassword','doNotMatch',true);
+                      scope.$root.$broadcast('schemaForm.error.confirmPassword','doNotMatch',true);
+                    }
+                  }
+                }
+              ]
+            }
+          ]
         }],
         "schema" : {
-            "type" : "object",
-            "title" : "Schema",
-            "properties" : {
-                "oldPassword": {
-                    "title": "Current Password",
-                    "type": "string"
-                },
-                "newPassword": {
-                    "title": "New Password",
-                    "type": "string",
-                    "validationMessage": {
-                      	"doNotMatch": "Passwords do not match."
-                     }
-                },
-                "confirmPassword" : {
-                    "type" : "string",
-                    "title": "Confirm Password",
-                    "validationMessage": {
-                      	"doNotMatch": "Passwords do not match."
-                     }
-                }
+          "type" : "object",
+          "title" : "Schema",
+          "properties" : {
+            "oldPassword": {
+              "title": "Current Password",
+              "type": "string"
             },
-            "required" : [ "oldPassword", "newPassword", "confirmPassword" ]
-        }
-    };
-  
-    vm.init = function() {
-        vm.frmGlobalOptions = {
-            "destroyStrategy" : "remove",
-            "formDefaults": {"feedback": false},
-            "validationMessage": { 
-                302: "Required field."
+            "newPassword": {
+              "title": "New Password",
+              "type": "string",
+              "validationMessage": {
+                "doNotMatch": "Passwords do not match."
+              }
+            },
+            "confirmPassword" : {
+              "type" : "string",
+              "title": "Confirm Password",
+              "validationMessage": {
+                "doNotMatch": "Passwords do not match."
+              }
             }
+          },
+          "required" : [ "oldPassword", "newPassword", "confirmPassword" ]
         }
-        vm.schema =  angular.copy(changePasswordForm.schema);
-        vm.form =   angular.copy(changePasswordForm.form);
-        vm.model = {}
-    }
-    
-    
-    vm.changePassword = function(form) {
-        $scope.$broadcast('schemaFormValidate');
-        // Then we check if the form is valid
-        if (form.$valid) {
-             var params = {
-                 "oldPassword": vm.model["oldPassword"],
-                 "newPassword": vm.model["newPassword"]
-             }
-         	 httpClient.get(changePasswordApi, params ).then(
-                function(data, response) {
-                  if(data && data.token) {
-                      console.log("data: ", data);
-                      vm.successMsg = "Password changed successfully."
-                     //MFE: we cannot use $cookies as ngCookies encodes as uri the cookies
-                      //$cookies.put('token', data["token"], {'expires': data["expires"], 'path': data["path"]});
-                     // $cookies.put('user', data["user"]);
-                      window.document.cookie = "token=" + data["token"] + ";expires=" + data["expires"]+ ";Path=/;Secure";
-                      window.document.cookie = "user=" + JSON.stringify(data["user"]) + ";expires=" + data["expires"]+ ";Path=/;Secure";
-                      httpClient.updateToken(data["token"] );
-                      wsClient.updateTokenAndReconnect();
-                  }
-                  console.log("resolve", data)
-                },
-                function(err) {
-                  if(err.errorCode == "INVALID_CREDENTIALS")
-                      vm.errorMsg = "Invalid current password."
-                  else
-                      vm.errorMsg = err.errorDetail;
-                  console.log("reject", err);
-                }
-              )
-        } 
-       
-    },
-        
+      };
+
+  vm.init = function() {
+
+    $translate(['PASSWORD.PSW1','PASSWORD.PSW2','PASSWORD.PSW3','PASSWORD.PSW4','PASSWORD.PSW5','PASSWORD.PSW6']).then(function (translations) {
+      changePasswordForm.schema.properties.oldPassword.title = translations['PASSWORD.PSW1'];
+      changePasswordForm.schema.properties.newPassword.title = translations['PASSWORD.PSW2'];
+      changePasswordForm.schema.properties.confirmPassword.title = translations['PASSWORD.PSW3'];
+      changePasswordForm.schema.properties.newPassword.validationMessage.doNotMatch = translations['PASSWORD.PSW4'];
+      changePasswordForm.schema.properties.confirmPassword.validationMessage.doNotMatch = translations['PASSWORD.PSW4'];
+
+      psw5 = translations['PASSWORD.PSW5'];
+      psw6 = translations['PASSWORD.PSW6'];
+
+      vm.frmGlobalOptions = {
+        "destroyStrategy" : "remove",
+        "formDefaults": {"feedback": false},
+        "validationMessage": { 
+          302: "Required field."
+        }
+      }
+      vm.schema =  angular.copy(changePasswordForm.schema);
+      vm.form =   angular.copy(changePasswordForm.form);
+      vm.model = {}
+    });
+
+  }
+
+
+  vm.changePassword = function(form) {
+    $scope.$broadcast('schemaFormValidate');
+    // Then we check if the form is valid
+    if (form.$valid) {
+      var params = {
+        "oldPassword": vm.model["oldPassword"],
+        "newPassword": vm.model["newPassword"]
+      }
+      httpClient.get(changePasswordApi, params ).then(
+        function(data, response) {
+          if(data && data.token) {
+            console.log("data: ", data);
+            vm.successMsg = psw5;
+            //MFE: we cannot use $cookies as ngCookies encodes as uri the cookies
+            //$cookies.put('token', data["token"], {'expires': data["expires"], 'path': data["path"]});
+            // $cookies.put('user', data["user"]);
+            window.document.cookie = "token=" + data["token"] + ";expires=" + data["expires"]+ ";Path=/;Secure";
+            window.document.cookie = "user=" + JSON.stringify(data["user"]) + ";expires=" + data["expires"]+ ";Path=/;Secure";
+            httpClient.updateToken(data["token"] );
+            wsClient.updateTokenAndReconnect();
+          }
+          console.log("resolve", data)
+        },
+        function(err) {
+          if(err.errorCode == "INVALID_CREDENTIALS")
+            vm.errorMsg = psw6;
+            else
+              vm.errorMsg = err.errorDetail;
+          console.log("reject", err);
+        }
+      )
+    } 
+
+  },
+
     vm.closeMessage = function() {
-        vm.successMsg = "";
-        vm.errorMsg = "";
-    }
-    
-    
+    vm.successMsg = "";
+    vm.errorMsg = "";
+  }
+
+
 });
-
-
-
-
 

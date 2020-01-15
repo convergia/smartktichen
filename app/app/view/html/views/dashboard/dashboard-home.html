@@ -1,7 +1,7 @@
 <div ng-controller="autocompCtrl as vm" layout="column" ng-cloak location-path="/dashboard/deviceId/">
   <md-content class="md-padding">
     <form ng-submit="$event.preventDefault()">
-      <label id="favoriteStateLabel">Search for a device ID</label>
+      <label id="favoriteStateLabel">{{ 'SEARCHFORID' | translate}}</label>
       <md-autocomplete style="min-width: 100px;"
           ng-disabled="vm.isDisabled"
           md-no-cache="vm.noCache"
@@ -19,7 +19,7 @@
           <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.name}}</span>
         </md-item-template>
         <md-not-found>
-          No device ID matching "{{vm.searchText}}" were found.
+          <p translate="NOTFOUND" translate-value-search="{{vm.searchText}}"></p>
         </md-not-found>
       </md-autocomplete>
 

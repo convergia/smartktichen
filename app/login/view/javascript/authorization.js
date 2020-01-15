@@ -1,6 +1,7 @@
 $.widget( "scriptr.authorization", {
     token:null,
     user:null,
+  lang:null,
     _create: function() {
         if(!this.options.onTokenValid){
             this.onTokenValid = function(){ 
@@ -67,6 +68,7 @@ $.widget( "scriptr.authorization", {
         window.localStorage.removeItem("stationsList");
         $.removeCookie('user',{'path':'/'});
         $.removeCookie('token',{'path':'/'});
+      $.removeCookie('lang',{'path':'/'});
         location.href= this.loginPage;
     },
     
@@ -79,6 +81,7 @@ $.widget( "scriptr.authorization", {
         window.localStorage.removeItem("stationsList");
         $.removeCookie('user',{'path':'/'});
         $.removeCookie('token',{'path':'/'});
+      $.removeCookie('lang',{'path':'/'});
         location.href= this.loginPage;
     }
 });

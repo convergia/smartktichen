@@ -1,0 +1,100 @@
+{
+  "SEARCHFORID": "Rechercher un ID d'appareil",
+	"NOTFOUND": "Aucun ID d'appareil correspondant à {{search}} n'a été trouvé",
+  "BUTTON_LANG": "English",
+
+  "VIEWDASHBOARD":"Voir Données",
+  "VIEWALERTS":"Voir Alertes",
+
+	"DEVICEID" : "Id Appareil",
+	"DATE&TIME" : "Date & heure",
+
+  "TEMP" : "Température",
+	"BATTERY" : "Batterie",
+  "ANEMO" : "Vitesse du vent",
+  "PRESS" : "Pression",
+  "HUMID" : "Humidité",
+  "SOIL" : "Humidité du sol",
+  "WINDIR" : "Direction du vent",
+  "RAINCH" : "Pluie heure actuelle",
+  "RAINPH" : "Pluie heure précédente",
+  "RAINAC" : "Pluie accumulée 24H",
+
+  "NOTIFICATION" : {
+  	"ADDEMAIL" : "Veuillez saisir votre adresse e-mail pour être averti chaque fois qu'une règle est appliquée",
+    "PLACEHOLDER" : "adresses email",
+    "SAVE": "Enregistrer"
+  },
+
+  "DASHB":{
+ 	 "NOKEYTEXT" : "Select Device Key to view the corresponding live dashboard.",
+ 	 "PH" : "Niveau pH"
+  },
+
+  "IDENTITY":{
+   "ADDNEW" : "Ajouter un nouvel appareil",
+   "EXISTDEVICE" : "Appareils existants",
+ 	 "DATARECEP" : "Dernière réception données",
+ 	 "EDIT" : "Modifier",
+   "DELETE" : "Supprimer",
+   "DETAILS" : "DÉTAILS DE L'APPAREIL",
+   "LONG" : "Longitude",
+   "LAT" : "Latitude",
+   "ADDRESS" : "Adresse",
+   "RESET" : "Réinitialiser",
+   "SAVE" : "Enregistrer",
+   "DELETEDEVICE" : "Supprimer un Appareil",
+   "CONFIRMDEL" : "Voulez-vous vraiment supprimer cet appareil ?",
+   "DELETED" : "Appareil supprimé avec succès",
+   "MESSAGE" : "Appareil mis à jour avec succès.",
+   "ERRORPARAM" : "Le paramètre {{paramid}} est requis.",
+   "YES" : "Oui",
+   "NO" : "Non"
+  },
+
+  "REPORTS":{
+    "REM" : "rem: les résultats par date peuvent varier selon votre fuseau horaire",
+		"BYDAY" : "Par jour",
+		"BYDATE" : "Par plage de dates",
+		"LAST50" : "50 derniers enregistrements",
+		"SELECTION" : "Sélection",
+		"EXPRAW" : "Exporter les données brutes",
+		"EXPPROCESS" : "Exporter les données traitées",
+		"DATE" : "Date",
+		"ORP" : "P.O.R.",
+		"DO" : "O.D.",
+		"MAX" : "Max",
+		"AVRG" : "Moyenne",
+		"MIN" : "Min",
+  	"FOR" : "Pour",
+  	"FROM" :"Du",
+  	"TO" : "au"
+  },
+
+  "MENU": {
+    "MAP": "Carte",
+    "DASHB": "Données",
+    "REPORTS": "Rapports",
+    "ALERTS": "Alertes",
+    "CONTROL": "Contrôle",
+    "AI": "IA",
+    "DEVICEMAN": "Gérer les appareils",
+    "ADDRULE": "Ajout Règle",
+    "INFO": "Info"
+  },
+  "HEADERMENU": {
+    "NOTIFSETTING": "Paramètres de notification",
+    "CHANGEPASS": "changer le mot de passe",
+    "LOGOUT" : "Déconnexion"
+  },
+  "PASSWORD": {
+    "PSW1" : "Mot de passe actuel",
+    "PSW2" : "Nouveau mot de passe",
+    "PSW3" : "Confirmer mot de passe",
+    "PSW4" : "Les Mots de passe ne correspondent pas.",
+    "PSW5" : "Mot de passe changé avec succès.",
+    "PSW6" : "Mot de passe actuel incorrect.",
+    "CHANGE" : "Changer"
+  }
+
+}

@@ -6,7 +6,7 @@
   
 <div class="col-xs-12 device-details" ng-init="$ctrl.listGroups()" >
 
-  <h5 class="box-title text-uppercase fntmontessart">Device details</h5>
+  <h5 class="box-title text-uppercase fntmontessart">{{'IDENTITY.DETAILS' | translate}}</h5>
 
   <div ng-if="$ctrl.message" uib-alert ng-class="'alert-' + ( $ctrl.message.type || 'default')  + ' m10'" close="$ctrl.closeAlert()" dismiss-on-timeout="5000">{{$ctrl.message.content}}</div>
   <form novalidate class="simple-form" name="myForm">
@@ -18,15 +18,15 @@
       </span>
     </div>
 		<div class="form-group">
-      <label>Longitude</label>
+      <label>{{'IDENTITY.LONG' | translate}}</label>
       <input type="text" ng-model="$ctrl.device.long" name="long" class="form-control"/>
     </div>
 		<div class="form-group">
-      <label>Latitude</label>
+      <label>{{'IDENTITY.LAT' | translate}}</label>
       <input type="text" ng-model="$ctrl.device.lat" name="lat" class="form-control" required/>
     </div>
     <div class="form-group">
-      <label>Address</label>
+      <label>{{'IDENTITY.ADDRESS' | translate}}</label>
       <textarea ng-model="$ctrl.device.address" class="form-control"></textarea>
     </div>
 <!--    <div class="form-group">
@@ -39,11 +39,16 @@
     <div class="form-group">
       <label>Description</label>
       <textarea ng-model="$ctrl.device.description" class="form-control"></textarea>
-    </div>
+    </div>-->
     <div class="form-group" ng-if="$ctrl.originalDevice.id != null">
       <div class="row">
         <label class="col-xs-12">Token</label>
-        <div class="col-xs-11"><input type="text" value="{{$ctrl.token}}" name="name" class="form-control" required ng-readonly="true"/></div>
+        <div class="col-xs-11" style="display: flex;">
+          <input type="text" value="{{$ctrl.token}}" name="name" class="form-control" required ng-readonly="true"/>
+        </div>
+        <div class="pull-left mt10">
+          <a href="javascript:void(0);" id="copyToken" class="tooltip-info" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Copy to clipboard" onclick="copyTokenFunction()"  style="flex: auto;color: #546E7A;"><i class="fa fa-clipboard" aria-hidden="true"></i></a>
+        </div>
         <div class="pull-left mt10">
           <a ng-click="$ctrl.renewToken($ctrl.device.id, $ctrl.token)" class="pointer"><i class="fa fa-refresh" aria-hidden="true"></i></a>
         </div>
@@ -51,15 +56,15 @@
           <span class="text-danger" ng-show="myForm.Id.$error.required">Id is required.</span>
         </span>
       </div>
-    </div>-->
+    </div>
     <!--<div class="form-group">
       <tags-input ng-model="$ctrl.device.groups" key-property="name" display-property="name" placeholder="groups"  add-from-autocomplete-only="true">
         <auto-complete source="$ctrl.filterGroups($query)" min-length="1"></auto-complete>
       </tags-input>
     </div>-->
     <div class="form-group">
-      <input type="button" class="btn btn-primary" ng-click="$ctrl.reset(); myForm.$setPristine()"  value="Reset" ng-disabled="!$ctrl.isDeviceChanged()"/>
-      <input type="button" class="btn btn-default" ng-click="$ctrl.submit()" value="Save"
+      <input type="button" class="btn btn-primary" ng-click="$ctrl.reset(); myForm.$setPristine()"  value="{{'IDENTITY.RESET' | translate}}" ng-disabled="!$ctrl.isDeviceChanged()"/>
+      <input type="button" class="btn btn-default" ng-click="$ctrl.submit()" value="{{'IDENTITY.SAVE' | translate}}"
              ng-disabled="myForm.name.$dirty && myForm.name.$invalid || myForm.id.$dirty && myForm.id.$invalid"/>
     </div>
   </form>

@@ -44,13 +44,13 @@
         <div class="icon infosummaryicon" ng-bind-html="summaryIcons.cxc_time">
         </div>
         <div class="nb bold summarydetail">{{marker.details.creationDate.value | date:'MM/dd/yyyy hh:mm:ss' || "N/A"}}</div>
-        <small>Time</small>
+        <small>{{'DATE&TIME' | translate}}</small>
       </div>
       <div class="col-xs-6 text-center" ng-if="marker.details.battery.value">
         <div class="icon infosummaryicon" ng-bind-html="summaryIcons.cxc_bat">
         </div>
         <div class="nb bold summarydetail">{{marker.details.battery.value || "N/A"}} %</div>
-        <small>Battery</small>
+        <small>{{'BATTERY' | translate}}</small>
       </div>
 
     </div>
@@ -59,8 +59,8 @@
   <section class="clear"></section>
   <section class="btns-container col-xs-12">
     <button type="button" ng-click='vm.go("/dashboard/deviceId/"+marker.details.id.value)'
-            class="btn btn-small btn-default orange-btn mt15 mrgr15" ng-cloak>View Dashboard</button>
+            class="btn btn-small btn-default orange-btn mt15 mrgr15" ng-cloak>{{'VIEWDASHBOARD' | translate}}</button>
     <button type="button" ng-click='vm.go("/alerts/deviceId/"+marker.details.id.value)' 
-            class="btn btn-small btn-danger orange-btn mt15" ng-cloak>View Alerts</button>
+            class="btn btn-small btn-danger orange-btn mt15" ng-cloak>{{'VIEWALERTS' | translate}}</button>
   </section>
 </div>

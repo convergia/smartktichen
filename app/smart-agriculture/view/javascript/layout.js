@@ -1,6 +1,8 @@
-
-
-//menu items user
+/**
+ * // menu items
+ * if sructure modifications are made to the menu
+ * changes to myApp.controller('myAppCtrl' in app/view/javascript/controller.js must apply also for translation
+ */
 var menuItems = {
   "mainMenu": "menu1",
   "menu1": [

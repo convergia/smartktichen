@@ -8,14 +8,14 @@
 
     <div ng-include="'/smart-agriculture/view/views/reports/reports-header.html'"></div>
 
-    <sub style="display: block;line-height: 12px;">rem: results by date may vary depending on your time zone</sub>
+    <sub style="display: block;line-height: 12px;">{{'REPORTS.REM' | translate}}</sub>
     <div class="box-content" style="text-align: left;">
 
       <div class="report-option-choice">
         <div class="report-option-cell">
           <label style="float: left;">
             <input type="radio" ng-model="vm.setoutput.name" value="bydate">
-            By day
+            {{'REPORTS.BYDAY' | translate}}
           </label>
           <div style="float: left;" ng-if="vm.setoutput.name=='bydate'">
             <scriptr-date-time-picker 
@@ -30,7 +30,7 @@
         <div class="report-option-cell">
           <label style="float: left;">
             <input type="radio" ng-model="vm.setoutput.name" value="byrange">
-            By date range
+            {{'REPORTS.BYDATE' | translate}}
           </label>
           <div style="float: left;" ng-if="vm.setoutput.name=='byrange'">
             <scriptr-date-time-picker
@@ -49,32 +49,32 @@
         <div class="report-option-cell">
           <label>
             <input type="radio" ng-change="vm.fiftyRecords()" ng-model="vm.setoutput.name" value="fifty">
-            Last 50 records
+            {{'REPORTS.LAST50' | translate}}
           </label>
 
         </div>
 
       </div>
-      <div class="date-selection">Selection: {{vm.getDateRangeStart}}{{vm.getDateRangeEnd}}</div>
+      <div class="date-selection">{{'REPORTS.SELECTION' | translate}}: {{vm.getDateRangeStart}}{{vm.getDateRangeEnd}}</div>
 
       <!--<strong>Device Id : </strong>{{vm.deviceKey}}-->
 
-      <a class="exportButton" ng-click="vm.ExcelfileExport()">Export Raw Data Table</a>
+      <a class="exportButton" ng-click="vm.ExcelfileExport()">{{'REPORTS.EXPRAW' | translate}}</a>
 
-      <button style="display: none;" id="exportPdfButton" ng-click="vm.convertTopng($event)">Export Processed Data</button>
+      <button style="display: none;" id="exportPdfButton" ng-click="vm.convertTopng($event)">{{'REPORTS.EXPPROCESS' | translate}}</button>
 
       <div style="height: calc(100% - 30px); box-sizing: border-box;" >
 
         <table id="report-table">
           <thead>
             <tr>
-              <th>Date</th>
-              <th>Battery</th>
-              <th>Temperature</th>
-              <th>Water Conductivity</th>
-              <th>O.R.P.</th>
-              <th>D.O.</th>
-              <th>pH</th>
+              <th>{{'REPORTS.DATE' | translate}}</th>
+              <th>{{'BATTERY' | translate}}</th>
+              <th>{{'TEMP' | translate}}</th>
+              <th>{{'SOIL' | translate}}</th>
+              <th>{{'ANEMO' | translate}}</th>
+              <th>{{'PRESS' | translate}}</th>
+              <th>{{'HUMID' | translate}}</th>
             </tr>
           </thead>
           <tbody>
@@ -82,10 +82,10 @@
               <td>{{ subject.creationDate | date:'yyyy/dd/MM HH:mm:ss' }}</td>
               <td>{{ subject.battery }}</td>
               <td>{{ subject.temperature }}</td>
-              <td>{{ subject.water_conductivity }}</td>
-              <td>{{ subject.oxidation_reduction_potential }}</td>
-              <td>{{ subject.dissolved_oxygen }}</td>
-              <td>{{ subject.ph }}</td>
+              <td>{{ subject.soil_moisture }}</td>
+              <td>{{ subject.anemometer }}</td>
+              <td>{{ subject.pressure }}</td>
+              <td>{{ subject.humidity }}</td>
             </tr>
           </tbody>
         </table>
@@ -105,15 +105,15 @@
             <div class="recap">
               <ul class="ng-scope">
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Max</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.MAX' | translate}}</span>
                   <span style="font-weight: 700;color: #3AAC4D;">{{vm.sumMax0}} %</span>
                 </li>
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Average</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.AVRG' | translate}}</span>
                   <span style="font-weight: 700;color: #FCAF3E;">{{vm.sumAvg0}} %</span>
                 </li>
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Min</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.MIN' | translate}}</span>
                   <span style="font-weight: 700;color: #EF2929;">{{vm.sumMin0}} %</span>
                 </li>
               </ul>
@@ -129,15 +129,15 @@
             <div class="recap">
               <ul class="ng-scope">
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Max</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.MAX' | translate}}</span>
                   <span style="font-weight: 700;color: #3AAC4D;">{{vm.sumMax1}} °C</span>
                 </li>
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Average</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.AVRG' | translate}}</span>
                   <span style="font-weight: 700;color: #FCAF3E;">{{vm.sumAvg1}} °C</span>
                 </li>
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Min</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.MIN' | translate}}</span>
                   <span style="font-weight: 700;color: #EF2929;">{{vm.sumMin1}} °C</span>
                 </li>
               </ul>
@@ -154,15 +154,15 @@
             <div class="recap">
               <ul class="ng-scope">
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Max</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.MAX' | translate}}</span>
                   <span style="font-weight: 700;color: #3AAC4D;">{{vm.sumMax2}} Hz</span>
                 </li>
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Average</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.AVRG' | translate}}</span>
                   <span style="font-weight: 700;color: #FCAF3E;">{{vm.sumAvg2}} Hz</span>
                 </li>
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Min</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.MIN' | translate}}</span>
                   <span style="font-weight: 700;color: #EF2929;">{{vm.sumMin2}} Hz</span>
                 </li>
               </ul>
@@ -179,15 +179,15 @@
             <div class="recap">
               <ul class="ng-scope">
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Max</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.MAX' | translate}}</span>
                   <span style="font-weight: 700;color: #3AAC4D;">{{vm.sumMax3}} km/h</span>
                 </li>
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Average</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.AVRG' | translate}}</span>
                   <span style="font-weight: 700;color: #FCAF3E;">{{vm.sumAvg3}} km/h</span>
                 </li>
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Min</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.MIN' | translate}}</span>
                   <span style="font-weight: 700;color: #EF2929;">{{vm.sumMin3}} km/h</span>
                 </li>
               </ul>
@@ -204,15 +204,15 @@
             <div class="recap">
               <ul class="ng-scope">
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Max</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.MAX' | translate}}</span>
                   <span style="font-weight: 700;color: #3AAC4D;">{{vm.sumMax4}} Pa</span>
                 </li>
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Average</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.AVRG' | translate}}</span>
                   <span style="font-weight: 700;color: #FCAF3E;">{{vm.sumAvg4}} Pa</span>
                 </li>
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Min</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.MIN' | translate}}</span>
                   <span style="font-weight: 700;color: #EF2929;">{{vm.sumMin4}} Pa</span>
                 </li>
               </ul>
@@ -229,15 +229,15 @@
             <div class="recap">
               <ul class="ng-scope">
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Max</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.MAX' | translate}}</span>
                   <span style="font-weight: 700;color: #3AAC4D;">{{vm.sumMax5}} %</span>
                 </li>
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Average</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.AVRG' | translate}}</span>
                   <span style="font-weight: 700;color: #FCAF3E;">{{vm.sumAvg5}} %</span>
                 </li>
                 <li>
-                  <span style="font-weight: 700;" class="ng-binding">Min</span>
+                  <span style="font-weight: 700;" class="ng-binding">{{'REPORTS.MIN' | translate}}</span>
                   <span style="font-weight: 700;color: #EF2929;">{{vm.sumMin5}} %</span>
                 </li>
               </ul>

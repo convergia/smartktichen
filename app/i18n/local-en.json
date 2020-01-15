@@ -1,0 +1,99 @@
+{
+  "SEARCHFORID": "Search for a device ID",
+  "NOTFOUND": "No device ID matching {{search}} were found.",
+  "BUTTON_LANG": "Français",
+
+  "VIEWDASHBOARD":"View Dashboard",
+  "VIEWALERTS":"View Alerts",
+
+  "DEVICEID" : "Device Id",
+	"DATE&TIME" : "Date & time",
+
+  "TEMP" : "Temperature",
+	"BATTERY" : "Battery",
+  "ANEMO" : "Wind speed",
+  "PRESS" : "Pressure",
+  "HUMID" : "Humidity",
+  "SOIL" : "Soil moisture",
+  "WINDIR" : "Wind direction",
+  "RAINCH" : "Rain current hour",
+  "RAINPH" : "Rain previous hour",
+  "RAINAC" : "Rain 24H accumulated",
+
+  "NOTIFICATION" : {
+  	"ADDEMAIL" : "Please enter your email address to get notified whenever a rule is applied",
+    "PLACEHOLDER" : "email addresses",
+    "SAVE": "Save"
+  },
+
+  "DASHB":{
+ 	 "NOKEYTEXT" : "Select Device Key to view the corresponding live dashboard.",
+ 	 "PH" : "pH Level"
+  },
+
+  "IDENTITY":{
+   "ADDNEW" : "Add new device",
+   "EXISTDEVICE" : "Existing Devices",
+ 	 "DATARECEP" : "Last data reception",
+ 	 "EDIT" : "Edit",
+   "DELETE" : "Delete",
+   "DETAILS" : "DEVICE DETAILS",
+   "LONG" : "Longitude",
+   "LAT" : "Latitude",
+   "ADDRESS" : "Address",
+   "RESET" : "Reset",
+   "SAVE" : "Save",
+   "DELETEDEVICE" : "Delete Device",
+   "CONFIRMDEL" : "Are you sure you want to delete this device?",
+   "DELETED" : "Device deleted successfully",
+   "MESSAGE" : "Device updated successfully.",
+   "ERRORPARAM" : "Parameter {{paramid}} is required.",
+   "YES" : "Yes",
+   "NO" : "No"
+  },
+
+  "REPORTS":{
+    "REM" : "rem: results by date may vary depending on your time zone",
+		"BYDAY" : "By day",
+		"BYDATE" : "By date range",
+		"LAST50" : "Last 50 records",
+		"SELECTION" : "Selection",
+		"EXPRAW" : "Export Raw Data Table",
+		"EXPPROCESS" : "Export Processed Data",
+		"DATE" : "Date",
+		"ORP" : "O.R.P.",
+		"DO" : "D.O.",
+		"MAX" : "Max",
+		"AVRG" : "Average",
+		"MIN" : "Min",
+  	"FOR" : "For",
+  	"FROM" :"From",
+  	"TO" : "To"
+  },
+
+  "MENU": {
+    "MAP": "Map",
+    "DASHB": "Dashboard",
+    "REPORTS": "Reports",
+    "ALERTS": "Alerts",
+    "CONTROL": "Control",
+    "AI": "AI",
+    "DEVICEMAN": "Manage Devices",
+    "ADDRULE": "Add Rule",
+    "INFO": "Info"
+  },
+  "HEADERMENU": {
+    "NOTIFSETTING": "Notification Settings",
+    "CHANGEPASS": "Change Password",
+    "LOGOUT" : "logout"
+  },
+  "PASSWORD": {
+    "PSW1" : "Current Password",
+    "PSW2" : "New Password",
+    "PSW3" : "Confirm Password",
+    "PSW4" : "Passwords do not match.",
+    "PSW5" : "Password changed successfully.",
+    "PSW6" : "Invalid current password.",
+    "CHANGE" : "Change"
+  }
+}

@@ -7,7 +7,7 @@
 
 
         <div class="icon text-center" ng-bind-html="vm.icons.id"></div>
-        <strong>Device Id</strong> 
+        <strong>{{'DEVICEID' | translate}}</strong> 
         <div class="nb fnt16" ng-click="vm.setFocus()" >{{vm.selectedDevice.id.value}}</span>&nbsp;<span ng-if="!vm.selectedDevice"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span></div>
 
 <div ng-controller="autocompCtrl as vm" layout="column" ng-cloak location-path="/dashboard/deviceId/" id="autocompDivId" >
@@ -30,7 +30,7 @@
           <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.name}}</span>
         </md-item-template>
         <md-not-found>
-          No device ID matching "{{vm.searchText}}" were found.
+          <p translate="NOTFOUND" translate-value-search="{{vm.searchText}}"></p>
         </md-not-found>
       </md-autocomplete>
 
@@ -42,7 +42,7 @@
 
       <div class="col-xs-12 col-sm-6 col-md-4">
         <div class="icon text-center" ng-bind-html="vm.icons.battery"></div>
-        <strong>Battery</strong>
+        <strong>{{'BATTERY' | translate}}</strong>
         <div class="nb fnt16">{{vm.selectedDevice.battery.value || '0' }}%<span ng-if="!vm.selectedDevice"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span></div>
 
         
@@ -50,7 +50,7 @@
 
       <div class="col-xs-12 col-sm-6 col-md-4">
         <div class="icon text-center" ng-bind-html="vm.icons.ctime"></div>
-        <strong>Date & time</strong>
+        <strong>{{'DATE&TIME' | translate}}</strong>
         <div class="nb fnt16">{{vm.selectedDevice.creationDate.value | date:'MM/dd/yyyy HH:mm:ss'}}<span ng-if="!vm.selectedDevice"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span></div>
       </div>
 

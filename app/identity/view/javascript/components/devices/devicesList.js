@@ -8,7 +8,16 @@ angular.module('Identity')
     onUpdate: '&'
   },
   templateUrl: '/identity/view/javascript/components/devices/devicesList.html',
-  controller: function($scope, _ , identityService, $uibModal){
+  controller: function($scope, _ , identityService, $uibModal, $translate){
+
+    var devicedelete = "Delete Device";
+    var confirmdel = "Are you sure you want to delete this device?";
+    var deleted = "Device deleted successfully";
+    
+    $translate('IDENTITY.DELETEDEVICE').then(function (headline) { devicedelete = headline; });
+    $translate('IDENTITY.CONFIRMDEL').then(function (headline) { confirmdel = headline; });
+    $translate('IDENTITY.DELETED').then(function (headline) { deleted = headline; });
+
     var self = this;
     self.isLoading = true;
 
@@ -56,7 +65,7 @@ var modalInstance = $uibModal.open({
         scope: $scope,
         resolve: {
           data: function () {
-            return {"title": "Delete Device", "body": "Are you sure you want to delete this device?"};
+            return {"title": devicedelete, "body": confirmdel};
           }
         }
       });
@@ -73,7 +82,7 @@ var modalInstance = $uibModal.open({
                   self.devices = angular.copy(_.reject(self.devices, function(device){ return device == deviceId; }));
                   console.log(self.devices);
                   $scope.$emit('deviceAdded');//same as deviceAdded
-                  self.setAlert("Device deleted successfully", "success");
+                  self.setAlert(deleted, "success");
                 }
               }
               console.log("resolve", data)

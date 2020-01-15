@@ -18,7 +18,7 @@ var optionalParams = ["lat", "long", "address", "groups"];
 var paramsEvaluator = new paramsEvaluator.ParamsEvaluator();
 hasAllRequiredParams = paramsEvaluator.hasRequiredParams(request.body, requiredParams)
 if(!hasAllRequiredParams.success) {
-  return errorHandler.buildError("missing_parameter", "Parameter \""+hasAllRequiredParams.param+ "\" is required.");
+  return errorHandler.buildError("missing_parameter", hasAllRequiredParams.param);
 }
 
 log.info(JSON.stringify(request.body))

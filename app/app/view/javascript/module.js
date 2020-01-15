@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ["DateTimePicker","Layout", "schemaForm", "WsClient", "HttpClient", "DataService", "MetricBox", "Map", "Chart", "Grid", "Gauge", "ngTagsInput", "gridster", "Button", "Accelerometer", "ui.bootstrap", "ngRoute", "pascalprecht.translate", "ui.select", "ui.codemirror", 'schemaForm-datepicker', 'schemaForm-timepicker', 'schemaForm-datetimepicker', 'ngMaterial', "ngAnimate", "Identity"]);
+var myApp = angular.module('myApp', ["DateTimePicker","Layout", "schemaForm", "WsClient", "HttpClient", "DataService", "MetricBox", "Map", "Chart", "Grid", "Gauge", "ngTagsInput", "gridster", "Button", "Accelerometer", "ui.bootstrap", "ngRoute", "pascalprecht.translate", "ui.select", "ui.codemirror", 'schemaForm-datepicker', 'schemaForm-timepicker', 'schemaForm-datetimepicker', 'ngMaterial', "ngAnimate", "Identity", "pascalprecht.translate", "tmh.dynamicLocale", "ngCookies"]);
 
 myApp
   .constant("menuItemsJson",  menuItems)
@@ -18,8 +18,20 @@ myApp
     }
   // $routeProvider.otherwise("/map")
 });
-
+//i18n
+myApp.config(function ($translateProvider) {
+    $translateProvider
+    .useStaticFilesLoader({
+        prefix: '/i18n/local-',
+        suffix: '.json'
+    }) 
+    // remove the warning from console log by putting the sanitize strategy
+    .useSanitizeValueStrategy('sanitizeParameters')    
+    .preferredLanguage($.cookie('lang'));
+});
+// \
 myApp.run(function($rootScope, $location,adminRoutesJson) {
+  $rootScope.lang = 'en';
   // register listener to watch route changes
   $rootScope.$on( "$routeChangeStart", function(event, next, current) {
 

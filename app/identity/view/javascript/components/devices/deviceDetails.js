@@ -11,7 +11,10 @@ angular
     },
     templateUrl : '/identity/view/javascript/components/devices/deviceDetails.html',
 
-    controller : function($scope, _, identityService, $timeout) {
+    controller : function($scope, _, identityService, $timeout, $translate) {
+      var message1 = "Device updated successfully.";
+      $translate('IDENTITY.MESSAGE').then(function (headline) { message1 = headline; });
+
       var self = this;
       self.token = null;
 
@@ -133,10 +136,15 @@ self.isUpdate = true;
           function(data, response) {
             self.isLoading = false;
             if (data.status == "failure") {
-              self.setAlert(data.errorDetail, "danger")
+
+              var message2 = data.errorDetail;
+              $translate('IDENTITY.ERRORPARAM', { paramid: data.errorDetail }).then(function (headline) {
+                message2 = headline;
+                self.setAlert(message2, "danger");
+              });
+
             } else {
-              var message = "Device updated successfully."
-              self.setAlert(message, "success")
+              self.setAlert(message1, "success");
               $scope.$emit('deviceAdded');
               $timeout(function () { document.querySelector('#detailwindow').style.display = "none"; }, 5000, false);
             }
@@ -191,3 +199,12 @@ self.isUpdate = true;
 
     }
   });
+function copyTokenFunction() {
+  /* Get the text field */
+  var copyToken = document.getElementById("copyTokenText");
+  /* Select the text field */
+  copyToken.select();
+  copyToken.setSelectionRange(0, 99999); /*For mobile devices*/
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+}

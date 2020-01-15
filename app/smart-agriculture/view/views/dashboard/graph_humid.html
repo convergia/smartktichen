@@ -1,10 +1,10 @@
 <div class="box">
 	<div class="box-content">
-		<div style="height: 30px;" tooltip-placement="bottom" uib-tooltip="Humidity" class="box-label">Humidity</div>
+		<div style="height: 30px;" tooltip-placement="bottom" uib-tooltip="{{'HUMID' | translate}}" class="box-label">{{'HUMID' | translate}}</div>
 		<div style="height: calc(100% - 30px)" >
       <scriptr-chart
                      type='line'
-                     boxLabel='Humidity'
+                     boxLabel='{{'HUMID' | translate}}'
                      xkey='creationDate'
                      ykeys='["humidity"]'
                      labels='["Humidity"]'
