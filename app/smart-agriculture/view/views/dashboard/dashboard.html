@@ -8,7 +8,7 @@
                                                  color: #ff8c00;
                                                  font-size: 1em;
                                                  " class="ng-scope">
-            <div>Select Device Key to view the corresponding live dashboard. </div>
+            <div>{{'NOKEYTEXT' | translate}} </div>
             <div style="font-size: 3em;">
                 <i class="fa fa-spinner fa-spin" aria-hidden="true"></i> 
             </div>
@@ -21,7 +21,7 @@
                                  transport="wss" 
                                  value="vm.selectedDevice.temperature.value"
                                  disabled="!vm.selectedDevice.temperature.value"
-                                 label="Temperature"
+                                 label="{{'TEMP' | translate}}"
                                  unit="&deg;C"
                                  icon="https://convergia-cdn.s3.amazonaws.com/temperature.png"
                                  action-icon="https://convergia-cdn.s3.amazonaws.com/chart_link.png"
@@ -63,7 +63,7 @@
                                  transport="wss" 
                                  value="vm.selectedDevice.humidity.value"
                                  disabled="!vm.selectedDevice.humidity.value"
-                                 label="Humidity"
+                                 label="{{'HUMID' | translate}}"
                                  unit="%"
                                  icon="https://convergia-cdn.s3.amazonaws.com/humidity.png"
                                  action-icon="https://convergia-cdn.s3.amazonaws.com/chart_link.png"
@@ -84,7 +84,7 @@
                                  transport="wss" 
                                  value="vm.selectedDevice.pressure.value"
                                  disabled="!vm.selectedDevice.pressure.value"
-                                 label="Pressure"
+                                 label="{{'PRESS' | translate}}"
                                  unit="Pa"
                                  icon="https://convergia-cdn.s3.amazonaws.com/pressure.png"
                                  action-icon="https://convergia-cdn.s3.amazonaws.com/chart_link.png"
@@ -105,7 +105,7 @@
                                  transport="wss" 
                                  value="vm.selectedDevice.wind_direction.value"
                                  disabled="!vm.selectedDevice.wind_direction.value"
-                                 label="Wind direction"
+                                 label="{{'WINDIR' | translate}}"
                                  unit=""
                                  icon="https://convergia-cdn.s3.amazonaws.com/wind_dir.png"
                                  
@@ -126,7 +126,7 @@
                                  transport="wss" 
                                  value="vm.selectedDevice.anemometer.value"
                                  disabled="!vm.selectedDevice.anemometer.value"
-                                 label="Wind speed"
+                                 label="{{'ANEMO' | translate}}"
                                  unit="km/h"
                                  icon="https://convergia-cdn.s3.amazonaws.com/wind_speed.png"
                                  action-icon="https://convergia-cdn.s3.amazonaws.com/chart_link.png"
@@ -155,7 +155,7 @@
                                  transport="wss" 
                                  value="vm.selectedDevice.pluviometer_1.value"
                                  disabled="!vm.selectedDevice.pluviometer_1.value"
-                                 label="Rain last hour"
+                                 label="{{'RAINCH' | translate}}"
                                  unit="mm/h"
                                  icon=""
                                  action-icon="https://convergia-cdn.s3.amazonaws.com/chart_link.png"
@@ -178,7 +178,7 @@
                                  transport="wss" 
                                  value="vm.selectedDevice.pluviometer_2.value"
                                  disabled="!vm.selectedDevice.pluviometer_2.value"
-                                 label="Rain previous hour"
+                                 label="{{'RAINPH' | translate}}"
                                  unit="mm/h"
                                  icon=""
                                  action-icon="https://convergia-cdn.s3.amazonaws.com/chart_link.png"
@@ -201,7 +201,7 @@
                                  transport="wss" 
                                  value="vm.selectedDevice.pluviometer_3.value"
                                  disabled="!vm.selectedDevice.pluviometer_3.value"
-                                 label="Rain 24H accumulated"
+                                 label="{{'RAINAC' | translate}}"
                                  unit="mm/h"
                                  icon=""
                                  action-icon="https://convergia-cdn.s3.amazonaws.com/chart_link.png"
@@ -224,7 +224,7 @@
                                  transport="wss" 
                                  value="vm.selectedDevice.soil_moisture.value"
                                  disabled="!vm.selectedDevice.soil_moisture.value"
-                                 label="Soil moisture"
+                                 label="{{'SOIL' | translate}}"
                                  unit="Hz"
                                  icon=""
                                  action-icon="https://convergia-cdn.s3.amazonaws.com/chart_link.png"

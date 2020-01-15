@@ -2,12 +2,12 @@
 
   <div class="col-xs-12">
     <div class="mt10">
-      <a type="button" class="btn btn-default" class="btn btn-success"  ng-click="$ctrl.addItem()" >Add new device</a>
+      <a type="button" class="btn btn-default" class="btn btn-success"  ng-click="$ctrl.addItem()" >{{'IDENTITY.ADDNEW' | translate}}</a>
     </div>
 
     <div class="management-list" ng-init="$ctrl.loadItems()">
 
-      <h5 class="box-title text-uppercase fntmontessart">Existing Devices</h5>
+      <h5 class="box-title text-uppercase fntmontessart">{{'IDENTITY.EXISTDEVICE' | translate}}</h5>
 
       <div ng-if="$ctrl.message" uib-alert ng-class="'alert-' + ( $ctrl.message.type || 'default')  + ' m10'" close="$ctrl.closeAlert()" dismiss-on-timeout="5000">{{$ctrl.message.content}}</div>
       <!--<div class="search-wrap">

@@ -1,4 +1,4 @@
-myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $routeParams, constants, _, $routeParams) {
+myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $routeParams, constants, _, $routeParams, $translate, $rootScope) {
     var vm = this;
   
 	  // list of all charts accessible through the select box
@@ -14,6 +14,14 @@ myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $rou
       { code:"humidity", name: 'Humidity', url: '/smart-agriculture/view/views/dashboard/graph_humid.html'},
       { code:"soil",name: 'Soil moisture', url: '/smart-agriculture/view/views/dashboard/graph_soil.html'}
     ];
+
+  $translate('TEMP').then(function (headline) { vm.graph[0].name = headline; });
+  $translate('BATTERY').then(function (headline) { vm.graph[1].name = headline; });
+  $translate('ANEMO').then(function (headline) { vm.graph[2].name = headline; });
+  $translate('PRESS').then(function (headline) { vm.graph[3].name = headline; });
+  $translate('HUMID').then(function (headline) { vm.graph[4].name = headline; });
+  $translate('SOIL').then(function (headline) { vm.graph[5].name = headline; });
+
     vm.selectedGraphLeft = vm.graph[0];//default selection of first chart/left
   	vm.selectedGraphRight = vm.graph[1];//default selection of second chart/right
   
@@ -181,7 +189,7 @@ myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $rou
   }
 });
 
-myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $routeParams, constants, _, $filter, $timeout) {
+myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $routeParams, constants, _, $filter, $timeout, $translate) {
 
   var vm = this;
   vm.deviceKey = null;
@@ -195,7 +203,22 @@ myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $
     }, 0);
   }
   /* \ */
-  const monthNames = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  if($.cookie('lang')=='es') {
+    var monthNames = ["Ene", "Feb", "Mar", "Abr", "Mayo", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+  } else if($.cookie('lang')=='fr') {
+    var monthNames = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Déc"];
+  } else {
+    var monthNames = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  }
+  var vFor = "For";
+  var vFrom ="From";
+  var vTo ="To";
+
+  $translate('REPORTS.FOR').then(function (headline) { vFor = headline; });
+  $translate('REPORTS.FROM').then(function (headline) { vFrom = headline; });
+  $translate('REPORTS.TO').then(function (headline) { vTo = headline; });
+
   vm.includes =  {
     battery: '/smart-agriculture/view/views/dashboard/graph_bat.html?',
     temperature : '/smart-agriculture/view/views/dashboard/graph_temp.html?',
@@ -224,7 +247,7 @@ myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $
       "timeEnd": topLimitTs
     }
     var showDate = new Date(ts);
-		vm.getDateRangeStart = "For "+monthNames[showDate.getMonth()]+" "+showDate.getDate()+" "+showDate.getFullYear();
+		vm.getDateRangeStart = vFor+" "+monthNames[showDate.getMonth()]+" "+showDate.getDate()+" "+showDate.getFullYear();
     vm.getDateRangeEnd ="";
     
     vm.loadRecords();
@@ -238,7 +261,7 @@ myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $
       "timeEnd": vm.endDate
     }
     var showDate = new Date(vm.startDate);
-		vm.getDateRangeStart = "From "+monthNames[showDate.getMonth()]+" "+showDate.getDate()+" "+showDate.getFullYear();
+		vm.getDateRangeStart = vFrom+" "+monthNames[showDate.getMonth()]+" "+showDate.getDate()+" "+showDate.getFullYear();
 
     if(vm.endDate!=null) vm.loadRecords();
   }
@@ -251,7 +274,7 @@ myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $
       "timeEnd": vm.endDate
     }
     var showDate = new Date(vm.endDate);
-    vm.getDateRangeEnd = " To "+monthNames[showDate.getMonth()]+" "+showDate.getDate()+" "+showDate.getFullYear();
+    vm.getDateRangeEnd = " "+vTo+" "+monthNames[showDate.getMonth()]+" "+showDate.getDate()+" "+showDate.getFullYear();
 
     if(vm.startDate!=null) vm.loadRecords();
   }
@@ -265,7 +288,10 @@ myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $
 
   vm.fiftyRecords = function(){
     vm.params = {"id":  vm.deviceKey }
-    vm.getDateRangeStart ="Last 50 records";vm.getDateRangeEnd ="";
+    $translate('REPORTS.LAST50').then(function (headline) {
+      vm.getDateRangeStart = headline;
+    });
+    vm.getDateRangeEnd ="";
     vm.loadRecords();
   }
 
