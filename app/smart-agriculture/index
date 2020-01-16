@@ -1,2 +1,2 @@
 var themeloader = require("app/api/themeloader");
-return themeloader.serveTheme("app/view/html/index.unpackaged.html", {"theme":"smart-agriculture", "style": true, "config": true, "layout": true})
+return themeloader.serveTheme("app/view/html/index.unpackaged.html", {"theme":"lorawan-app", "style": true, "config": true, "layout": true})

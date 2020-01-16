@@ -1,4 +1,4 @@
 var config = {
-   redirect: "/smart-agriculture/index.html",
-   loginPage: "/smart-agriculture/login.html"
+   redirect: "/lorawan-app/index.html",
+   loginPage: "/lorawan-app/login.html"
 };

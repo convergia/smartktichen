@@ -17,8 +17,8 @@ function execute(event, signal) {
   
   var params = getEventConfig(event, signal);
 
-  var url = "https://"+config.subDomain+".scriptrapps.io/smart-agriculture/index#/dashboard/deviceId/"+event.id+"?chart=" + params.chart;
-  //var url = "https://"+config.subDomain+".scriptrapps.io/smart-agriculture/index#/dashboard/deviceId/"+event.id;
+  var url = "https://"+config.subDomain+".scriptrapps.io/lorawan-app/index#/dashboard/deviceId/"+event.id+"?chart=" + params.chart;
+  //var url = "https://"+config.subDomain+".scriptrapps.io/lorawan-app/index#/dashboard/deviceId/"+event.id;
 
   var msg = {
     "@context": "https://schema.org/extensions",
@@ -54,9 +54,9 @@ function execute(event, signal) {
         "text": "Event Released for device: "+event.id
       }
     ],
-    "summary": "CxC Smart Agriculture",
+    "summary": "LoraWan App",
     "themeColor": "612480",
-    "title": "CxC Smart Agriculture"
+    "title": "CxC LoraWan App"
   };
 
   log.info("[app/entities/actions/msteamOnAlert] Msg is: " + JSON.stringify(msg));

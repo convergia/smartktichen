@@ -6,13 +6,13 @@ myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $rou
   	// "code" has been added to support external call to chart from gauge
   
     vm.graph = [
-      { code:"temperature", name: 'Temperature', url: '/smart-agriculture/view/views/dashboard/graph_temp.html'},
-      { code:"battery", name: 'Battery', url: '/smart-agriculture/view/views/dashboard/graph_bat.html'},
-      { code:"anemometer", name: 'Wind speed', url: '/smart-agriculture/view/views/dashboard/graph_anemo.html'},
-/*      { code:"winddir",name: 'Wind direction', url: '/smart-agriculture/view/views/dashboard/graph_wind.html'},*/
-      { code:"pressure", name: 'Pressure', url: '/smart-agriculture/view/views/dashboard/graph_press.html'},
-      { code:"humidity", name: 'Humidity', url: '/smart-agriculture/view/views/dashboard/graph_humid.html'},
-      { code:"soil",name: 'Soil moisture', url: '/smart-agriculture/view/views/dashboard/graph_soil.html'}
+      { code:"temperature", name: 'Temperature', url: '/lorawan-app/view/views/dashboard/graph_temp.html'},
+      { code:"battery", name: 'Battery', url: '/lorawan-app/view/views/dashboard/graph_bat.html'},
+      { code:"anemometer", name: 'Wind speed', url: '/lorawan-app/view/views/dashboard/graph_anemo.html'},
+/*      { code:"winddir",name: 'Wind direction', url: '/lorawan-app/view/views/dashboard/graph_wind.html'},*/
+      { code:"pressure", name: 'Pressure', url: '/lorawan-app/view/views/dashboard/graph_press.html'},
+      { code:"humidity", name: 'Humidity', url: '/lorawan-app/view/views/dashboard/graph_humid.html'},
+      { code:"soil",name: 'Soil moisture', url: '/lorawan-app/view/views/dashboard/graph_soil.html'}
     ];
 
   $translate('TEMP').then(function (headline) { vm.graph[0].name = headline; });
@@ -220,12 +220,12 @@ myApp.controller('saReportsCtrl', function($scope, $log, wsClient, httpClient, $
   $translate('REPORTS.TO').then(function (headline) { vTo = headline; });
 
   vm.includes =  {
-    battery: '/smart-agriculture/view/views/dashboard/graph_bat.html?',
-    temperature : '/smart-agriculture/view/views/dashboard/graph_temp.html?',
-    soil: '/smart-agriculture/view/views/dashboard/graph_soil.html?',
-    anemo: '/smart-agriculture/view/views/dashboard/graph_anemo.html?',
-    press: '/smart-agriculture/view/views/dashboard/graph_press.html?',
-    humid: '/smart-agriculture/view/views/dashboard/graph_humid.html?'
+    battery: '/lorawan-app/view/views/dashboard/graph_bat.html?',
+    temperature : '/lorawan-app/view/views/dashboard/graph_temp.html?',
+    soil: '/lorawan-app/view/views/dashboard/graph_soil.html?',
+    anemo: '/lorawan-app/view/views/dashboard/graph_anemo.html?',
+    press: '/lorawan-app/view/views/dashboard/graph_press.html?',
+    humid: '/lorawan-app/view/views/dashboard/graph_humid.html?'
   };
 
   vm.startDate = null;

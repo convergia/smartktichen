@@ -36,7 +36,7 @@ var routingItems = {
   "params": [
     {"route": "map", "template": "/app/view/html/views/map/map.html", "controller": "mapCtrl as vm"},
     {"route": "map/deviceId/:deviceId*", "template": "/app/view/html/views/map/map.html", "controller": "mapCtrl as vm"},
-    {"route": "dashboard/deviceId/:deviceId*", "template": "/smart-agriculture/view/views/dashboard/dashboard.html","controller": "swDashboardCtrl as vm"},
+    {"route": "dashboard/deviceId/:deviceId*", "template": "/lorawan-app/view/views/dashboard/dashboard.html","controller": "swDashboardCtrl as vm"},
     {"route": "alerts/deviceId/:deviceId*", "template": "/app/view/html/views/logs/alerts.html","controller": "alertsCtrl as vm"},
     {"route": "alerts", "template": "/app/view/html/views/alerts/alerts.html" },
     {"route": "notifications", "template": "/app/view/html/views/notifications/notifications.html", controller: "notificationCtrl as vm"},
@@ -47,8 +47,8 @@ var routingItems = {
     {"route": "logout", "template": "/login/view/logout.html"},  
     { "route": "dashboard-home", "template": "/app/view/html/views/dashboard/dashboard-home.html", controller: "dashboardHomeCtrl as vm" },
 
-    { "route": "reports", "template": "/smart-agriculture/view/views/reports/reports-home.html"},
-    { "route": "reports/deviceId/:deviceId*", "template": "/smart-agriculture/view/views/reports/reports.html","controller": "saReportsCtrl as vm"},
+    { "route": "reports", "template": "/lorawan-app/view/views/reports/reports-home.html"},
+    { "route": "reports/deviceId/:deviceId*", "template": "/lorawan-app/view/views/reports/reports.html","controller": "saReportsCtrl as vm"},
     
     { "route": "control", "template": "/app/view/html/views/control/control.html", controller: "controlCtrl as vm" },
     { "route": "ai", "template": "/app/view/html/views/ai/ai.html", controller: "aiCtrl as vm" },

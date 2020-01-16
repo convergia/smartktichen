@@ -1,4 +1,4 @@
-# convergia_smart_agriculture_demo
+# convergia_lorawan_app_demo
 
 - [Install the application](#install-the-application)
 - [Install dependencies](#install-dependencies)
@@ -10,7 +10,7 @@
 - In the Modules wizard, click "+Add custom module from Github"
 - Fill the fields as follows (see image below)
   - Owner: **convergia**
-  - Repository: **smartagriculture**
+  - Repository: **lorawan-app**
   - Path: /app
   - Branch: leave empty or type **master**
   - Destination folder: /
@@ -60,7 +60,7 @@ In the tree view on the left side of the scriptr.io web IDE
 
 ### Configure the simulator
 
-- Scroll to **/smart-agriculture/simulator/meshilum/config** and open the config script
+- Scroll to **/lorawan-app/simulator/meshilum/config** and open the config script
 - Replace the **subdomain** with your account subdomain
 
 - Replace the **token** value of the  **var dmpBrokerToken** variable with your own dmpBrokerToken
