@@ -1,0 +1,21 @@
+//The TTN Info 
+const ttn = {
+  	protocol: "VALUE",
+  	name:"VALUE",
+    url:"VALUE",
+    port:"VALUE",
+    topic:"VALUE",
+    clientId:"VALUE",
+    username:"VALUE",
+    password:"VALUE",
+  
+  	channelName:"VALUE"
+};
+
+
+
+const errorCodeList = {
+    "missingParameter": "MISSING_PARAMETER",
+    "invalidAction": "INVALID_ACTION",
+    "notFound": "ENTITY_NOT_FOUND"
+};

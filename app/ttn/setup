@@ -1,0 +1,3 @@
+var ttnModule = require('./TTN');
+var ttn= new ttnModule.TTN();
+return ttn.setup();

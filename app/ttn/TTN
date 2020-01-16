@@ -1,0 +1,69 @@
+var configModule = require("./config");
+
+/**
+ * TTN Manager
+ * @class BeWhere
+ * @constructor
+ * @param {Object} [config]
+ */
+
+function TTN(config) {
+
+    if (config) {
+
+        for (var key in config) {
+            this[key] = config[key]
+        }
+    }
+
+    this.ttn = this.ttn ? this.ttn : configModule.ttn;
+
+
+}
+
+/**
+ * @method  setup
+ * @return {Object} [responseObject]
+ */
+TTN.prototype.setup = function () {
+    var responseObject = {};
+
+    //Create the channel used by the mqtt bridge between scriptr and ibm bluemix
+    var channelsList = [configModule.ttn.channelName];
+    var params = { "name": configModule.ttn.channelName, "subscribeACL": ["authenticated"], "publishACL": ["authenticated"] };
+    var step6 = apsdb.callApi("SaveChannel", params, null)
+    responseObject["channelCreation_" + params.name] = JSON.stringify(step6);
+
+    //Setup the mqtt connection instance (ttn)
+    var params = {
+        'name': configModule.ttn.name,
+        'protocol': configModule.ttn.protocol,
+        'url': configModule.ttn.url,
+        'topic': configModule.ttn.topic,
+        'clientId': configModule.ttn.clientId,
+        'port': configModule.ttn.port,
+        'username': configModule.ttn.username,
+        'password': configModule.ttn.password,
+
+    }
+    var response = apsdb.callApi("SaveExternalEndpointConfiguration", params, null);
+    responseObject["createMqttExternalEndPoint"] = JSON.stringify(response);
+
+
+    //Link the bridge to the channel for publishing messages
+    //The free trial if not activated yet can be activated by going to channels and clicking on bridges under any channel and clicking on free trial button
+    var devices = require("device");
+    var params = {
+        "channel": configModule.ttn.channelName,
+        "externalEndpointConfiguration": configModule.ttn.name,
+        "auth_token": devices.get("scriptr").result["auth_token"]
+    }
+    var response = apsdb.callApi("AddBridge", params, null);
+    responseObject["AddBridge"] = JSON.stringify(response);
+
+    var pubsub = require("pubsub");
+    var topic = pubsub.getInstance(configModule.ttn.channelName);
+    var response = topic.subscribe("ttn/api", "script");
+    responseObject["subscribeScriptToChannel"] = JSON.stringify(response);
+    return responseObject;
+};

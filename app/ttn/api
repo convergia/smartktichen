@@ -1,0 +1,4 @@
+
+var log = require("log"); 
+log.setLevel("info");
+log.info(JSON.stringify(request));
