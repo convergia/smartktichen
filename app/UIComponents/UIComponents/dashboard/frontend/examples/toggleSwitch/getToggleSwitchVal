@@ -1,6 +1,0 @@
-var log = require("log");
-log.setLevel("INFO");
-
-
-
-return {status:true,disabled:false};

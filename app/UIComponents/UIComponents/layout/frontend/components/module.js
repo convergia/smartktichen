@@ -1,1 +1,0 @@
-angular.module('Layout', ['ngRoute', 'underscore', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
