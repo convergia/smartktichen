@@ -1,6 +1,6 @@
 var _= require("modules/underscore/underscore.js")._;
 var emailAlert = require("app/entities/actions/emailOnAlert");
-var msteamAlert = require("app/entities/actions/msteamOnAlert");
+//var msteamAlert = require("app/entities/actions/msteamOnAlert");
 var utils = require("app/entities/utils");
 var config = require("app/config/config");
 
@@ -29,10 +29,10 @@ function classicEvaluateDevice(entry) {
 log.info("[app/entities/deviceevaluator] sending e-mail");
           emailAlert.execute(null, entry, decisions[i].sendEmail);
         }
-        if(decisions[i].msteam!==undefined){
+/*        if(decisions[i].msteam!==undefined){
 log.info("[app/entities/deviceevaluator] sending msteam alert");
 	        msteamAlert.execute( entry, decisions[i].msteam);
-        }
+        }*/
         if(decisions[i].isAlert == "true"){
           recordAsAlert = true; 
           alertType.push(decisions[i].alertType);

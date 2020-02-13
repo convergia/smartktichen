@@ -37,27 +37,7 @@
                                  >
               </scriptr-metricbox>
             </li>
-            <!--<li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 1, row: 0 }'>
-              <scriptr-metricbox 
-                                 transport="wss" 
-                                 value="vm.selectedDevice.battery.value"
-                                 disabled="!vm.selectedDevice.battery.value"
-                                 label="Battery"
-                                 unit="%"
-                                 icon="https://convergia-cdn.s3.amazonaws.com/battery.png"
-                                 action-icon="https://convergia-cdn.s3.amazonaws.com/chart_link.png"
-                                 on-action-clicked="vm.metricBoxClicked"
-                                 tag="battery"
-                                 border-color="#fff"
-                                 background="#fff"
-                                 label-text-color="#761f86"
-                                 label-text-alignment="left"
-                                 unit-text-color="#5e5e5e"
-                                 value-text-color="#5e5e5e"
-                                 background-color="#fff"
-                                 >
-              </scriptr-metricbox>
-            </li>-->
+
             <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 1, row: 0 }'>
               <scriptr-metricbox 
                                  transport="wss" 
@@ -82,14 +62,14 @@
             <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 2, row: 0 }'>
               <scriptr-metricbox 
                                  transport="wss" 
-                                 value="vm.selectedDevice.pressure.value"
-                                 disabled="!vm.selectedDevice.pressure.value"
-                                 label="{{'PRESS' | translate}}"
-                                 unit="Pa"
-                                 icon="https://convergia-cdn.s3.amazonaws.com/pressure.png"
+                                 value="vm.selectedDevice.probe_temperature.value"
+                                 disabled="!vm.selectedDevice.probe_temperature.value"
+                                 label="{{'PROBE_TEMP' | translate}}"
+                                 unit="°C"
+                                 icon="https://convergia-cdn.s3.amazonaws.com/temperature.png"
                                  action-icon="https://convergia-cdn.s3.amazonaws.com/chart_link.png"
                                  on-action-clicked="vm.metricBoxClicked"
-                                 tag="pressure"
+                                 tag="probe_temperature"
                                  border-color="#fff"
                                  background="#fff"
                                  label-text-color="#761f86"
@@ -103,14 +83,14 @@
             <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 3, row: 0 }'>
               <scriptr-metricbox 
                                  transport="wss" 
-                                 value="vm.selectedDevice.wind_direction.value"
-                                 disabled="!vm.selectedDevice.wind_direction.value"
-                                 label="{{'WINDIR' | translate}}"
-                                 unit=""
-                                 icon="https://convergia-cdn.s3.amazonaws.com/wind_dir.png"
-                                 
+                                 value="vm.selectedDevice.rssi.value"
+                                 disabled="!vm.selectedDevice.rssi.value"
+                                 label="{{'RSSI' | translate}}"
+                                 unit="dB"
+                                 icon="https://convergia-cdn.s3.amazonaws.com/db.png"
+                                 action-icon="https://convergia-cdn.s3.amazonaws.com/chart_link.png"
                                  on-action-clicked="vm.metricBoxClicked"
-                                 tag=""
+                                 tag="rssi"
                                  border-color="#fff"
                                  background="#fff"
                                  label-text-color="#761f86"
@@ -121,27 +101,31 @@
                                  >
               </scriptr-metricbox>
             </li>
+
             <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 4, row: 0 }'>
               <scriptr-metricbox 
                                  transport="wss" 
-                                 value="vm.selectedDevice.anemometer.value"
-                                 disabled="!vm.selectedDevice.anemometer.value"
-                                 label="{{'ANEMO' | translate}}"
-                                 unit="km/h"
-                                 icon="https://convergia-cdn.s3.amazonaws.com/wind_speed.png"
+                                 value="vm.selectedDevice.snr.value"
+                                 disabled="!vm.selectedDevice.snr.value"
+                                 label="{{'SNR' | translate}}"
+                                 unit=""
+                                 icon="https://convergia-cdn.s3.amazonaws.com/sbr.png"
                                  action-icon="https://convergia-cdn.s3.amazonaws.com/chart_link.png"
                                  on-action-clicked="vm.metricBoxClicked"
-                                 tag="anemometer"
+                                 tag="snr"
                                  border-color="#fff"
                                  background="#fff"
                                  label-text-color="#761f86"
                                  label-text-alignment="left"
                                  unit-text-color="#5e5e5e"
+                                 unit-text-alignment="left"
+                                 value-text-alignment="right"
                                  value-text-color="#5e5e5e"
                                  background-color="#fff"
                                  >
               </scriptr-metricbox>
             </li>
+
 					</ul>
         </div>
 
@@ -150,102 +134,9 @@
 
 				<div gridster="vm.gridsterOptions" ng-if="vm.deviceKey != null" class="innergrid">
           <ul>
-						<li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 1, row: 0 }'>
-              <scriptr-metricbox 
-                                 transport="wss" 
-                                 value="vm.selectedDevice.pluviometer_1.value"
-                                 disabled="!vm.selectedDevice.pluviometer_1.value"
-                                 label="{{'RAINCH' | translate}}"
-                                 unit="mm/h"
-                                 icon=""
-                                 action-icon="https://convergia-cdn.s3.amazonaws.com/chart_link.png"
-                                 on-action-clicked="vm.metricBoxClicked"
-                                 tag=""
-                                 border-color="#f6a000"
-                                 background="#fff"
-                                 label-text-color="#612480"
-                                 label-text-alignment="center"
-                                 unit-text-color="#5e5e5e"
-                                 unit-text-alignment="left"
-                                 value-text-alignment="right"
-                                 value-text-color="#5e5e5e"
-                                 background-color="#fff"
-                                 >
-              </scriptr-metricbox>
-            </li>
-            <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 2, row: 0 }'>
-              <scriptr-metricbox 
-                                 transport="wss" 
-                                 value="vm.selectedDevice.pluviometer_2.value"
-                                 disabled="!vm.selectedDevice.pluviometer_2.value"
-                                 label="{{'RAINPH' | translate}}"
-                                 unit="mm/h"
-                                 icon=""
-                                 action-icon="https://convergia-cdn.s3.amazonaws.com/chart_link.png"
-                                 on-action-clicked="vm.metricBoxClicked"
-                                 tag=""
-                                 border-color="#f6a000"
-                                 background="#fff"
-                                 label-text-color="#761f86"
-                                 label-text-alignment="center"
-                                 unit-text-color="#5e5e5e"
-                                 unit-text-alignment="left"
-                                 value-text-alignment="right"
-                                 value-text-color="#5e5e5e"
-                                 background-color="#fff"
-                                 >
-              </scriptr-metricbox>
-            </li>
-            <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 3, row: 0 }'>
-              <scriptr-metricbox 
-                                 transport="wss" 
-                                 value="vm.selectedDevice.pluviometer_3.value"
-                                 disabled="!vm.selectedDevice.pluviometer_3.value"
-                                 label="{{'RAINAC' | translate}}"
-                                 unit="mm/h"
-                                 icon=""
-                                 action-icon="https://convergia-cdn.s3.amazonaws.com/chart_link.png"
-                                 on-action-clicked="vm.metricBoxClicked"
-                                 tag=""
-                                 border-color="#f6a000"
-                                 background="#fff"
-                                 label-text-color="#761f86"
-                                 label-text-alignment="center"
-                                 unit-text-color="#5e5e5e"
-                                 unit-text-alignment="left"
-                                 value-text-alignment="right"
-                                 value-text-color="#5e5e5e"
-                                 background-color="#fff"
-                                 >
-              </scriptr-metricbox>
-            </li>
-            <li class="myItem" gridster-item='{sizeX: 1, sizeY: 1, col: 4, row: 0 }'>
-              <scriptr-metricbox 
-                                 transport="wss" 
-                                 value="vm.selectedDevice.soil_moisture.value"
-                                 disabled="!vm.selectedDevice.soil_moisture.value"
-                                 label="{{'SOIL' | translate}}"
-                                 unit="Hz"
-                                 icon=""
-                                 action-icon="https://convergia-cdn.s3.amazonaws.com/chart_link.png"
-                                 on-action-clicked="vm.metricBoxClicked"
-                                 tag=""
-                                 border-color="#f6a000"
-                                 background="#fff"
-                                 label-text-color="#761f86"
-                                 label-text-alignment="center"
-                                 unit-text-color="#5e5e5e"
-                                 unit-text-alignment="left"
-                                 value-text-alignment="right"
-                                 value-text-color="#5e5e5e"
-                                 background-color="#fff"
-                                 >
-              </scriptr-metricbox>
-            </li>
+						
 
-
-
-            <li class="myItem" gridster-item='{sizeX: 3, sizeY: 3, col: 0, row: 1 }'>
+            <li class="myItem" gridster-item='{sizeX: 3, sizeY: 3, col: 0, row: 0 }'>
                 <select class="select-chart" ng-model="vm.selectedGraphLeft" ng-options="t.name for t in vm.graph">
                 </select>
                 <div class="slide-animate-container">
@@ -253,7 +144,7 @@
                 </div>
               </li>
 
-              <li class="myItem" gridster-item='{sizeX: 3, sizeY: 3, col: 4, row: 1 }'>
+              <li class="myItem" gridster-item='{sizeX: 3, sizeY: 3, col: 4, row: 0 }'>
                 <select class="select-chart" ng-model="vm.selectedGraphRight" ng-options="t.name for t in vm.graph">
                 </select>
                 <div class="slide-animate-container">

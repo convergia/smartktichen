@@ -11,14 +11,10 @@
 
   "TEMP" : "Temperature",
 	"BATTERY" : "Batería",
-  "ANEMO" : "Wind speed",
-  "PRESS" : "Pressure",
-  "HUMID" : "Humidity",
-  "SOIL" : "Soil moisture",
-  "WINDIR" : "Wind direction",
-  "RAINCH" : "Rain current hour",
-  "RAINPH" : "Rain previous hour",
-  "RAINAC" : "Rain 24H accumulated",
+  "RSSI" : "RSSI",
+  "HUMID" : "Humedad",
+  "SNR" : "SNR",
+	"PROBE_TEMP" : "Probe Temperature",
 
   "NOTIFICATION" : {
   	"ADDEMAIL" : "Please enter your email address to get notified whenever a rule is applied",

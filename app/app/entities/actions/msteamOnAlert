@@ -1,4 +1,4 @@
-var config = require("app/config/config");
+/*var config = require("app/config/config");
 var _ = require("modules/underscore/underscore.js")._;
 var mscModule = require('msteam/MicrosoftTeams');
 
@@ -89,4 +89,4 @@ function getEventConfig(event, signal){
       break;
   }
   return eConf
-}
+}*/

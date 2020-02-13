@@ -76,13 +76,13 @@ myApp.controller('myAppCtrl', function($scope, $rootScope, constants, $sce, http
   //Menu
   $translate('MENU.MAP').then(function (headline) { menuItems["menu1"][0]["label"] = headline; });
   $translate('MENU.DASHB').then(function (headline) { menuItems["menu1"][1]["label"] = headline; });
-  $translate('MENU.REPORTS').then(function (headline) { menuItems["menu1"][2]["label"] = headline; });
-  $translate('MENU.ALERTS').then(function (headline) { menuItems["menu1"][3]["label"] = headline; });
-  $translate('MENU.CONTROL').then(function (headline) { menuItems["menu1"][4]["label"] = headline; });
-  $translate('MENU.AI').then(function (headline) { menuItems["menu1"][5]["label"] = headline; });
-  $translate('MENU.DEVICEMAN').then(function (headline) { menuItems["menu1"][6]["label"] = headline; });
-  $translate('MENU.ADDRULE').then(function (headline) { menuItems["menu1"][7]["label"] = headline; });
-  $translate('MENU.INFO').then(function (headline) { menuItems["menu1"][8]["label"] = headline; });
+//  $translate('MENU.REPORTS').then(function (headline) { menuItems["menu1"][2]["label"] = headline; });
+  $translate('MENU.ALERTS').then(function (headline) { menuItems["menu1"][2]["label"] = headline; });
+/*  $translate('MENU.CONTROL').then(function (headline) { menuItems["menu1"][4]["label"] = headline; });
+  $translate('MENU.AI').then(function (headline) { menuItems["menu1"][5]["label"] = headline; });*/
+  $translate('MENU.DEVICEMAN').then(function (headline) { menuItems["menu1"][3]["label"] = headline; });
+  $translate('MENU.ADDRULE').then(function (headline) { menuItems["menu1"][4]["label"] = headline; });
+//  $translate('MENU.INFO').then(function (headline) { menuItems["menu1"][8]["label"] = headline; });
   
   $translate('HEADERMENU.NOTIFSETTING').then(function (headline) { headerItems["subitems"][0]["label"] = headline; });
   $translate('HEADERMENU.CHANGEPASS').then(function (headline) { headerItems["subitems"][1]["label"] = headline; });

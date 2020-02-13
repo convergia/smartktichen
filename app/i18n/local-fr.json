@@ -11,14 +11,10 @@
 
   "TEMP" : "Température",
 	"BATTERY" : "Batterie",
-  "ANEMO" : "Vitesse du vent",
-  "PRESS" : "Pression",
+  "RSSI" : "RSSI",
   "HUMID" : "Humidité",
-  "SOIL" : "Humidité du sol",
-  "WINDIR" : "Direction du vent",
-  "RAINCH" : "Pluie heure actuelle",
-  "RAINPH" : "Pluie heure précédente",
-  "RAINAC" : "Pluie accumulée 24H",
+  "SNR" : "Rapport Signal sur Bruit",
+	"PROBE_TEMP" : "Probe Temperature",
 
   "NOTIFICATION" : {
   	"ADDEMAIL" : "Veuillez saisir votre adresse e-mail pour être averti chaque fois qu'une règle est appliquée",

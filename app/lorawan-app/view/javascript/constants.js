@@ -1,5 +1,5 @@
 myApp.constant("constants", {
- appTitle: "CxC LoraWan App",
+ appTitle: "LoraWan App",
  logo: "https://i.ibb.co/TmfS643/logo-450.png",
  login: {
     "background": '', // '//s3.amazonaws.com/scriptr-cdn/carwash/images/background-3.jpg',

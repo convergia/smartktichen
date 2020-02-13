@@ -8,19 +8,19 @@ myApp.controller('swDashboardCtrl', function($scope,  wsClient, httpClient, $rou
     vm.graph = [
       { code:"temperature", name: 'Temperature', url: '/lorawan-app/view/views/dashboard/graph_temp.html'},
       { code:"battery", name: 'Battery', url: '/lorawan-app/view/views/dashboard/graph_bat.html'},
-      { code:"anemometer", name: 'Wind speed', url: '/lorawan-app/view/views/dashboard/graph_anemo.html'},
-/*      { code:"winddir",name: 'Wind direction', url: '/lorawan-app/view/views/dashboard/graph_wind.html'},*/
-      { code:"pressure", name: 'Pressure', url: '/lorawan-app/view/views/dashboard/graph_press.html'},
+      { code:"probe_temperature", name: 'Probe Temperature', url: '/lorawan-app/view/views/dashboard/graph_anemo.html'},
+      { code:"rssi", name: 'rssi', url: '/lorawan-app/view/views/dashboard/graph_rssi.html'},
       { code:"humidity", name: 'Humidity', url: '/lorawan-app/view/views/dashboard/graph_humid.html'},
-      { code:"soil",name: 'Soil moisture', url: '/lorawan-app/view/views/dashboard/graph_soil.html'}
+      { code:"snr", name: 'snr', url: '/lorawan-app/view/views/dashboard/graph_snr.html'}
     ];
 
   $translate('TEMP').then(function (headline) { vm.graph[0].name = headline; });
   $translate('BATTERY').then(function (headline) { vm.graph[1].name = headline; });
-  $translate('ANEMO').then(function (headline) { vm.graph[2].name = headline; });
-  $translate('PRESS').then(function (headline) { vm.graph[3].name = headline; });
+  $translate('PROBE_TEMP').then(function (headline) { vm.graph[2].name = headline; });
   $translate('HUMID').then(function (headline) { vm.graph[4].name = headline; });
-  $translate('SOIL').then(function (headline) { vm.graph[5].name = headline; });
+  $translate('RSSI').then(function (headline) { vm.graph[3].name = headline; });
+  $translate('SNR').then(function (headline) { vm.graph[5].name = headline; });
+
 
     vm.selectedGraphLeft = vm.graph[0];//default selection of first chart/left
   	vm.selectedGraphRight = vm.graph[1];//default selection of second chart/right

@@ -1,14 +1,14 @@
 <div class="box">
   <div class="box-content">
-    <div style="height: 30px;" tooltip-placement="bottom" uib-tooltip="{{'PRESS' | translate}}" class="box-label">{{'PRESS' | translate}}</div>
+    <div style="height: 30px;" tooltip-placement="bottom" uib-tooltip="{{'SNR' | translate}}" class="box-label">{{'SNR' | translate}}</div>
     <div style="height: calc(100% - 30px)" >
       <scriptr-chart
                      type='line'
-                     boxLabel='{{'PRESS' | translate}}'
+                     boxLabel='{{'SNR' | translate}}'
                      xkey='creationDate'
-                     ykeys='["pressure"]'
-                     labels='["Pressure"]'
-                     post-units='&nbsp;Pa'
+                     ykeys='["snr"]'
+                     labels='["snr"]'
+                     post-units=''
                      colors='["#FCC717","#38B9D6", "#1DBC68"]'
                      transport='wss'
                      msg-tag='{{vm.tag}}'
